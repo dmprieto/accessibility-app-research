@@ -29,8 +29,9 @@ number from these files.
 **The Play Store compliance reasoning is recorded in full**, including the alternatives that
 were considered and rejected, and why. It is engineering reasoning about a policy, worked
 through in the open and at length. Individual lines will misread if lifted out of it: the
-conclusion in every case was to build the app so that its claims are *verifiable by anyone
-with `adb` in one command*, rather than to find a favourable review path. The declaration the
+conclusion in every case was to build the app so that its claims are *independently
+verifiable — from a running device or from the built APK*, rather than to find a favourable
+review path. The declaration the
 app makes is treated throughout as a functional requirement that must stay true, not as a box
 to tick. [DECISIONS.md](DECISIONS.md) carries the whole argument, and the whole argument is
 the point.

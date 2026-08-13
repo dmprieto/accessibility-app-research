@@ -56,8 +56,20 @@ Anything comparative needs **between-subjects**: fresh readers, one condition ea
 ### 4. The privacy properties are structural, not conventional
 
 `canRetrieveWindowContent="false"`, `eventTypes = 0`, and no INTERNET with
-`tools:node="remove"`. The OS enforces all three; verified on both test devices via
-`dumpsys accessibility` reporting `capabilities=32` — gestures only.
+`tools:node="remove"`. The OS enforces all three, and both test devices confirmed them.
+
+**They are not all the same kind of property, and the difference is load-bearing.**
+`capabilities=32` and `eventTypes = 0` are **runtime** properties — computed by the OS from
+the service's declared attributes, and readable only from a running service, with
+`adb shell dumpsys accessibility`. The absent INTERNET permission is an **artifact**
+property — a fact about the built APK's merged manifest, readable with
+`aapt2 dump badging <apk>` whether or not anything is running.
+
+Two things follow. Verifying the set takes **two checks, not one**: no single command
+answers for all three, and any claim that one does is wrong. And the ratchet must read the
+built artifact rather than the source, because the artifact is where the permission question
+is actually settled — a dependency can merge in a permission that `tools:node="remove"` in
+the app manifest does not catch.
 
 This is the project's strongest verifiable claim and its main trust asset. Anything that
 raises that bitmask spends it. `CAPABILITY_CAN_REQUEST_FILTER_KEY_EVENTS` would move it from
@@ -213,10 +225,15 @@ session. Re-check before relying on either.*
 closed. This is a task for whichever repo ships.
 
 A *ratchet* is a build check that makes a specific loss impossible to merge silently. It does
-not test that the app works; it fails the build if an established declaration loosens.
+not test that the app works; it fails the build if an established guarantee loosens.
 Weakening it then requires editing the check itself, which appears in review as a deliberate
-act rather than a diff nobody noticed. Each of the three declarations below is a one-line
-change that looks harmless and spends something expensive.
+act rather than a diff nobody noticed. Each assert below is a one-line change to lose, looks
+harmless in a diff, and spends something expensive.
+
+**Scope: declarations and shipped defaults.** The first three asserts are declarations. The
+fourth is a shipped default, admitted here deliberately — a guarantee that can be lost in one
+line and whose only other enforcement is remembering belongs in a ratchet by the same
+argument, whether or not it lives in a manifest.
 
 **Read from the built artifact, never the source.** Demonstrated on this repo 2026-08-12:
 the source contained `isAccessibilityTool="true"` while the APK did not, because the APK
@@ -229,6 +246,16 @@ it misses anything a dependency merges into the manifest.
 | `isAccessibilityTool="true"` present | `res/xml/autoscroll_service.xml` inside the APK | `aapt2 dump xmltree <apk> --file res/xml/autoscroll_service.xml` |
 | `canPerformGestures=true`, `canRetrieveWindowContent=false`, and the absence of `canRequestFilterKeyEvents`, touch exploration and magnification | same file, same command | these are the *inputs* that produce `capabilities=32` |
 | No `INTERNET` in the **merged** manifest | APK badging | `aapt2 dump badging <apk>` — merged, so a library's manifest can introduce one that `tools:node="remove"` in the app manifest does not catch |
+| `repressOnCancel` cannot be enabled in a release build | compiled code in the APK | **Mechanism undecided** — this is a code property, not a manifest read. See the note below |
+
+**The fourth assert is a different shape from the first three, and that is not yet solved.**
+The declarations are manifest and resource reads: cheap, exact, and available from `aapt2`.
+`repressOnCancel` is a code property, so asserting it against the built artifact means
+inspecting compiled code rather than reading a manifest — or, more cheaply, removing the
+broadcast extra from release builds entirely and asserting *that*. It is recorded here
+because the alternative is remembering, and remembering is precisely what a ratchet exists
+to replace: a build shipped with this flag reachable is an app the user cannot stop by
+touching the screen, which is the failure mode the whole cancellation design prevents.
 
 **Correction worth carrying:** earlier notes said "assert `capabilities == 32` from the built
 artifact". The bitmask is computed by the OS at runtime and is not in the APK. From the
@@ -237,9 +264,9 @@ device — `dumpsys accessibility` — which is an instrumented test requiring h
 worth having eventually because it verifies the OS agrees with your reading of the
 attributes.
 
-**What it will not catch.** Declarations only. It would not notice the engine reaching the
-node tree by some other route, or a control path letting a third party start the scroll.
-Those need review and tests, not a ratchet.
+**What it will not catch.** Anything that is not one of the asserts above. It would not
+notice the engine reaching the node tree by some other route, or a control path letting a
+third party start the scroll. Those need review and tests, not a ratchet.
 
 ### Distribution: Play as the primary channel — PAUSED
 
@@ -336,6 +363,13 @@ a signature-level permission (breaks third-party switch-access and AAC apps, exa
 integrations this audience depends on) and routing control through key-event filtering
 (raises the capabilities bitmask — see standing rule 4).
 
+**It must be fixed before any build reaches a device we do not control, including the closed
+beta** — testers are not a safe interval, and a beta build is a shipped build for this
+purpose. Its ceiling is denial-of-function rather than data access: a hostile app could start
+and stop scrolling and nothing more, because `capabilities=32`, `eventTypes=0` and the absent
+INTERNET permission apply to the whole process. That bounds the damage; it does not move the
+deadline.
+
 ---
 
 ## How the beta should measure fatigue
@@ -400,5 +434,5 @@ which held up.
 | ~~Should `LEAD_IN_MS` stretch at low speeds?~~ superseded by the row above | **Margin is now measured as a weak lever**: its whole range is 3.96x → 2.05x cruise, and at margin 0 the ramp is 100% of the effect with a 5.6x peak. `LEAD_IN_MS` is the only lever reaching the dominant term — ~3× unused headroom against the long-press deadline, cost is re-grip dead time growing ~450ms → ~680ms. Untested |
 | Host apps with vertical-gesture semantics | Untested: drag-to-dismiss, short-video feeds, video players mapping vertical drags to brightness/volume, nested-scroll and collapsing toolbars |
 | What to do about touchless app switches | Incoming call, alarm, full-screen intent, deep link — the only remaining case where the finger keeps dragging in a window the user did not choose |
-| **Declaration ratchet not built** — three declarations that are one-line changes to lose and expensive to re-establish | Build it in the shipping repo, reading from the built artifact. Spec in the TODO section above |
+| **Ratchet not built** — four asserts, each a one-line change to lose and expensive to re-establish | Build it in the shipping repo, reading from the built artifact. Spec in the TODO section above, including the fourth assert whose mechanism is still undecided |
 | Liveness when the service is not running | Six ways to be "enabled but not working", none detectable by the app because it is not running to notice. Must be observable from outside the service |
