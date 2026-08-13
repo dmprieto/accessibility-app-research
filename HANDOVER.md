@@ -16,7 +16,7 @@ not inputs to a build.
 | Finding | Confidence | Basis |
 |---|---|---|
 | Held-finger chaining scrolls third-party apps smoothly | **High** | Two devices, 5 Android majors apart, zero engine changes for the second |
-| Privacy properties are OS-enforced | **High** | `capabilities=32` on both devices, verifiable by anyone in one command |
+| Privacy properties are OS-enforced | **High** | `capabilities=32` on both devices, plus no `INTERNET` in the built APK — **two checks, not one**, both runnable by anyone. See standing rule 4 in DECISIONS |
 | Touch-to-stop works; no spurious cancellations | **High** | 9-min soak, 8-item provocation pass, physical positive control |
 | Delivered speed within ~1% after rate correction | **High** | Swept 4–100 dp/s, both devices |
 | Re-grip costs ~450ms, travel-bound | **High** | n=30+ across devices, 12ms spread |
