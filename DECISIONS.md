@@ -196,6 +196,88 @@ Four sessions in, heavily primed, reports converging on "it's fine". **The instr
 exhausted**, and another session would risk a false positive more than it would produce a
 result. The question moves to the beta.
 
+---
+
+## The v1 control set
+
+**Recorded here because it was recorded nowhere.** Until now the v1 control set lived in a
+frozen Play draft and in conversation, while the rest of this repo reasoned *about* it. The
+external switch is the clearest symptom: it appears only inside a rejected-alternative
+argument — a signature-level permission was rejected because it "breaks third-party
+switch-access and AAC apps, exactly the integrations this audience depends on" — so it was
+load-bearing without ever having been scoped. Same failure as the consent line: the thing
+everything else depends on is the thing nobody wrote down.
+
+**Provenance varies inside this section and is marked per item.** Most of it rests on
+measurement, or on arguments recorded elsewhere in this file. Two items — the edge slider and
+tilt — come from design discussion only: never prototyped, never measured. They are marked so
+they do not sit at the same apparent weight as everything around them.
+
+### The speed premise, and why this section gives no count
+
+**v1's premise is a set-and-forget speed:** one dp/s value, chosen once, not adjusted during a
+run.
+
+Two reader observations put that premise under pressure — images have no reading rate, and
+smaller text raises the line rate at a fixed dp/s. Both are recorded in full in *Threat to the
+v1 premise* above, which is where the argument lives; it is not restated here. What matters
+for scope is their weight: **Medium confidence, two observations, one reader.** Standing rule
+3 says no design decision may be made against a single reader.
+
+So the budget is recorded as **two intents committed — start and stop — and two contingent on
+the beta: faster and slower.** The need is real and is recorded at its actual confidence. The
+count is a design decision the present evidence cannot carry, and this is the document meant
+to outlive the rest, so it does not get to make one on that evidence.
+
+**The proximity result sharpens this rather than settling it.** Fewer usable input channels on
+tablet-class hardware means an expansion from two intents to four is not an abstract scope
+choice — it may be undeliverable on the hardware it lands on. That is an argument for settling
+the *need* before the *count*, not after.
+
+### The controls
+
+**Start and stop by proximity, where the hardware provides it.** Not universal: proximity is
+absent on tablet-class hardware, so anything built on it must feature-detect and degrade. It
+cannot be the primary hands-free control. Measured — see the sensor record.
+
+**The nav-bar accessibility button.** Recorded as a candidate, **not as a working control.**
+Whether it presents a chooser when more than one accessibility service is registered is
+unverified, and a chooser is a window — the same root cause that excludes a quick-settings
+tile. This app's users run TalkBack or Switch Access already, so multiple services is the
+expected case, not the edge case. It must not be counted as available until that is answered.
+
+**An external switch, via a documented entry point — required, not optional.** v1 requires a
+documented external-switch entry point. **The contract is undefined**: which intent, what it
+carries, and who documents it are all control-path charter output. Blocked on that charter and
+on the receiver-security fix, since the only entry point that exists today is the exported
+`CONTROL` broadcast whose pairing-token fix is unbuilt. This is required because of the
+proximity result: on a tablet, a user who cannot reliably touch the screen has no other
+hands-free path.
+
+**Rewind-on-resume.** On restart, the scroll resumes **~120dp above where it stopped**, so the
+reader re-reads a few lines rather than resuming mid-sentence at a point they may already have
+passed. **A fixed distance, not a computed one** — the app cannot know line height, because
+knowing it would mean reading the screen (standing rule 4), so it cannot resume by lines.
+
+**The edge slider — deferred to 1.1, not dropped.** *Recorded from design discussion, not
+measured.* Two independent reasons:
+
+1. **The design that reached rule 1 was a held slider, and there is no surviving non-held
+   design.** What is deferred is the idea of an on-screen edge control, not one mechanism.
+2. **Play exposure.** `SYSTEM_ALERT_WINDOW` combined with an `AccessibilityService` is the
+   signature of tapjacking malware, and draws scrutiny on precisely the submission this
+   project cannot afford to lose. **This compounds with the window-capture finding** — an
+   overlay owns a window, so it would capture the synthetic finger as well. That second
+   argument arrived later and independently of the first, and is recorded because the repo
+   previously carried only the rule-1 reason.
+
+**Tilt — considered and rejected.** *Recorded from design discussion, not measured. Never
+prototyped.* Two structural reasons, either sufficient:
+
+1. **It fails entirely on a mounted device**, which is a named v1 audience.
+2. **It demands controlled wrist rotation**, which is precisely the capability this app
+   assumes absent.
+
 ## Decisions
 
 ### `isAccessibilityTool="true"` is a functional requirement, not a submission tactic
