@@ -264,6 +264,13 @@ device — `dumpsys accessibility` — which is an instrumented test requiring h
 worth having eventually because it verifies the OS agrees with your reading of the
 attributes.
 
+**Note on the duplication.** This section and standing rule 4 both state the
+runtime-versus-artifact distinction. That is deliberate — the ratchet spec has to be readable
+on its own by whoever builds it — but restating a definition in two places is exactly how the
+"one command" claim drifted in the first place. **If it drifts again, the ratchet spec is the
+one that should point at rule 4 rather than restate it.** Rule 4 is the definition; this is
+its application.
+
 **What it will not catch.** Anything that is not one of the asserts above. It would not
 notice the engine reaching the node tree by some other route, or a control path letting a
 third party start the scroll. Those need review and tests, not a ratchet.
