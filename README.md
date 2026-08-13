@@ -1,25 +1,181 @@
-# spike1-autoscroll
+# Accessibility app research
 
-Throwaway spike. **Not production code.**
+Research toward an Android reading-assistance app: **continuous, slow, hands-free scrolling
+in other people's apps**, for readers who cannot repeatedly swipe a screen — weakness,
+tremor, spasticity, or a device mounted out of reach.
 
-Tests one assumption: *can an AccessibilityService produce smooth, slow, continuous
-scrolling in arbitrary third-party apps by holding a single synthetic "virtual finger"
-down and moving it incrementally, rather than dispatching repeated discrete swipes?*
+The constraint that shapes everything here is that the app must do this **without reading the
+screen**. It scrolls; it does not know what it is scrolling. That is a privacy property
+enforced by the operating system rather than promised by the code, and most of the design
+decisions in these documents are downstream of refusing to give it up.
 
-The answer the logs can give you is partial. The part only eyes can give you —
-**whether the re-grip is invisible** — is now answered for good hardware and still open for
-noisy hardware. See [NOTES.md](NOTES.md).
+---
 
-**Picking this up cold? Read [HANDOVER.md](HANDOVER.md) first** — it carries the scope
-boundary, the retracted findings, and the design decisions that look like oversights.
-[DECISIONS.md](DECISIONS.md) has the product decisions with their reasoning, the standing
-rules, and the open items with what would settle each.
+## About these notes
 
-## Status
+This repository is the working record of an **unreleased** research project — five documents,
+no source code. It is public because the reasoning is more useful in the open than in a
+drawer, and because the retractions are part of the record: several findings here were wrong,
+are marked as wrong, and are left in place alongside whatever corrected them.
 
-Measured on two devices: **Moto G54** (Android 15, phone) and **Samsung SM-P200**
-(Android 11, tablet). Full per-device data in [DEVICES.md](DEVICES.md); protocols and
-subjective notes in [NOTES.md](NOTES.md).
+Three things follow, for anyone reading a section in isolation:
+
+**Findings carry confidence levels, and some are weak.** The engine measurements rest on
+instrumented runs across two devices and are solid. Every *perceptual* result rests on **one
+reader** and is recorded as a hypothesis for a beta, not as a basis for a decision.
+[HANDOVER.md](HANDOVER.md) opens with the confidence table — read it before quoting any
+number from these files.
+
+**The Play Store compliance reasoning is recorded in full**, including the alternatives that
+were considered and rejected, and why. It is engineering reasoning about a policy, worked
+through in the open and at length. Individual lines will misread if lifted out of it: the
+conclusion in every case was to build the app so that its claims are *verifiable by anyone
+with `adb` in one command*, rather than to find a favourable review path. The declaration the
+app makes is treated throughout as a functional requirement that must stay true, not as a box
+to tick. [DECISIONS.md](DECISIONS.md) carries the whole argument, and the whole argument is
+the point.
+
+**Nothing here describes a shipping product.** No build is released, no submission has been
+made, and the application sources are not in this repository. Where these notes reference
+source files, build steps or class names, they describe a separate working tree.
+
+---
+
+## How the work is organised
+
+The project runs as **spikes**: each one asks a single question, and closes when that question
+is answered rather than when the work runs out. Findings that fall outside a spike's question
+get recorded and handed forward instead of chased.
+
+| Spike | Question | Status |
+|---|---|---|
+| **1 — Autoscroll engine** | Can an `AccessibilityService` produce smooth, slow, continuous scrolling in arbitrary third-party apps by holding one synthetic finger down, rather than dispatching repeated swipes? | **Closed 2026-08-12 — answered yes**, on two devices five Android majors apart |
+| **2 — Control surface** | How does a user start and stop it, without adb, given no control may require sustained input? | **Not started.** Spike 1 collected the evidence it should start from |
+| **Beta — fatigue** | Does the scroll actually reduce reading effort, measured between-subjects on fresh readers? | **Not started.** Design recorded in [DECISIONS.md](DECISIONS.md) |
+
+**The Play track is paused** until spike 2 delivers a control surface. There is nothing to
+submit until a user can start and stop the app without a terminal.
+
+### The documents
+
+| File | What it carries |
+|---|---|
+| **[HANDOVER.md](HANDOVER.md)** | **Read this first.** Confidence levels per finding, the retractions in one table, the scope boundary, and what *not* to do next |
+| **[DECISIONS.md](DECISIONS.md)** | The standing rules, product decisions with their reasoning, rejected alternatives, and open items with what would settle each. Written to outlive the code |
+| **[DEVICES.md](DEVICES.md)** | One row per device, structured not prose. Built so measurements stay comparable as devices are added |
+| **[NOTES.md](NOTES.md)** | Test protocols, session-by-session observations, and the raw working record |
+| **README.md** | This file: the programme, then spike 1 in operational detail |
+
+---
+
+## What the programme has established
+
+**On the engine — high confidence, instrumented, two devices:**
+
+- **Held-finger chaining works.** One `StrokeDescription` extended segment after segment
+  produces smooth continuous scroll in third-party apps: a 68-second unbroken press, seams of
+  1–3ms. The second device required **zero engine changes**.
+- **The privacy properties hold, and are OS-enforced.** `capabilities=32`, `eventTypes=0`, no
+  window-content access, no `INTERNET` permission — verified on both devices in one `dumpsys`
+  command, which means anyone can check them.
+- **Touch-to-stop works.** A physical finger cancels within 12ms, with zero spurious
+  cancellations across a 9-minute hands-off soak.
+- **Re-grip is unavoidable and costs ~450ms**, bounded by travel rather than time.
+- **Delivered speed lands within ~1% of commanded** across 4–100 dp/s after rate correction.
+
+**On the product — this is where the programme turned:**
+
+- **Visibility was the wrong success criterion; fatigue is the right one.** The engine was
+  built, tuned and measured to make the re-grip *invisible*. That work is correct, and it
+  optimised an artifact that turned out not to matter. Across four sessions the discrete
+  re-grip was noticed once, called harmless, and never linked to fatigue. What tracked
+  fatigue was a *continuous* artifact nobody was optimising.
+
+  The lesson generalises past this project: **a criterion that is easy to measure will get
+  optimised whether or not it is the one that matters.**
+
+- **A single dp/s setting cannot serve varying content.** `dp/s` is a *distance* rate;
+  reading demand is a *line* rate, related by line height — and the app cannot know line
+  height, because knowing it would mean reading the screen. Two independent reader
+  observations converged on this: images have no reading rate at all, and smaller text at the
+  same dp/s asks the reader to read faster. This is an open threat to the v1 premise, not a
+  tuning problem.
+
+- **The control surface, not the engine, is where the risk lives.** Every finding after the
+  second device concerned how a user *tells* the engine what to do — and that is also where
+  the entire Play-policy exposure sits, since the engine cannot observe state and therefore
+  cannot decide on it.
+
+## What the programme has *not* established
+
+- **Every perceptual result comes from one reader**, naive at the start and heavily primed by
+  the end. That is the binding limitation on all of it, and more sessions with the same
+  person cannot fix it.
+- **Whether jitter reduction is perceptible is unresolved, not disproven.** The comparison was
+  serial and memory-based, which is itself a null instrument for subtle continuous
+  differences.
+- **No control surface exists.** The app cannot currently be started or stopped by its
+  intended user without a terminal.
+
+## Standing rules
+
+These outrank individual decisions: a proposal that violates one is wrong regardless of how
+good it looks in isolation. Stated in full, with the reasoning that produced each, in
+[DECISIONS.md](DECISIONS.md).
+
+1. **No control may require sustained input.** Sustained contact is exactly the effort this
+   app exists to remove. Reached twice independently, from different directions.
+2. **Fatigue, not visibility, is the success criterion.**
+3. **No design decision may be made against a single reader.** Anything comparative needs
+   between-subjects: fresh readers, one condition each.
+4. **The privacy properties are structural, not conventional.** Anything that raises the
+   capabilities bitmask spends the project's strongest verifiable claim.
+5. **Before believing a result, ask what a null instrument would have produced.**
+6. **The app may not initiate, plan, or sequence anything.** The engine satisfies this by
+   construction; the exposure is entirely in the control surface.
+
+## One method rule, learned six times over
+
+**Before believing a result, ask what a null instrument would have produced.** Six separate
+measurements returned clean-looking data from instruments that could not measure the thing in
+question:
+
+| Instrument | Looked like | Actually |
+|---|---|---|
+| `adb shell input tap` | "touches don't cancel" | synthesised via InputManager, never reaches the digitiser |
+| `am start` to launcher | "app switches don't cancel" | changes the window *without* a touch, and only the touch cancels |
+| Plain A/B, one comparison | "250ms segments are smoother" | unreplicated; the A/B/A control showed the discrimination didn't hold |
+| A primed observer across sessions | "later sessions felt worse" | sensitisation — the observer got more critical, not the setting worse |
+| `logcat -G 64M` | "the app is dead" | the log reader silently stopped returning data |
+| The `VISIBLE LURCH` log line | "the lead-in is an ease-in" | it measured only the margin term; the ramp carries ~90% |
+
+Each returns something that looks like data. The check is cheap: run a positive control from
+the real modality *first*, repeat the baseline, and ask whether the instrument reproduces the
+user action or only its side effect. Verify the instrument **before** the measurement, not
+after.
+
+---
+---
+
+# Spike 1 — autoscroll engine
+
+**Closed 2026-08-12.** Everything below is spike 1 in operational detail: what it built, how
+to run it, what it measured, and what it handed forward.
+
+Tests one assumption: *can an AccessibilityService produce smooth, slow, continuous scrolling
+in arbitrary third-party apps by holding a single synthetic "virtual finger" down and moving
+it incrementally, rather than dispatching repeated discrete swipes?*
+
+**Answer: yes.** Verified on a **Moto G54** (Android 15, phone) and a **Samsung SM-P200**
+(Android 11, tablet) — five Android majors apart, two manufacturers, both form factors, both
+navigation modes. Full per-device data in [DEVICES.md](DEVICES.md); protocols and subjective
+notes in [NOTES.md](NOTES.md).
+
+**Scope note: spike 1 is closed for engine work.** Everything found after device 2 landed
+concerns the *control surface*, which was an explicit non-goal — see
+[Handover to a control-surface spike](#handover-to-a-control-surface-spike) at the end.
+
+## Findings
 
 **Settled:**
 
@@ -39,6 +195,14 @@ subjective notes in [NOTES.md](NOTES.md).
 
   The engine was built, tuned and measured around making the re-grip invisible. That work is
   correct and it optimised the artifact that does not matter.
+
+- Held-finger chaining produces smooth continuous scroll. 68s unbroken press; seams 1–3ms.
+- Re-grip costs ~450ms and is unavoidable — travel-bound, ~32s on a phone, ~39s on the tablet.
+- Delivered speed within ~1% of commanded at 4–100 dp/s, after rate correction.
+- Privacy properties hold on both devices: `capabilities=32`, `eventTypes=0`, no content access.
+- **Touch-to-stop works.** A physical finger cancels within 12ms; zero spurious
+  cancellations in 9 minutes hands-off; notifications, shade peeks, volume overlays and
+  screenshots provoke nothing.
 
 **NOT settled, and the headline open problem:**
 
@@ -64,19 +228,6 @@ subjective notes in [NOTES.md](NOTES.md).
   app cannot know line height because it cannot read the screen, by design. Two independent
   reader observations now point at the same missing input. See NOTES.md for the tests.
 
-- Held-finger chaining produces smooth continuous scroll. 68s unbroken press; seams 1–3ms.
-- Re-grip costs ~450ms and is unavoidable — travel-bound, ~32s on a phone, ~39s on the tablet.
-- Delivered speed within ~1% of commanded at 4–100 dp/s, after rate correction.
-- Privacy properties hold on both devices: `capabilities=32`, `eventTypes=0`, no content access.
-- **Touch-to-stop works.** A physical finger cancels within 12ms; zero spurious
-  cancellations in 9 minutes hands-off; notifications, shade peeks, volume overlays and
-  screenshots provoke nothing.
-
-**Scope note: spike 1 is closed for engine work.** The assumption it was built to test is
-answered on two devices. Everything found after device 2 landed concerns the *control
-surface*, which was an explicit non-goal here — see "Handover to a control-surface spike"
-at the end of this file.
-
 **Open, and not answerable from logs:**
 
 - Whether the ~450ms re-grip is visible **on the noisy device**. It is now confirmed
@@ -89,26 +240,10 @@ at the end of this file.
   full-screen intent, deep link — which are the only remaining case where the finger keeps
   dragging in a window the user did not choose.
 
-**One rule, learned six times over:** *before believing a result, ask what a null
-instrument would have produced.* Six separate measurements in this spike returned
-clean-looking data from instruments that could not measure the thing in question:
-
-| Instrument | Looked like | Actually |
-|---|---|---|
-| `adb shell input tap` | "touches don't cancel" | synthesised via InputManager, never reaches the digitiser |
-| `am start` to launcher | "app switches don't cancel" | changes the window *without* a touch, and only the touch cancels |
-| Plain A/B, one comparison | "250ms segments are smoother" | unreplicated; the A/B/A control showed the discrimination didn't hold |
-| A primed observer across sessions | "later sessions felt worse" | sensitisation — the observer got more critical, not the setting worse |
-| `logcat -G 64M` | "the app is dead" | the log reader silently stopped returning data |
-| The `VISIBLE LURCH` log line | "the lead-in is 0.7x cruise, an ease-in" | it measured only the margin term; the ramp carries ~90% and the real figure is 2.55x |
-
-Each returns something that looks like data. The check is cheap: run a positive control
-from the real modality *first*, repeat the baseline, and ask whether the instrument
-reproduces the user action or only its side effect.
-
 **Known wrong turns, documented so they are not repeated:** chain-age decay (was sub-pixel
 segments), the band widening (wrong in both directions), and the app-switch cancellation
-claim (was the touch, not the window change).
+claim (was the touch, not the window change). The instrument failures behind several of them
+are in [the null-instrument table](#one-method-rule-learned-six-times-over) above.
 
 ---
 
@@ -159,11 +294,18 @@ never hardcoded.
 
 ---
 
-## Build
+## Running it
 
-**Known gap:** `gradle/wrapper/gradle-wrapper.jar` is not in this tree, and there is no
-Gradle or JDK on `PATH` on this machine (Android Studio's bundled JBR is the only JDK).
-Materialize the wrapper once, either way:
+> **The application sources are not in this repository.** This repo is the research record.
+> The sections below are the operating instructions for whoever has the spike's working tree,
+> and are kept here because the adb surface is also how the measurements were taken and how
+> they can be reproduced.
+
+### Build
+
+**Known gap:** `gradle/wrapper/gradle-wrapper.jar` is not in the source tree, and there was no
+Gradle or JDK on `PATH` on the development machine (Android Studio's bundled JBR is the only
+JDK). Materialize the wrapper once, either way:
 
 - **Open the project folder in Android Studio and sync.** It reads
   `gradle/wrapper/gradle-wrapper.properties`, downloads the distribution and writes
@@ -180,7 +322,7 @@ gradlew.bat :app:installDebug
 Targets `compileSdk`/`targetSdk` 37, `minSdk` 26. No dependencies beyond the Kotlin
 stdlib.
 
-## Enable it on the device
+### Enable it on the device
 
 ```bash
 adb shell pm grant dev.spike.autoscroll android.permission.POST_NOTIFICATIONS
@@ -189,6 +331,26 @@ adb shell pm grant dev.spike.autoscroll android.permission.POST_NOTIFICATIONS
 The app has no launcher activity and no UI, so the notification permission has to come
 from adb. Without it you get no control notification — use the broadcast commands below
 instead, they work regardless.
+
+**Android 13+ blocks the accessibility toggle for sideloaded apps** ("Restricted
+setting" — greyed out with no explanation). Clear it with:
+
+```bash
+adb shell appops set dev.spike.autoscroll ACCESS_RESTRICTED_SETTINGS allow
+```
+
+Then **Settings → Accessibility → Autoscroll Spike → On**. Or skip Settings entirely:
+
+```bash
+adb shell settings put secure enabled_accessibility_services dev.spike.autoscroll/dev.spike.autoscroll.AutoScrollService
+```
+
+```bash
+adb shell settings put secure accessibility_enabled 1
+```
+
+(That overwrites any other enabled services — read the current value first if you have
+others on.)
 
 ### Sideload barriers observed so far
 
@@ -221,27 +383,7 @@ need the `isAccessibilityTool` declaration and a prominent-disclosure statement,
 is a per-release review risk rather than a per-user wall. Worth planning for, not worth
 conflating with the table above.
 
-**Android 13+ blocks the accessibility toggle for sideloaded apps** ("Restricted
-setting" — greyed out with no explanation). Clear it with:
-
-```bash
-adb shell appops set dev.spike.autoscroll ACCESS_RESTRICTED_SETTINGS allow
-```
-
-Then **Settings → Accessibility → Autoscroll Spike → On**. Or skip Settings entirely:
-
-```bash
-adb shell settings put secure enabled_accessibility_services dev.spike.autoscroll/dev.spike.autoscroll.AutoScrollService
-```
-
-```bash
-adb shell settings put secure accessibility_enabled 1
-```
-
-(That overwrites any other enabled services — read the current value first if you have
-others on.)
-
-## Control it
+### Control it
 
 Start / stop, either from the notification or:
 
@@ -310,6 +452,8 @@ adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll -
 Extras combine in one broadcast. Speed and segment take effect at the next segment
 boundary; `leadin` applies at the next press. Nothing needs a restart or a rebuild.
 
+---
+
 ## Reading the logs
 
 ```bash
@@ -341,7 +485,23 @@ gets you one event type.
 | `STOP` | Requested, then completed with measured latency (remaining segment + 100ms decel + 100ms hold). |
 | `SEG` / `ABORT` | Warnings: clamped durations, degenerate sub-pixel paths, a refused dispatch. |
 
-### Measured on a Moto G54 5G (Android 15, 1080x2400, density 3.08)
+### What good looks like
+
+- `SEAM gap` consistently small and consistent. A *variable* gap will read worse than a
+  large steady one.
+- `TICK jitter` small relative to segment duration. Expect this to get worse as segment
+  duration goes down — at 32ms the IPC round trip is a large fraction of the segment.
+- `REGRIP deadMs` around 350–400ms. Whether that reads as a blink or a glitch every
+  ~26s is not in the logs.
+- Cumulative dp advancing linearly. Stair-stepping or stalling at 6 dp/s means the
+  Double accumulator got quantised somewhere.
+
+Logs looking clean is **not** a pass. A context menu, a text-selection handle or a
+tooltip appearing at press or re-grip is a fail regardless of what logcat says.
+
+---
+
+## Measured results — Moto G54 5G (Android 15, 1080x2400, density 3.08)
 
 *Device 2 (Samsung SM-P200, Android 11, tablet) is in [DEVICES.md](DEVICES.md), including
 where its numbers differ — notably 20x worse segment-timing jitter.*
@@ -586,20 +746,6 @@ runtime, always). Travel band 288..2112px = 593dp.
   cannot quickly stop it. Production needs a deliberate decision here — and note that
   detecting the window change requires window-state events, which costs `eventTypes = 0`.
 
-### What good looks like
-
-- `SEAM gap` consistently small and consistent. A *variable* gap will read worse than a
-  large steady one.
-- `TICK jitter` small relative to segment duration. Expect this to get worse as segment
-  duration goes down — at 32ms the IPC round trip is a large fraction of the segment.
-- `REGRIP deadMs` around 350–400ms. Whether that reads as a blink or a glitch every
-  ~26s is not in the logs.
-- Cumulative dp advancing linearly. Stair-stepping or stalling at 6 dp/s means the
-  Double accumulator got quantised somewhere.
-
-Logs looking clean is **not** a pass. A context menu, a text-selection handle or a
-tooltip appearing at press or re-grip is a fail regardless of what logcat says.
-
 ## Known deviations from spec
 
 - `stop` is not instantaneous. A gesture in flight cannot be cancelled, so hard-stop
@@ -616,7 +762,6 @@ tooltip appearing at press or re-grip is a fail regardless of what logcat says.
   the status bar and 75% clears the nav/gesture strip, and record it in NOTES.md. The
   SM-P200 is the first device tested with 3-button navigation, where a persistent nav bar
   makes this check matter more than it did on gesture-nav devices.
-
 
 ---
 
@@ -698,6 +843,12 @@ switch-access and AAC apps, which are precisely the integrations this audience r
 and routing control through `CAPABILITY_CAN_REQUEST_FILTER_KEY_EVENTS` moves the dumpsys
 capabilities bitmask from 32 to 40, spending the submission's strongest verifiable claim on
 a convenience.
+
+Note what the privacy architecture already bounds here: a hostile app could start and stop
+scrolling, and nothing more. It cannot read screen content or exfiltrate anything, because
+`capabilities=32`, `eventTypes=0` and the absent `INTERNET` permission apply to the whole
+process. **This must be fixed before any release**, and its ceiling is denial-of-function
+rather than data access.
 
 ### Interstitial ads end the session, and the user may not be able to clear them
 
