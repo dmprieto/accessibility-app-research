@@ -65,7 +65,14 @@ submit until a user can start and stop the app without a terminal.
 | **[DECISIONS.md](DECISIONS.md)** | The standing rules, product decisions with their reasoning, rejected alternatives, and open items with what would settle each. Written to outlive the code |
 | **[DEVICES.md](DEVICES.md)** | One row per device, structured not prose. Built so measurements stay comparable as devices are added |
 | **[NOTES.md](NOTES.md)** | Test protocols, session-by-session observations, and the raw working record |
+| **[PARKED.md](PARKED.md)** | Deliberately not being worked on, with what would un-park each |
 | **README.md** | This file: the programme, then spike 1 in operational detail |
+
+One more, outside that ordering because it is about *how* the record is kept rather than what
+the research found: **[RECORD-KEEPING.md](RECORD-KEEPING.md)** — the provenance vocabulary,
+which decisions are never settled without the developer, and why publishing is a separate
+authority from writing. Read it before editing any of the files above. It governs the research
+phase and is meant to be deleted when that closes, apart from the part it marks as graduating.
 
 ---
 
