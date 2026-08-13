@@ -369,7 +369,16 @@ wandering means noise is being fed into on-screen velocity and the filter is too
 >    Consent, purpose, retention and withdrawal need deciding before the session, not
 >    improvised in a table afterwards.
 >
-> The two quotes currently in this file are the developer's own, recorded knowingly.
+> **Consent record — Observer A.** Every verbatim quote attributed to Observer A in this
+> file — the unprompted and prompted reports from the SM-P200 session, and the mixed-media
+> feedback below — was recorded after they were told out loud, before the session, that
+> their words would be written down. Quotes of the developer's own are self-disclosure and
+> carry none of this, per rule 4; where both appear, the attribution says which is which.
+>
+> **Update this line whenever a quote is added**, and do not let it fall behind the tables
+> again. It said "the two quotes currently in this file are the developer's own" well after
+> the file had acquired three of Observer A's — the one line carrying the consent record was
+> the one line that had gone stale.
 
 Does the eased re-grip read as a blink or a glitch on hardware it was not tuned on?
 
