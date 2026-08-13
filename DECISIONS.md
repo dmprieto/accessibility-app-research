@@ -77,7 +77,7 @@ raises that bitmask spends it. `CAPABILITY_CAN_REQUEST_FILTER_KEY_EVENTS` would 
 
 ### 5. Before believing a result, ask what a null instrument would have produced
 
-Six measurements in this spike returned clean-looking data about things the instrument could
+Seven measurements in this spike returned clean-looking data about things the instrument could
 not see. Verify the instrument *before* the measurement, use a positive control from the
 real modality, and repeat the baseline.
 
@@ -89,6 +89,10 @@ real modality, and repeat the baseline.
 | A primed observer across sessions | later sessions felt worse | sensitisation, not the setting |
 | `logcat -G 64M` | the app is dead | the log reader silently stopped returning data |
 | The `VISIBLE LURCH` log line | the lead-in is an ease-in | measured a tenth of the effect; the ramp carries ~90% |
+| A check scoped narrower than the claim | HANDOVER's basis cell was accurate on its own | the row title made it a claim about all three privacy properties, which the cell could not support |
+
+Verify the **claiming unit** — title plus basis, heading plus body — not the fragment you
+were pointed at. In that case the narrow scope came from the instruction, not from the check.
 
 ### 6. The app may not initiate, plan, or sequence anything
 
