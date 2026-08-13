@@ -845,7 +845,7 @@ any beta.
 | Finding | Evidence |
 |---|---|
 | Starting from the notification scrolled the shade, not the app | `mCurrentFocus` stayed `NotificationShade` for 86 ticks. Fixed; both API branches verified |
-| Any control that is its own window captures the finger | Same root cause. A QS tile would behave identically. Proximity wave is the only planned control immune by construction — **but only where the hardware provides it**; proximity is absent on the SM-P200, so tablet-class devices have no immune control. Narrowed 2026-08-13 from a claim that read as universal |
+| Any control that is its own window captures the finger | Same root cause. A QS tile would behave identically. Proximity wave is immune, **but only where the hardware provides it** — absent on the SM-P200, so tablets have none. See DECISIONS |
 | Notification body is inert — `contentIntent=null` | `dumpsys notification`. Large easy target dead, small button live: target sizing inverted for this audience |
 | No feedback between press and visible motion | ~500ms panel wait + slop consumed by the host + 12 dp/s cruise ≈ a second before anything is unambiguous |
 | Force-stop silently disables the service | Clears `enabled_accessibility_services` and `accessibility_enabled`. OEM battery managers force-stop routinely |
