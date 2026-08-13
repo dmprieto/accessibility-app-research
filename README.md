@@ -75,9 +75,20 @@ submit until a user can start and stop the app without a terminal.
 - **Held-finger chaining works.** One `StrokeDescription` extended segment after segment
   produces smooth continuous scroll in third-party apps: a 68-second unbroken press, seams of
   1–3ms. The second device required **zero engine changes**.
-- **The privacy properties hold, and are OS-enforced.** `capabilities=32`, `eventTypes=0`, no
-  window-content access, no `INTERNET` permission — verified on both devices in one `dumpsys`
-  command, which means anyone can check them.
+- **The privacy properties hold, and are OS-enforced.** They take **two** checks, not one,
+  and the distinction matters — one reads runtime OS behaviour, the other reads the built
+  artifact:
+
+  - `capabilities=32` (gestures only, no window-content access) and `eventTypes=0`, from
+    `adb shell dumpsys accessibility` against a running device. The bitmask is computed by
+    the OS from the service's declared attributes, so this is the OS agreeing with the
+    declaration rather than the app reporting on itself.
+  - **No `INTERNET` permission**, from `aapt2 dump badging <apk>` against the built APK. It
+    has to be read from the *merged* manifest: a dependency can introduce the permission,
+    and `tools:node="remove"` in the app manifest does not catch that.
+
+  Verified on both devices, and checkable by anyone. See the ratchet spec in
+  [DECISIONS.md](DECISIONS.md) for why the second one cannot be a source grep.
 - **Touch-to-stop works.** A physical finger cancels within 12ms, with zero spurious
   cancellations across a 9-minute hands-off soak.
 - **Re-grip is unavoidable and costs ~450ms**, bounded by travel rather than time.
@@ -362,7 +373,7 @@ adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll -
 | `--ei cap` | Press age cap, ms — probes a device's chain-decay threshold directly | 30000 → 120000 |
 | `--ez leadin false` | Disables the lead-in kick, to observe the long-press failure mode on that device | — |
 | `--ez ratecorrect false` | Disables rate correction, to reproduce the raw delivered-speed bias or A/B the smoothness | — |
-| `--ez repress true` | **Measurement mode only.** Re-presses through cancellations, so touching the screen does *not* stop the scroll. Never ship it on | — |
+| `--ez repress true` | **Measurement mode only.** Re-presses through cancellations, so touching the screen does *not* stop the scroll. Never ship it on — its removal is a recorded build-check requirement, not a thing to remember | — |
 
 Extras combine in one broadcast. Speed and segment take effect at the next segment
 boundary; `leadin` applies at the next press. Nothing needs a restart or a rebuild.
@@ -670,7 +681,15 @@ runtime, always). Travel band 288..2112px = 593dp.
   engine treats that as the user saying stop. It originally re-pressed 250ms later so
   that the cancellation count could exceed 1 — which meant the app fought the user for
   control of the screen and could not be stopped by touching it. `--ez repress true`
-  restores the old behaviour for measurement runs only. Never ship it on.
+  restores the old behaviour for measurement runs only.
+
+  **Never ship it on, and do not rely on remembering that.** A shipped build with this flag
+  reachable is an app the user cannot stop by touching the screen — the failure mode the
+  engine's whole cancellation design exists to prevent. Its removal belongs in the CI
+  ratchet, asserted against the built artifact like the declarations are. **Recorded as a
+  requirement, not as done:** the ratchet does not exist yet, and the spec in
+  [DECISIONS.md](DECISIONS.md) currently scopes it to declarations only, so covering this
+  means widening that spec rather than adding a row to it.
 - The band is **25%–75%**, matching the original spec. It was widened to 12%–88%
   mid-spike on a theory that turned out to be wrong twice over, then narrowed back — see
   the `BAND_TOP_FRAC` doc comment for both reasons. **Verify per device** that 25% clears
@@ -763,8 +782,9 @@ a convenience.
 Note what the privacy architecture already bounds here: a hostile app could start and stop
 scrolling, and nothing more. It cannot read screen content or exfiltrate anything, because
 `capabilities=32`, `eventTypes=0` and the absent `INTERNET` permission apply to the whole
-process. **This must be fixed before any release**, and its ceiling is denial-of-function
-rather than data access.
+process. Its ceiling is denial-of-function rather than data access. **It must be fixed
+before any build reaches a device we do not control, including the closed beta** — testers
+are not a safe interval, and a beta build is a shipped build for this purpose.
 
 ### Interstitial ads end the session, and the user may not be able to clear them
 
