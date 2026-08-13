@@ -657,7 +657,7 @@ detectable when you are looking for it and not otherwise.
   binds every ~32.5s, giving roughly 3–4 re-grips. So the claim is *"no disturbance reported
   across ~3–4 re-grips"* — real, but thin. Treat it as supporting evidence rather than the
   citable result, and see step 4-pre: **log the tablet session.**
-- **Able-bodied, not target population.** Fine for the perceptual question — perception
+- **Not a member of the target population.** Fine for the perceptual question — perception
   transfers — but see the fast-forward note below, where it stops being fine.
 - **This was the smooth device.** The Moto had zero jitter outliers in 936 segments. The
   SM-P200 has 216/1000 and ±35% instantaneous velocity variation, and has still had no eyes

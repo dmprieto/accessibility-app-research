@@ -738,8 +738,9 @@ rather than repayment of a debt. A *speed setting* is far more expensive — per
 a UI to set it, and it reintroduces the continuous-control problem the design deliberately
 removed.
 
-Open, and not settleable by an able-bodied informant: whether it should be **latching fast
-mode** (tap to enter, tap to leave — lets the user watch and stop when the image clears,
+Open, and not settleable by an informant outside the target population: whether it should
+be **latching fast mode** (tap to enter, tap to leave — lets the user watch and stop when
+the image clears,
 suits someone who sees the screen well) or a **discrete skip** (one action, fixed distance,
 the mirror of rewind-on-resume — needs no visual feedback loop, suits a mounted device).
 That is a beta question. Note the input budget conflict either way: momentary boost maps

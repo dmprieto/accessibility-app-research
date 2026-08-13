@@ -245,7 +245,7 @@ Related open question from the same naive reader: **a single speed does not serv
 media.** Images have no reading rate, so a 300dp figure at 12 dp/s takes 25s to pass with
 nothing to read. Fast-forward as a *transient* is nearly free in the engine; as a *setting*
 it is expensive and reintroduces continuous control. Whether it should latch or skip is a
-beta question, and an able-bodied informant cannot settle it. See README.
+beta question, and an informant outside the target population cannot settle it. See README.
 
 Observer-recording rules are in `NOTES.md` stage 4 and must hold from the first participant
 session: pseudonymous IDs, no health or demographic data in the repo, quotes only with the
