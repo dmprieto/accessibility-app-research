@@ -371,9 +371,25 @@ wandering means noise is being fed into on-screen velocity and the filter is too
 >
 > **Consent record — Observer A.** Every verbatim quote attributed to Observer A in this
 > file — the unprompted and prompted reports from the SM-P200 session, and the mixed-media
-> feedback below — was recorded after they were told out loud, before the session, that
-> their words would be written down. Quotes of the developer's own are self-disclosure and
-> carry none of this, per rule 4; where both appear, the attribution says which is which.
+> feedback below — was recorded after they were told out loud, before the session, what
+> would happen to their words: that they would be written down verbatim, that these notes
+> would be **shared as a public repository for review**, and that **nothing about their
+> health, body or identity would be recorded alongside them**.
+>
+> That last undertaking is what rule 2 exists to keep, and it is checkable rather than
+> promised: the only things recorded about Observer A anywhere in this repo are a pseudonym
+> and their relation to the target population. No impairment, diagnosis, age, assistive-tech
+> setup, or health data. Their quotes describe the experience of reading a scrolling screen,
+> which is the object of study, and nothing else about them.
+>
+> **Re-confirmed after the fact.** Observer A was asked again once the repository was
+> actually public, and agreed to the quotes appearing in it on those terms. The pre-session
+> disclosure and the confirmation are recorded separately on purpose: agreeing to be written
+> down and agreeing to be published are different undertakings, and only the second one can
+> be given by someone who knows what the repository turned out to be.
+>
+> Quotes of the developer's own are self-disclosure and carry none of this, per rule 4;
+> where both appear, the attribution says which is which.
 >
 > **Update this line whenever a quote is added**, and do not let it fall behind the tables
 > again. It said "the two quotes currently in this file are the developer's own" well after
