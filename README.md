@@ -772,6 +772,12 @@ That is a beta question. Note the input budget conflict either way: momentary bo
 naturally onto proximity's hold-cover gesture, which is already allocated to the
 spasm-tolerant hard stop.
 
+**Both halves of that conflict are qualified as of 2026-08-13**, and it survives only if both
+hold. The gesture may not exist: proximity is absent in hardware on the SM-P200, so on
+tablet-class devices there is nothing to contend for. And the allocation it assumes is itself
+unresolved: hold-cover is sustained input, which standing rule 1 forbids, and it is recorded
+nowhere as a deliberate exemption. Both are open items in [DECISIONS.md](DECISIONS.md).
+
 ### Security: the control receiver is exported
 
 `registerReceiver(..., RECEIVER_EXPORTED)` in `AutoScrollService` means **any installed app
