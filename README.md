@@ -509,7 +509,12 @@ runtime, always). Travel band 288..2112px = 593dp.
 
   It is also an argument for the planned proximity-wave control that was not part of the
   original reasoning: it is the only planned control with no panel of its own, so it is the
-  only one immune by construction.
+  only one immune to this **where the hardware provides it**.
+
+  **Narrowed 2026-08-13.** This originally read "the only one immune by construction",
+  which was true of the mechanism and false as a statement about availability: proximity is
+  absent in hardware on the SM-P200, so on tablet-class devices there is no immune control
+  at all. See DECISIONS.md.
 
   **Fixed.** A start dismisses system panels first, then waits `PANEL_COLLAPSE_MS` (500ms)
   for the collapse animation before pressing.
@@ -840,7 +845,7 @@ any beta.
 | Finding | Evidence |
 |---|---|
 | Starting from the notification scrolled the shade, not the app | `mCurrentFocus` stayed `NotificationShade` for 86 ticks. Fixed; both API branches verified |
-| Any control that is its own window captures the finger | Same root cause. A QS tile would behave identically. Proximity wave is the only planned control immune by construction |
+| Any control that is its own window captures the finger | Same root cause. A QS tile would behave identically. Proximity wave is the only planned control immune by construction — **but only where the hardware provides it**; proximity is absent on the SM-P200, so tablet-class devices have no immune control. Narrowed 2026-08-13 from a claim that read as universal |
 | Notification body is inert — `contentIntent=null` | `dumpsys notification`. Large easy target dead, small button live: target sizing inverted for this audience |
 | No feedback between press and visible motion | ~500ms panel wait + slop consumed by the host + 12 dp/s cruise ≈ a second before anything is unambiguous |
 | Force-stop silently disables the service | Clears `enabled_accessibility_services` and `accessibility_enabled`. OEM battery managers force-stop routinely |

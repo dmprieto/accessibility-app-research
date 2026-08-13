@@ -7,7 +7,8 @@ once enough devices are measured, these become shipped starting values keyed on
 instead of discovering from scratch. That only works if the numbers stay comparable
 across devices, so keep the columns fixed and leave cells blank rather than approximating.
 
-Every field except the two subjective ones comes straight out of logcat:
+Every field except the two subjective ones, **and except where noted**, comes straight out of
+logcat:
 
 - `DEVICE` line → manufacturer, model, device, api, release, build
 - `PRESS` line → screen, density, slop, longPress, minFling
@@ -24,6 +25,33 @@ Every field except the two subjective ones comes straight out of logcat:
 
 `longPress` is bolded on device 1 as a reminder: it was 400ms, not the 500ms every
 reference states, and it is user-configurable in accessibility settings.
+
+## Sensor availability
+
+**Provenance: `dumpsys sensorservice`, read-only — not logcat.** This is the "except where
+noted" case. Measured 2026-08-13 on both devices.
+
+**This table does not feed the shipped-defaults model, and cannot.** Everything above is
+recorded because it looks like a property of the OS build, so it can become a starting value
+keyed on `Build.MANUFACTURER` + `Build.VERSION.SDK_INT`. Sensor presence is per-model hardware
+inventory: it cannot be interpolated from a neighbouring device, and a matching manufacturer
+and API level tell you nothing about it. It is here because it is a device constant, not
+because it feeds that model.
+
+| # | proximity | light | notes |
+|---|---|---|---|
+| 1 | **yes** — `stk3a5x_ps`, `android.sensor.proximity(8)`, on-change, wakeUp | yes | Motorola vendor type `prox_for_call(65585)` is also present; type 8 is the usable one |
+| 2 | **no — absent in hardware** | yes — VEML3328 | Full inventory: accelerometer, light, Semtech grip, significant_motion, tilt_detector, light_cct |
+
+**Device 2's absence is verified, not assumed.** An empty grep looks identical whether the
+sensor is absent or the dump failed, so the full inventory was printed to tell those apart:
+103 lines, "Total 6 h/w sensors", every sensor named. Absent in hardware — not disabled, and
+not hidden behind a vendor alias. That check is standing rule 5 applied without being asked
+for, and it is the reason this row can be trusted.
+
+**Inferred, not measured:** that `getDefaultSensor(TYPE_PROXIMITY)` returns null on device 2.
+It follows from the hardware inventory rather than from a call, and it confirms itself for
+free the first time app code runs there.
 
 ## Chain decay
 

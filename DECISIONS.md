@@ -23,6 +23,11 @@ natural design is hold-to-boost. Both times the obvious answer was a held contro
 times it was what an able-bodied person reaches for. Latching (tap on, tap off) or discrete
 fixed-distance actions satisfy the rule; momentary hold does not.
 
+**One known unresolved conflict with this rule:** the spasm-tolerant hard stop is designed as
+a hold-cover gesture, which is sustained input. It is not recorded anywhere as a deliberate
+exemption. Open, and in the open items table — do not read the design's existence as the rule
+having been waived.
+
 ### 2. Visibility was the wrong success criterion. Fatigue is the right one.
 
 The engine was built, tuned and measured to make the re-grip **invisible** — the lead-in
@@ -238,7 +243,9 @@ the *need* before the *count*, not after.
 
 **Start and stop by proximity, where the hardware provides it.** Not universal: proximity is
 absent on tablet-class hardware, so anything built on it must feature-detect and degrade. It
-cannot be the primary hands-free control. Measured — see the sensor record.
+cannot be the primary hands-free control. Measured — see the sensor availability table in
+[DEVICES.md](DEVICES.md), and the consequences under *Proximity cannot be the primary
+hands-free control* below.
 
 **The nav-bar accessibility button.** Recorded as a candidate, **not as a working control.**
 Whether it presents a chooser when more than one accessibility service is registered is
@@ -446,6 +453,41 @@ site's sticky footer — a hazard the narrower band avoids. Above ~20 dp/s trave
 and the narrow band costs re-grip frequency; that trade is accepted because reading speeds
 are the point.
 
+### Proximity cannot be the primary hands-free control
+
+Measured 2026-08-13, both devices — see the sensor availability table in
+[DEVICES.md](DEVICES.md). Proximity is present on the Moto G54 and **absent in hardware on the
+SM-P200**. It fails on tablet-class hardware, so it cannot carry the hands-free path alone.
+
+Consequences, all of them scope rather than tuning:
+
+- **Anything built on proximity must feature-detect and degrade.** Not an implementation
+  detail — a control that silently does nothing on half the hardware is worse than one that is
+  absent, because the user cannot tell which they have.
+- **The external switch moves from optional to required.** Recorded in *The v1 control set*
+  above, with its contract still undefined.
+- **The notification control is now load-bearing for a group it was not before**, which raises
+  the priority of its two recorded defects: the unexplained no-broadcast bug on the Start
+  action button, and the inverted target sizing — large inert body, small live button, exactly
+  backwards for this audience.
+
+**The gap, precisely.** Users who *can* touch the screen but for whom repeated swiping hurts
+remain served on any hardware by the notification control. Users who cannot reach or reliably
+touch the screen — mounted device, severe weakness, spasticity — are served on a phone by
+proximity, and on a tablet **by an external switch only**. Mounted tablets are common in
+wheelchair setups, so this lands on a real segment rather than a hypothetical one.
+
+### PENDING — which hands-free path v1 takes
+
+**Undecided. Recorded, not resolved, and deliberately without a recommendation.** Two options:
+
+1. **Proximity on phones, external switch elsewhere.** Tablet users without a switch are
+   served by touch controls only, documented as a limitation.
+2. **Pursue the light sensor first**, as a windowless control present on both devices.
+
+This is a scope decision, not a measurement. What is known about option 2 — and what would
+have to be true for it to work — is in the open items table.
+
 ### Control surface: the receiver must not ship exported
 
 `RECEIVER_EXPORTED` means any installed app can start and stop the scroll, with no
@@ -528,4 +570,7 @@ which held up.
 | Host apps with vertical-gesture semantics | Untested: drag-to-dismiss, short-video feeds, video players mapping vertical drags to brightness/volume, nested-scroll and collapsing toolbars |
 | What to do about touchless app switches | Incoming call, alarm, full-screen intent, deep link — the only remaining case where the finger keeps dragging in a window the user did not choose |
 | **Ratchet not built** — four asserts, each a one-line change to lose and expensive to re-establish | Build it in the shipping repo, reading from the built artifact. Spec in the TODO section above, including the fourth assert whose mechanism is still undecided |
+| Does the nav-bar accessibility button show a chooser when more than one accessibility service is registered? | Register a second service and observe. **Unverified — the button must not be counted as a working control until it is.** A chooser is a window, and any control owning a window captures the synthetic finger; the panel-dismiss fix is gated on starts arriving from the notification and would not cover it. This app's users run TalkBack or Switch Access already, so multiple services is the expected case, not the edge case |
+| Can the light sensor serve as a windowless hands-free control? | Prototype occlusion detection on both devices — both have one. Needs no permission and does not touch the capabilities bitmask, so it costs nothing under standing rule 4. **Hypothesis only**, and possibly fatal on ambient variation, dim-room mounting, passing shadows, or on-change latency |
+| Does the spasm-tolerant hard stop's hold-cover gesture violate standing rule 1? | The control-path charter. Pre-existing, not caused by the sensor result: hold-cover is sustained input, which rule 1 forbids, and it is nowhere recorded as a deliberate exemption. **Open design question — not resolved here.** Note the asymmetry runs backwards for a stop: a false positive is cheap (the scroll stops, the user restarts) and a false negative is the dangerous one, because the person needing a hands-free stop is by definition the person who cannot reach the screen |
 | Liveness when the service is not running | Six ways to be "enabled but not working", none detectable by the app because it is not running to notice. Must be observable from outside the service |

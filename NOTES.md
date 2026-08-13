@@ -838,6 +838,14 @@ Costs:
   entirely: a finger cancels mid-segment, measured at 9–12ms. The deliberate path still
   matters because proximity wave and a QS tile are the controls for users who cannot
   reliably touch.
+
+  **CORRECTED 2026-08-13 — the sentence above names two controls that group does not have
+  on a tablet.** The QS tile was already excluded: a QS panel is a window, and any control
+  owning a window captures the synthetic finger. And proximity is now measured **absent in
+  hardware on the SM-P200** (see DEVICES.md), so on tablet-class devices the user who cannot
+  reliably touch has neither. The deliberate path still matters — that part holds — but it
+  matters because of the *notification control and an external switch*, not because of these
+  two. Left in place because the reasoning that followed from it is still readable.
 - **Rate-filter convergence** stretches from ~2s to ~5s at steady-state gain, since there
   are 2.5x fewer samples per second. The warm-up gain already collapses this to ~3 samples,
   and it only affects the first press of a run.
