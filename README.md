@@ -294,69 +294,29 @@ never hardcoded.
 
 ---
 
-## Running it
+## Reproducing the measurements
 
-> **The application sources are not in this repository.** This repo is the research record.
-> The sections below are the operating instructions for whoever has the spike's working tree,
-> and are kept here because the adb surface is also how the measurements were taken and how
-> they can be reproduced.
+**The application sources are not in this repository** — this repo is the research record.
+What follows is what a reader needs to interpret the numbers in [DEVICES.md](DEVICES.md) and
+reproduce them against the spike's working tree. Full operating instructions belong with the
+code.
 
-### Build
+The spike builds against `compileSdk`/`targetSdk` 37, `minSdk` 26, **with no dependencies
+beyond the Kotlin stdlib** — a choice that began as an APK-size preference and became a
+reliability requirement once LMKD kills turned out to matter (see the memory-footprint
+finding below). No Gradle wrapper is committed to the source tree; opening the project in
+Android Studio once materialises it.
 
-**Known gap:** `gradle/wrapper/gradle-wrapper.jar` is not in the source tree, and there was no
-Gradle or JDK on `PATH` on the development machine (Android Studio's bundled JBR is the only
-JDK). Materialize the wrapper once, either way:
+The app has **no launcher activity and no UI**, so it is enabled and driven entirely from
+adb: grant `POST_NOTIFICATIONS`, clear the Android 13+ restricted-settings block with
+`appops set … ACCESS_RESTRICTED_SETTINGS allow`, then enable the service in
+**Settings → Accessibility** — or write `enabled_accessibility_services` and
+`accessibility_enabled` directly, which overwrites any other enabled services.
 
-- **Open the project folder in Android Studio and sync.** It reads
-  `gradle/wrapper/gradle-wrapper.properties`, downloads the distribution and writes
-  `gradlew` / `gradlew.bat` / the jar. Easiest path, and it also fixes the AGP/Kotlin
-  versions in `gradle/libs.versions.toml` via the Upgrade Assistant if they're stale.
-- **Or**, with Gradle installed: `gradle wrapper`
+### Onboarding evidence: every device blocked the sideload somewhere
 
-After that:
-
-```bash
-gradlew.bat :app:installDebug
-```
-
-Targets `compileSdk`/`targetSdk` 37, `minSdk` 26. No dependencies beyond the Kotlin
-stdlib.
-
-### Enable it on the device
-
-```bash
-adb shell pm grant dev.spike.autoscroll android.permission.POST_NOTIFICATIONS
-```
-
-The app has no launcher activity and no UI, so the notification permission has to come
-from adb. Without it you get no control notification — use the broadcast commands below
-instead, they work regardless.
-
-**Android 13+ blocks the accessibility toggle for sideloaded apps** ("Restricted
-setting" — greyed out with no explanation). Clear it with:
-
-```bash
-adb shell appops set dev.spike.autoscroll ACCESS_RESTRICTED_SETTINGS allow
-```
-
-Then **Settings → Accessibility → Autoscroll Spike → On**. Or skip Settings entirely:
-
-```bash
-adb shell settings put secure enabled_accessibility_services dev.spike.autoscroll/dev.spike.autoscroll.AutoScrollService
-```
-
-```bash
-adb shell settings put secure accessibility_enabled 1
-```
-
-(That overwrites any other enabled services — read the current value first if you have
-others on.)
-
-### Sideload barriers observed so far
-
-Every device tried has blocked a sideloaded accessibility app somewhere, and each one
-presents differently. None of these apply to a Play-installed app. This is onboarding
-evidence, not a build problem:
+Each device presented differently, and none of these apply to a Play-installed app. This is
+onboarding evidence, not a build problem:
 
 | Device | Barrier | Presents as | Cleared by |
 |---|---|---|---|
@@ -383,71 +343,26 @@ need the `isAccessibilityTool` declaration and a prominent-disclosure statement,
 is a per-release review risk rather than a per-user wall. Worth planning for, not worth
 conflating with the table above.
 
-### Control it
+### The measurement surface
 
-Start / stop, either from the notification or:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --es cmd start
-```
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --es cmd stop
-```
-
-`--es cmd toggle` also works.
-
-**Speed, in dp/s** — the sweep is 6 / 12 / 25 / 50 / 100:
+Every parameter is settable at runtime by broadcast, which is what made the sweeps possible
+without a rebuild:
 
 ```bash
 adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ei speed 25
 ```
 
-**Segment duration, in ms** — the sweep is 32 / 50 / 100 / 150 / 250:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ei segment 250
-```
-
-**Lead-in kick off**, to observe the long-press failure mode on this device:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ez leadin false
-```
-
-**Lead-in margin in dp** — the visible lurch after every re-grip. Sweep 4 / 2 / 1 / 0:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ei margin 1
-```
-
-**Age cap in ms**, to probe a new device's chain-decay threshold directly:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ei cap 45000
-```
-
-**Lead-in duration in ms** — the dominant lever on re-grip smoothness. Sweep 120 / 200 /
-250 / 300. Clamped per device at 0.75x the measured long-press timeout, so a request above
-that is honoured up to the limit and logged:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ei leadinms 250
-```
-
-**Rate correction** — on by default. Turn it off to reproduce the raw delivered-speed
-bias, or to A/B the smoothness:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ez ratecorrect false
-```
-
-**Re-press through cancellations**, measurement mode only — with this on, touching
-the screen will *not* stop the scroll:
-
-```bash
-adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ez repress true
-```
+| Extra | Sets | Swept over |
+|---|---|---|
+| `--es cmd start` / `stop` / `toggle` | Run control; also available from the notification | — |
+| `--ei speed` | Cruise speed, dp/s | 6 / 12 / 25 / 50 / 100 |
+| `--ei segment` | Segment duration, ms | 32 / 50 / 100 / 150 / 250 |
+| `--ei margin` | Lead-in margin, dp — the visible lurch after every re-grip | 4 / 2 / 1 / 0 |
+| `--ei leadinms` | Lead-in duration, ms — the dominant lever on re-grip smoothness. Clamped per device at 0.75× the measured long-press timeout; a request above that is honoured to the limit and logged | 120 / 200 / 250 / 300 |
+| `--ei cap` | Press age cap, ms — probes a device's chain-decay threshold directly | 30000 → 120000 |
+| `--ez leadin false` | Disables the lead-in kick, to observe the long-press failure mode on that device | — |
+| `--ez ratecorrect false` | Disables rate correction, to reproduce the raw delivered-speed bias or A/B the smoothness | — |
+| `--ez repress true` | **Measurement mode only.** Re-presses through cancellations, so touching the screen does *not* stop the scroll. Never ship it on | — |
 
 Extras combine in one broadcast. Speed and segment take effect at the next segment
 boundary; `leadin` applies at the next press. Nothing needs a restart or a rebuild.
