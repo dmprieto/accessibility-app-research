@@ -677,8 +677,14 @@ keytool -genkeypair -v \
 - **10000 days ≈ 27.4 years.** Android's signing guide recommends at least 25 years and
   requires a validity period ending after 22 October 2033 for Play.
   *developer.android.com/studio/publish/app-signing, checked 13 Aug 2026.*
-- **`-dname` is baked into the certificate permanently** and is publicly readable. No street
-  address, no phone number.
+- **`-dname` is baked into the certificate permanently.** **Corrected 14 Aug 2026: it is not
+  publicly readable.** It goes into the *upload* certificate, and under Play App Signing that
+  certificate is stripped and replaced before anything reaches a user — what users can inspect
+  is Google's generated app signing key, per the standing instruction above not to opt out. So
+  the DN is visible to Google and Play Console, not to the public. *Reasoning from what this
+  file already records about Play App Signing; not independently verified, and it does not
+  hold if the default is ever opted out of.* The advice is unchanged and rests on permanence
+  rather than exposure: no street address, no phone number.
 
 **The keystore filename and the `-dname` organisation followed the identifier when it was
 amended**, on 14 Aug 2026: both read `keepreading` until then. Generation is deferred, and the
