@@ -45,6 +45,12 @@ is paused — the applicationId, the developer account, the upload key, and the 
 comparable app — are recorded in DECISIONS.md and not restated here. Two of them carry the
 same trigger as the pause itself: a control surface plus the exported-receiver fix.
 
+**The production applicationId is `io.github.dmprieto.reading`**, settled 14 Aug 2026 and
+irreversible at first publication. **It has never been built or run.** The spike's
+`dev.spike.autoscroll` is unchanged and stays in every command in this file — those were run
+against a build carrying it. DECISIONS.md has the criterion, the superseded candidate and the
+reasoning; none of it is repeated here.
+
 ### What NOT to do next
 
 - **Do not tune anything on this evidence.** Segment duration, lead-in, margin: all have
