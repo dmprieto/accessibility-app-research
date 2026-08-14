@@ -158,6 +158,27 @@ When a command appears in a document, it was sourced from this repo's own record
 it. **Say so.** "Sourced from DECISIONS.md" and "verified by running it" are different claims
 and the difference must be explicit every time.
 
+**Reading this repo by URL is not a reliable read.** An instance in a web chat context, given
+the repo's public URL and told to read the documents, reported that `RECORD-KEEPING.md` does
+not exist and listed the root as six files — omitting `PARKED.md` too. Both files are in the
+repo and pushed. The cause is caching in the URL-fetch path: a second instance fetching the
+same URL earlier the same day received a different stale tree, with `PARKED.md` present and
+`RECORD-KEEPING.md` missing, and the same path returned a byte-identical cached page twice,
+which led an instance to report a completed set of edits as not landed. Two views, both
+confident, both wrong, neither able to tell. **A file's absence from a URL-fetched listing is
+not evidence the file is absent.** An instance without a local clone should have the files
+uploaded to it directly rather than fetching them. The reading order under *Onboarding a new
+instance* assumes a local clone, where the tree is ground truth; it does not transfer to a
+fetched view — and the two files that went missing are its first and fifth steps, the ones
+that stop an editing instance breaking the record's rules and re-proposing parked items.
+
+**Canary, for any prompt that does hand an instance the repo URL.** Include it verbatim:
+
+> The repository root should contain `RECORD-KEEPING.md`, `CLAUDE.md` and `PARKED.md`
+> alongside `README.md`, `HANDOVER.md`, `DECISIONS.md`, `NOTES.md` and `DEVICES.md`. If your
+> listing is missing any of these, your view of the repo is stale — stop and say so rather
+> than working from it.
+
 ## Working style
 
 The developer coordinates this work across more than one Claude instance and routes follow-up
