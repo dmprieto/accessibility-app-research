@@ -371,6 +371,10 @@ without a rebuild:
 adb shell am broadcast -a dev.spike.autoscroll.CONTROL -p dev.spike.autoscroll --ei speed 25
 ```
 
+**`dev.spike.autoscroll` is the spike's package name and stays.** It is not the production
+identifier and must not be swept to match it: this command was run against a build carrying it.
+See *applicationId and namespace* in [DECISIONS.md](DECISIONS.md).
+
 | Extra | Sets | Swept over |
 |---|---|---|
 | `--es cmd start` / `stop` / `toggle` | Run control; also available from the notification | — |

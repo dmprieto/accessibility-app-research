@@ -4,6 +4,12 @@ One block per device. Copy the template. `PRESS` in logcat reports density, scre
 and the device's measured slop / long-press timeout — paste those in rather than
 guessing.
 
+**`dev.spike.autoscroll` in the commands here is not stale and must not be swept.** Every
+command in this file was run against a build carrying that package name; rewriting them would
+make the record describe a build that never existed. The production identifier is a different
+string and applies to a tree that has never been built — see *applicationId and namespace* in
+[DECISIONS.md](DECISIONS.md), which is where both rules live and is not repeated here.
+
 ---
 
 ## Moto G54 5G — objective measurements only
