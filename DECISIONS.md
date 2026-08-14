@@ -433,6 +433,12 @@ judgment being involved:
 4. **No collision** — not an existing Play package, not a trademark, not a domain with a prior
    owner who shipped software under it.
 
+**None of these four is satisfied by relocating the finding.** Every one of them can be dodged
+the same way: a namespace-control problem redirected to "we will host it elsewhere", a legality
+problem to "we will alias it", an occupancy problem to the display name. The finding moves, the
+candidate survives, and the gate appears to have been respected. Gate 4 was lost exactly this
+way — see *Superseded* below.
+
 **And four judgment tests:**
 
 5. **Must not read as automation.** The declaration package ranks "automation tool wearing an
@@ -675,8 +681,9 @@ keytool -genkeypair -v \
   address, no phone number.
 
 **The keystore filename and the `-dname` organisation followed the identifier when it was
-amended**, on 14 Aug 2026: both read `keepreading` until then. Generation is deferred, so no
-keystore carrying either string exists — they are recorded intent, and the rule stated under
+amended**, on 14 Aug 2026: both read `keepreading` until then. Generation is deferred, and the
+13 Aug flag-set run left no keystore on disk — *confirmed by the developer, 14 Aug 2026*. So no
+keystore carrying either string exists: they are recorded intent, and the rule stated under
 *applicationId and namespace* puts recorded intent on the update side. `dev.spike.autoscroll`
 stays because builds carrying it actually ran; nothing carrying this ever will.
 
