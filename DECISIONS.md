@@ -388,6 +388,378 @@ has a way for a user to start and stop it that is not adb. Standing rule 6 also 
 control surface must be designed against the autonomy prohibition from the start, rather
 than reviewed against it afterwards.
 
+### applicationId and namespace: `io.github.dmprieto.reading`
+
+**Amended 14 Aug 2026.** Recorded first as `io.github.dmprieto.keepreading`, reopened, and
+settled on `io.github.dmprieto.reading`. **The namespace is unchanged; only the leaf segment
+moved.** The superseded candidate and the reasoning that admitted it are kept below under
+*Superseded* rather than overwritten — it failed gate 4, and *how it got past gate 4* is the
+more useful half of the record.
+
+**Correction first: the naming criterion was never recorded anywhere in this repo.** It was
+assumed to be in this file and it is not. Nor was `dev.spike.autoscroll` ever a rejected
+candidate with recorded reasoning — it was a placeholder in a draft of the Play declaration
+package, a document that is not in this repo either.
+
+**This is the third instance of the pattern named in *The v1 control set* above**: the thing
+everything else depends on is the thing nobody wrote down. The v1 control set was the first,
+the consent line the second, and this is the third.
+
+**This is a new identifier for the production tree, not a rename.** `dev.spike.autoscroll`
+stays exactly as it is everywhere it appears in this repo. Every `adb` command, `pidof` call
+and broadcast action recorded here was run against a build carrying that package name;
+rewriting them would make the record describe a build that never existed.
+
+**The production identifier is under the opposite rule**, and the difference is why the
+amendment above could be swept and the placeholder cannot. Nothing has ever been executed
+against `io.github.dmprieto.reading` or against the candidate it replaced: they exist only as
+recorded intent, so they are updated wherever they appear.
+
+**The criterion — four hard gates.** An identifier that fails any of these is out, without
+judgment being involved:
+
+1. **Derives from a namespace the developer controls** and can keep for the life of the
+   listing, with the privacy policy and verification page hosted inside it.
+2. **Is a legal Java package** — lowercase ASCII, no hyphens, no leading digits, no Java
+   reserved word as a label. The TLD trap: `.do`, `.new` and `.int` produce illegal first
+   segments; `.co`, `.dev`, `.io`, `.org` and `.app` are fine.
+3. **Encodes only settled decisions.**
+
+   *Note, added after this section was reopened.* **The leaf should be forgettable.** Anything
+   meaningful in it is a decision, and decisions get revisited. This is the generalisation of
+   "never encode an unsettled decision" and it is the stronger form: `reading` is settled and
+   still should not have been the interesting part of the name. The evidence is this section's
+   own history — closed and reopened twice, both times because the leaf carried meaning.
+4. **No collision** — not an existing Play package, not a trademark, not a domain with a prior
+   owner who shipped software under it.
+
+**And four judgment tests:**
+
+5. **Must not read as automation.** The declaration package ranks "automation tool wearing an
+   accessibility badge" as its highest rejection risk and bans *automate*, *automatic* and
+   *macro*. `auto-` is the same pattern, and the applicationId is publicly visible — in the
+   Play URL, in App info, and in `dumpsys` output.
+6. **Must survive transcription.** It appears in output this project asks sceptical readers to
+   type.
+7. **Capability, not diagnosis.** No condition names, no clinical vocabulary, no
+   "assist"/"helper" framing. The store copy defines the audience by what swiping costs them;
+   the identifier must not undo that.
+8. **No English wordplay.**
+
+**Why the placeholder fails: gates 1 and 3, and test 5.** `dev.spike` is not a namespace
+anyone controls, so nothing can be hosted inside it (gate 1). `spike` names a phase closed
+2026-08-12, and `autoscroll` names a mechanism whose premise this file records as unresolved —
+the single-speed premise is under threat, the hands-free path is PENDING (gate 3). And `auto-`
+is the prefix test 5 exists to catch. Its *shape* was never the problem: it is structurally
+identical to `com.google.android.marvin.talkback`.
+
+**Refinement to gate 3.** Established accessibility apps do name mechanisms —
+`com.google.android.marvin.talkback`, `com.google.android.apps.accessibility.voiceaccess`. So
+the rule is not "never name a mechanism", it is **"never encode an unsettled decision"**.
+Google could name theirs because theirs were settled at ship time; this file records the
+single-speed premise as a threat to v1 and the hands-free path as PENDING.
+
+TalkBack is also the cautionary case in the other direction. That identifier carries a dead
+research codename (`marvin`) plus a product name that is now one of three features inside
+"Android Accessibility Suite" — and the cost of the mismatch has been zero. **Identifier and
+branding are permitted to diverge**; `com.letsenvision.assistant`, shipping publicly as "ally",
+does it deliberately.
+
+**What these two precedents do not support.** One diverges into a dead codename, the other into
+a generic word. **Neither identifier carries another live product's brand in the same
+category**, so neither licenses a leaf that does. They were cited for exactly that when
+`keepreading` was admitted, and it is a proposition they cannot carry: they support the *shape*
+of the divergence, not the instance.
+
+*The third-party package names and brandings above — TalkBack, Voice Access, Envision — are
+recorded as supplied, 13 Aug 2026, and not independently verified. Nothing here depends on
+them being exact: they are precedent for a permitted shape, not evidence for a measurement.*
+
+**Superseded: `io.github.dmprieto.keepreading`.** Recorded 13 Aug 2026, rejected 14 Aug 2026.
+**It fails gate 4**, on a finding this section already carried: `com.emspx.keepreading` is a
+live Play app branded "KeepReading" in reading assistance, and Keep Reading, S.A. de C.V. is a
+company with a Play developer presence. **The argument for changing it, in the form it was
+made and no stronger:** an irreversible field should not carry a string this same section says
+must not be used elsewhere, when a clean alternative costs nothing. Nothing is published, so
+the change is free now and unavailable after first publication.
+
+**Correction: how gate 4 was read — not a change to gate 4.** The gate as written already
+covers brand occupancy: *not an existing Play package, not a trademark, not a domain with a
+prior owner who shipped software under it.* It was read down to mean package collision only,
+which is narrower than what is recorded and narrower than what the gate is for. **The criterion
+did not need extending; it needed applying.**
+
+The mechanism of the error is worth keeping, because it is available to any gate. The occupancy
+finding was found, understood and then **routed to the display name** instead of failing the
+candidate. Gate 4 governs the identifier — the criterion is a criterion for the applicationId —
+so redirecting an occupancy finding to a different field exempts a candidate from a gate while
+appearing to respect it.
+
+**Rejected alternatives:**
+
+- **A registered custom domain.** Play requires a reachable privacy policy URL for the life of
+  the listing, so the domain becomes a renewal that can never lapse — for a solo developer with
+  no entity and no revenue. A lapse someone else picks up leaves the identifier reverse-DNSing
+  to a stranger's site, for an app whose whole claim is that it is checkable.
+  `io.github.<handle>` removes that failure mode and points at the source rather than a
+  marketing site. **Residual risk accepted and named:** control is delegated to GitHub, and the
+  handle is encoded permanently.
+- **A product-named leaf.** The app name is not chosen, and a leaf chosen now fixes a permanent
+  identifier to a name that may not survive the beta.
+- **A coined or non-English word from a "helping/assisting" field.** Fails test 7 — a word
+  meaning "helper" inverts the social-model framing the store copy rests on.
+- **A phonetic respelling** (e.g. `kiipreading`). Likelihood-of-confusion analysis covers marks
+  that sound alike, so it gives no trademark protection while potentially evidencing intent; it
+  breaks transcription in the verification flow; and deliberate near-miss spellings
+  pattern-match to typosquatting, in a category already under extended review.
+- **`reader`.** Passes every gate and test, and was rejected on two avoidable frictions. It
+  implies text-to-speech, which this app does not have and which the nearest comparable does —
+  in a string that appears in the verification output a reader is asked to check. And it is the
+  same leaf as `com.google.android.accessibility.reader`, which is the app the differentiation
+  argument is about.
+- **`longform`.** Fails gate 4. Longform.org is a long-running longform-journalism publication
+  that shipped a Longform iOS app from 2012 until it was withdrawn in 2018, and an unofficial
+  "Longform Reader" remains on the App Store: same category, live brand, the same failure mode
+  as `keepreading`. *Source: longform.org, Longform's Medium post on withdrawing the app, and
+  App Store listings, checked 14 Aug 2026. Not independently verified.*
+
+  **Kept in the file although rejected**, because it is the positive control on the corrected
+  reading of gate 4: it was the first non-generic candidate tried after that correction, and
+  the check fired.
+
+**`reading`, against the recorded criterion.** It passes every gate and every test. By the
+numbering above: **gate 1** is untouched, since the namespace did not move. **Gate 2** — a legal
+Java package. **Gate 3** — encodes only the settled purpose: no mechanism, no control surface,
+no speed model. **Gate 4** — a generic activity noun, so there is nothing to collide with.
+**Test 5** — it names an activity a person does, not a thing software does. **Test 6** — a
+single common word, trivially transcribed from verification output. **Test 7** — no diagnosis,
+no helper framing. **Test 8** — not wordplay.
+
+**The gate 4 result has a different provenance from the others, and it must not be written as
+though it were a search.** No check of any kind was run on `reading`, and none was needed —
+because the gate's two clauses are each satisfied structurally, by different mechanisms:
+
+- **Brand occupancy.** A generic activity noun describing the category it appears in is not
+  ownable as a brand within that category, so there is no occupancy to find. The provenance
+  here is the reasoning, not a search, and it is unverifiable by construction rather than by
+  omission.
+- **Package collision.** `io.github.dmprieto.*` is namespaced to a handle nobody else holds, so
+  an exact-string collision is not something another developer can plausibly produce. Nothing
+  further is available now in any case: *Permanence* below records that the only authoritative
+  collision check is Play Console at first bundle upload.
+
+So gate 4 is satisfied twice over by structure, and this records which structure does which.
+That is a narrower and more durable claim than "gate 4 passed".
+
+**That is the main reason for this choice, and it is structural rather than aesthetic. A
+generic leaf makes gate 4 self-satisfying** — it removes the failure mode instead of clearing
+it once. No occupancy check has to be repeated on the next candidate, in a year's time, or by
+the next reader who reopens this section.
+
+**Display name — separate, and deferred.** `com.emspx.keepreading` is a live Play app branded
+"KeepReading" in reading assistance, and Keep Reading, S.A. de C.V. is a company in Guadalajara,
+Mexico with a Play developer presence. **The word is occupied in this category, so it is
+avoided in both fields** — it failed gate 4 for the identifier, as recorded above, and
+**`keepreading` remains unusable as the display name.** The display name itself is still an
+open decision, deferred, and nothing here settles it. *Play listings, checked 13 Aug 2026;
+read from the listings, not independently verified.*
+
+**Permanence.** Play package names are globally unique. A deleted app with zero lifetime
+installs frees its name; with any lifetime installs it is locked out permanently, including for
+the account that created it. The only authoritative collision check is Play Console at first
+bundle upload. **The identifier is irreversible at first publication, not first upload.**
+*support.google.com/googleplay/android-developer/answer/16483176, checked 13 Aug 2026, not
+independently verified.*
+
+### Play developer account: personal, and creation deferred
+
+**Personal account, not organisation.** The organisation route needs a registered business and
+a D-U-N-S number. Google's own pages disagree on timing — the verification FAQ says up to 28
+days, Play Console help says up to 30; **the disagreement is recorded rather than resolved**,
+since picking one would be inventing a number. Either way it is weeks plus an entity that does
+not exist, to avoid a closed test that should run anyway. *Both figures as supplied and dated
+13 Aug 2026, neither independently verified — the disagreement is the recorded fact, so neither
+number is treated as authoritative.*
+
+**What creating the account actually starts.** *All three items recorded as supplied and dated
+13 Aug 2026; not independently verified in this session. The third carries its own source.*
+
+- **Identity verification is not a deferred deadline for new accounts** — it happens at
+  onboarding. The widely-circulated material about choosing a deadline, completing it 60 days
+  early and requesting a 90-day extension applies to accounts created **before September
+  2023**. It does not describe this path and will mislead anyone planning around it.
+- **The 12-tester requirement applies, and cannot be banked.** It applies because this will be
+  a personal account created well after 13 November 2023. It is a state you must be *in* when
+  you apply for production access: at least 12 testers continuously opted in for the previous
+  14 days. Creating the account early buys nothing. **This is the definition of the
+  requirement**; *The Play testing requirement is the instrument, not an obstacle* below
+  draws the scheduling consequence and points here rather than restating it.
+- **Inactivity closure is the real clock.** An account created more than a year ago that has
+  never submitted an app for review is closed, and the fee is not refunded. The documented
+  remedy is to verify account email and phone and publish something — internal app sharing,
+  internal testing or closed testing are explicitly sufficient. **At least one recent developer
+  report describes an account flagged despite a closed-testing release**, so the remedy is not
+  bulletproof. *support.google.com/googleplay/android-developer/answer/11605267, checked
+  13 Aug 2026, not independently verified.*
+
+**Android developer verification: Colombia is not in the first wave.** Enforcement begins
+30 September 2026 for users in Brazil, Indonesia, Singapore and Thailand across seven
+participating stores; global expansion is stated for 2027 with no announced date. Enforcement
+is device-side, so it concerns **where the app is installed, not where the developer is** — and
+publishing through Play satisfies it, since the programme targets sideloading and third-party
+stores. *support.google.com/android-developer-console/answer/16561738, checked 13 Aug 2026,
+not independently verified.*
+
+**No consequence for the beta — recorded so nobody re-examines it.** Closed testing distributes
+through Play, Play is a participating store, and a developer publishing through Play is verified
+by that route. A tester inside one of the four launch countries after 30 September 2026 is
+unaffected. There is no scope implication and nothing to plan around before the 2027 expansion,
+which has no announced date. An unanswered adjacency here reads like an unexamined risk, which
+is why the negative is written down rather than left implicit.
+
+**Trigger for creation:** spike 2 has delivered a control surface **and** the exported-receiver
+fix has landed. Both are already recorded here as prerequisites for any build reaching a device
+not under the developer's control, testers included — see *Control surface: the receiver must
+not ship exported*.
+
+**Worth doing now, ahead of the trigger:** make the identity document, address and payment card
+carry the same name in the same form. Mismatched or unsupported documents are the primary
+documented cause of verification failure.
+
+### Upload key: decided, generation deferred
+
+**This is a decision with a trigger, and it does not belong in [PARKED.md](PARKED.md).** Parked
+items wait for a reason that may never arrive. This waits on a known prerequisite and is
+certain to happen.
+
+**Correction to a prior assumption.** The upload key is **recoverable**: if lost, the account
+owner requests a reset through the Play Console help form and supplies a new
+`upload_certificate.pem`, which affects neither the app signing key nor existing users. The
+unrecoverable key is the **app signing key** — and by default the app is enrolled at first
+upload in quantum-ready hybrid signing with Google-generated keys, so Google holds it and it
+cannot be lost. Two standing instructions follow:
+
+- **Do not opt out of the default.** Play Console offers "provide a copy of your app signing
+  key". Taking it moves the unrecoverable key onto a developer laptop and creates a
+  catastrophic scenario that otherwise does not exist.
+- **The real safeguard is the Google account**, since the reset path is account-based. Enforce
+  2-Step Verification. **Not deferred — do this immediately**, independent of everything else
+  here.
+
+*support.google.com/googleplay/android-developer/answer/9842756, checked 13 Aug 2026, not
+independently verified.*
+
+**The command:**
+
+```
+keytool -genkeypair -v \
+  -keystore reading-upload.jks \
+  -storetype PKCS12 \
+  -alias upload \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000 \
+  -dname "CN=<name or project>, O=reading, C=CO"
+```
+
+- **`-storepass` is omitted deliberately** so keytool prompts. A password on the command line
+  lands in shell history.
+- **PKCS12** is keytool's default since JDK 9; JKS is legacy. PKCS12 uses one password for
+  store and key and will not accept separate ones.
+- **2048** is Google's documented minimum and what the reset flow expects. Larger buys nothing,
+  since Google re-signs with its own key.
+- **10000 days ≈ 27.4 years.** Android's signing guide recommends at least 25 years and
+  requires a validity period ending after 22 October 2033 for Play.
+  *developer.android.com/studio/publish/app-signing, checked 13 Aug 2026.*
+- **`-dname` is baked into the certificate permanently** and is publicly readable. No street
+  address, no phone number.
+
+**The keystore filename and the `-dname` organisation followed the identifier when it was
+amended**, on 14 Aug 2026: both read `keepreading` until then. Generation is deferred, so no
+keystore carrying either string exists — they are recorded intent, and the rule stated under
+*applicationId and namespace* puts recorded intent on the update side. `dev.spike.autoscroll`
+stays because builds carrying it actually ran; nothing carrying this ever will.
+
+*The flag set was executed against OpenJDK 21 on 13 Aug 2026 and produced a `PrivateKeyEntry`,
+`SHA384withRSA`, expiry December 2053. Run by the developer and recorded as supplied — there is
+no JDK, keystore or Android toolchain in the environment these documents are edited from, so it
+was not re-run here. **That run confirms the flag set**, which is a fact about `keytool`'s
+arguments and survives the leaf changing; it does not attest to the two values amended above.*
+
+**Backup verification is the deliverable, not the generation.** Seven steps, and the scenario
+they are testing is "the laptop is gone":
+
+1. **Two locations in different failure domains.** Not two folders on one laptop; not cloud
+   storage plus a password manager behind the same account.
+2. **Password in a password manager** whose own recovery kit lives somewhere neither location
+   is.
+3. **Record the SHA-256** from `keytool -list -v -keystore <file> -alias upload`. The
+   fingerprint is public and safe to write down.
+4. **Restore from each location independently** into a clean directory, ideally on another
+   machine, retrieving the password from the manager rather than from memory. Compare SHA-256.
+5. **Prove the private key is usable**, not merely that the file opens:
+   `keytool -certreq -alias upload -keystore <file> -file /tmp/check.csr`. Delete the `.csr`.
+6. **Repeat for the second location.** Two backups where only one was tested is one backup and
+   one hope.
+7. **If any step needed something that only existed on the laptop, the test failed** regardless
+   of what the fingerprint said.
+
+The certificate for a reset request comes from
+`keytool -exportcert -rfc -alias upload -keystore <file> -file upload_certificate.pem`.
+
+**The written note is the artifact.** Contents: purpose and applicationId; creation date; alias,
+format, algorithm, key size, expiry; SHA-256 fingerprint; both keystore locations and how to
+reach each; where the password lives and how to recover access to *that*; the two verification
+commands and what output proves success; a "last verified" date with a tickbox per location;
+and the reset path if lost. **The password never appears in the note.** Re-verify periodically —
+cloud accounts close and drives die, and a backup verified once and never again is one that
+fails when it matters.
+
+**Why this surfaces late.** The upload key must exist **before the first bundle upload**,
+because Play binds the upload certificate at that moment. The keystore must never be committed:
+`.gitignore` it, and keep the password out of any `gradle.properties` inside a repository.
+
+**Trigger: the same as the account** — spike 2's control surface and the exported-receiver fix.
+
+### The nearest comparable app, and what it does that this one cannot
+
+Recorded here because this is where the distribution and differentiation reasoning lives; the
+store copy itself is in the Play declaration package, outside this repo.
+
+Google ships **Reading mode** (`com.google.android.accessibility.reader`), an
+`AccessibilityService` for people with low vision, blindness and dyslexia: a decluttered reading
+view, text-to-speech, control over contrast, font and spacing, quick-settings integration, and
+stated TalkBack compatibility. It is the nearest comparable, and it comes from Google itself.
+
+**Its Play listing's permissions notice states that, as an accessibility service, it can observe
+the user's actions and window content.**
+
+**The differentiator: the closest comparable accessibility reading app, shipped by Google, reads
+the screen. This one structurally cannot** — `canRetrieveWindowContent="false"` and
+`eventTypes = 0`, yielding `capabilities=32`, confirmed on both test devices. That is sharper
+and more concrete than anything currently in the drafted store copy, and it belongs in the
+listing. **Standing rule 4 is the definition of that property set** — including why verifying it
+takes two checks rather than one — and is not restated here.
+
+**Point at rule 4; do not restate the set.** This is the permanent shape, not caution for one
+pass. An earlier draft of this section listed the properties and claimed they were verified in
+one command, which is the exact claim rule 4 exists to kill and the one this repo has already
+had to clear three times. Even a *correct* list of the runtime-only properties invites someone
+to append "and no INTERNET" later, which is how it drifted the first time: **a list wants
+completing, and a pointer does not.**
+
+**Provenance ceiling on the comparison — record it and do not exceed it.** The claim about
+Reading mode is a **self-description**, read from that app's own Play listing on 13 Aug 2026. It
+is not a runtime property read from `dumpsys` and not an artifact property read from
+`aapt2 dump badging`, so under standing rule 4 it is weaker than either. A listing's permission
+notice is written by the developer and describes what the service *may* do, which is not what
+its declared attributes *grant*.
+
+**It must be verified from the artifact or the running service before this comparison appears
+in the store listing or anywhere else public.** Until then it is a listing quote, and the
+listing is the one place it must not be used unverified. In the open items table below, with
+the checks that would settle it.
+
 ### Engine: never catch up for dead time
 
 A re-grip costs ~460ms of no motion. Repaying that debt with a burst afterwards is rejected.
@@ -527,18 +899,28 @@ Behavioural proxies are better, and are recordable without asking anyone to intr
 
 Both are closer to the real outcome than any verbal report, and neither sensitises.
 
-### The Play testing requirement may be the instrument, not an obstacle
+### The Play testing requirement is the instrument, not an obstacle
 
-If a closed test with 12 testers over 14 continuous days applies, that is **precisely the
-between-subjects, fresh-reader, longitudinal cohort** this question needs — the design named
-in HANDOVER.md as the only one that can settle the comparative questions.
+**The requirement applies** — 12 testers continuously opted in for the 14 days before applying
+for production access. It is defined under *Play developer account* above and not restated
+here; this section is what follows from it. It was previously written as a conditional, from a
+point where nobody had checked whether it applied.
+
+That cohort is **precisely the between-subjects, fresh-reader, longitudinal design** this
+question needs — the one named in HANDOVER.md as the only design that can settle the
+comparative questions.
 
 **Assign conditions across participants rather than within.** One condition per tester, never
 a sequence. That removes memory, habituation, sensitisation and order effects in a single
 move — every one of which corrupted the sessions run here.
 
-What looks like a scheduling obstacle is the study design. Plan the conditions before the
-closed test opens, not after, because a cohort can only be assigned once.
+**A cohort can only be assigned once, and the requirement is a state rather than a total.**
+Those two facts compose into a scheduling constraint rather than an observation: **the fatigue
+study and the Play production-access gate should be the same cohort, run once, immediately
+before applying.** Running them separately means recruiting twelve disabled testers twice, for
+no gain — and the 14-day window has to be the last 14 days before the application either way.
+
+Plan the conditions before the closed test opens, not after.
 
 ## Retractions
 
@@ -573,4 +955,5 @@ which held up.
 | Does the nav-bar accessibility button show a chooser when more than one accessibility service is registered? | Register a second service and observe. **Unverified — the button must not be counted as a working control until it is.** A chooser is a window, and any control owning a window captures the synthetic finger; the panel-dismiss fix is gated on starts arriving from the notification and would not cover it. This app's users run TalkBack or Switch Access already, so multiple services is the expected case, not the edge case |
 | Can the light sensor serve as a windowless hands-free control? | Prototype occlusion detection on both devices — both have one. Needs no permission and does not touch the capabilities bitmask, so it costs nothing under standing rule 4. **Hypothesis only**, and possibly fatal on ambient variation, dim-room mounting, passing shadows, or on-change latency |
 | Does the spasm-tolerant hard stop's hold-cover gesture violate standing rule 1? | The control-path charter. Pre-existing, not caused by the sensor result: hold-cover is sustained input, which rule 1 forbids, and it is nowhere recorded as a deliberate exemption. **Open design question — not resolved here.** Note the asymmetry runs backwards for a stop: a false positive is cheap (the scroll stops, the user restarts) and a false negative is the dangerous one, because the person needing a hands-free stop is by definition the person who cannot reach the screen |
+| Does Reading mode (`com.google.android.accessibility.reader`) actually read window content, as the differentiation argument assumes? | `aapt2 dump badging` or `aapt2 dump xmltree` against its APK, or `dumpsys accessibility` against it running. **Currently a self-description read from its Play listing on 13 Aug 2026** — weaker than either check under standing rule 4, because a listing notice says what a service *may* do rather than what its declared attributes *grant*. **Must be settled before the comparison appears in the store listing or anywhere public** |
 | Liveness when the service is not running | Six ways to be "enabled but not working", none detectable by the app because it is not running to notice. Must be observable from outside the service |

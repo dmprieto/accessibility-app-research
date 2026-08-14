@@ -40,7 +40,10 @@ not inputs to a build.
   the source.
 
 **The Play track is paused** until spike 2 delivers a control surface. Nothing to submit
-until a user can start and stop the app without adb.
+until a user can start and stop the app without adb. The Play-track decisions taken while it
+is paused — the applicationId, the developer account, the upload key, and the nearest
+comparable app — are recorded in DECISIONS.md and not restated here. Two of them carry the
+same trigger as the pause itself: a control surface plus the exported-receiver fix.
 
 ### What NOT to do next
 
