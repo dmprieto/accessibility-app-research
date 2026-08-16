@@ -205,8 +205,10 @@ run this long, and dumping with `logcat -d` at the end loses most of it: 684 tic
 recovered out of ~5400, and 1 of 13 `REGRIP` lines. The engine's cumulative counters on the
 final `LIFT` are authoritative and survived, but per-event detail did not. **Stream to a
 file during the run** (`adb logcat > file &`) or bump the buffer first — but use
-`-G 16M`, **not** `-G 64M`, which broke the reader entirely on a Moto G54. Verify with
-`logcat -g` either way.
+`-G 16M`, **not** `-G 64M`, which broke the reader entirely on a Moto G54. **Verify with
+`logcat -g` either way — and treat that as mandatory rather than advisory: the SM-P200 refuses the
+raise and caps at 5 MiB, so on this device the buffer stays 5 MiB whatever you asked for** (measured
+16 Aug 2026).
 
 **1a-ter. Before any run, confirm the service is actually bound.**
 
@@ -423,6 +425,7 @@ Before handing the device over:
 ```
 adb shell pidof dev.spike.autoscroll          # confirm it is actually running
 adb logcat -G 16M                             # NOT 64M - that broke the reader on the Moto
+                                              # SM-P200 refuses this and caps at 5 MiB - check -g
 adb logcat -g                                 # verify the buffer took
 adb logcat -c
 ```
@@ -779,7 +782,10 @@ that — but **`-G 64M` broke logcat entirely on a Moto G54**: the buffer report
 was then misread as the app being dead. It cost a force-stop, three re-enables and a phone
 reboot before a screenshot showed the app had been scrolling the whole time.
 
-Use a modest increase — `-G 16M` worked on both devices — verify it with
+Use a modest increase — `-G 16M` **takes on the Moto G54; the SM-P200 refuses it and caps at
+5 MiB**, replying "MAX log buffer size is 5 MiB. So set it to 5 MiB". *Corrected 16 Aug 2026: this
+line read "worked on both devices", measured on two invocation forms and at 8M. On the tablet the
+raise is unavailable and telemetry must be streamed to a file during the run instead.* Verify it with
 `logcat -g` afterwards, and **never conclude anything from missing log lines without a
 check outside the logging path.**
 

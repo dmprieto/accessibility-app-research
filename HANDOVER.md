@@ -270,5 +270,6 @@ person's knowledge. Git history is permanent.
 - **Force-stop silently disables the accessibility service**, clearing both
   `enabled_accessibility_services` and `accessibility_enabled`.
 - **Raise the log buffer to `-G 16M`, not more**, and verify with `logcat -g`. 64M broke
-  the reader on the Moto.
+  the reader on the Moto. **On the SM-P200 the raise is refused — it caps at 5 MiB** and
+  telemetry must be streamed to a file during the run instead (measured 16 Aug 2026).
 - There is no Gradle wrapper in the tree — open in Android Studio once to materialise it.
