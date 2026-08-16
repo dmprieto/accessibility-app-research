@@ -291,6 +291,31 @@ rebuild would change. *Measured on a Samsung SM-P200 (API 30, One UI, 3-button) 
 (API 35, gesture). No cross-device same-surface comparison exists, so OEM and API level are not
 excluded as factors — they are merely not needed to explain the divergence.*
 
+**DEFERRED TO 1.1, not dropped. Decided by the developer, 16 Aug 2026**, after the measurements above.
+
+**Three facts carry the deferral**, and all three survive this run: there is no nav-bar button under
+gesture navigation; it is a touch control, so it does not serve the segment that made an external
+switch mandatory; and wiring it is a rebuild, since `accessibilityFlags` is declared nowhere and the
+platform therefore toggles the service instead of delivering a callback.
+
+**Two findings landed on the other side and are recorded so the deferral is not re-argued from a
+one-sided set.** On floating-menu devices the control is a persistent, user-positioned icon — a
+better target for limited reach than a notification, which requires a drag from the top edge, the
+exact motion this app exists to remove. And the icon **cannot** be parked in the synthetic finger's
+column: measured on the Moto, it snaps to a vertical edge, 318px clear of x = 50%, so it does not
+create the hazard it might have. A faded overlay also stays touchable, so it does not stop working
+when it stops being obvious.
+
+**One fact was refuted and must not be reintroduced.** *Multi-target selection is touch-and-hold*,
+carried at the documentation ceiling and read as a standing-rule-1 conflict, **failed on all three
+surfaces tested** — nav-bar button (tap and hold both), floating menu (neither), swipe (the swipe;
+hold is not a distinct gesture). It is not a rule 1 conflict, and the set of facts against the button
+is three rather than four.
+
+**What would reopen it:** the rebuild that wires the button, which is a prerequisite for it doing
+anything other than toggling the service — and which the control-path charter would have to want for
+its own reasons, since the three facts above are unaffected by it.
+
 **An external switch, via a documented entry point — required, not optional.** v1 requires a
 documented external-switch entry point. **The contract is undefined**: which intent, what it
 carries, and who documents it are all control-path charter output. Blocked on that charter and
