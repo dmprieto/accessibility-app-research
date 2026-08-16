@@ -81,14 +81,25 @@ git status -sb             # clean? ahead of the remote?
 git config user.email      # must be the repo-local noreply address
 ```
 
-**Before reporting a change complete**, run it against `RECORD-KEEPING.md`. Four actions,
-three rules — the rule carries the reasoning and the incident behind it, and is not repeated
-here:
+**Before reporting a change complete**, run it against `RECORD-KEEPING.md`. Five actions — the
+rule carries the reasoning and the incident behind it, and is not repeated here:
 
 - **Swept** across the other files carrying the same claim — rule 2
 - **Provenance attached** to anything asserted — rule 1
 - **Verification limits stated** wherever a command was sourced rather than run — rule 1
 - **Claiming unit checked**, not only the line you edited — rule 3
+- **Unvaried variables not declared irrelevant.** Before writing that something is *not* the
+  cause, check whether it was varied. If it wasn't, the claim is "not needed to explain this",
+  not "excluded" — no rule number yet, see below
+
+**The last one has no home in `RECORD-KEEPING.md`, and giving it one is the developer's call.**
+It is here because it is the only failure class that *recurred* inside a single document: the
+pre-spike-2 Moto run log asserted the irrelevance of an unvaried variable three separate times
+— once about registration, once about OEM and API level, once about a log line's source field —
+and each was caught in a different review round, twice by the document's own later corrections.
+It is a sibling of standing rule 5 in `DECISIONS.md`: that one asks what a null instrument would
+have produced, this one asks what a comparison you did not run would have shown. *Recorded
+16 Aug 2026 from that run's review; not independently derived.*
 
 **What not to do in a first session.** Do not restructure. Do not tighten claims you were not
 asked about. Do not resolve anything marked open, pending or undecided. Do not push. Flag all
