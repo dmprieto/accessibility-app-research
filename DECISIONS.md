@@ -82,8 +82,14 @@ raises that bitmask spends it. `CAPABILITY_CAN_REQUEST_FILTER_KEY_EVENTS` would 
 
 ### 5. Before believing a result, ask what a null instrument would have produced
 
-Seven measurements in this spike returned clean-looking data about things the instrument could
-not see. Verify the instrument *before* the measurement, use a positive control from the
+Eight measurements in this spike returned clean-looking data about things the instrument could
+not see. **The eighth is a different species from the other seven and the rule as stated cannot
+catch it:** those are instruments that ran and misled, while `NOTES.md`'s "with a 64M logcat buffer
+so nothing rolled" is a **check recorded as having been run that was not run** — the SM-P200 refuses
+any buffer above 5 MiB, so `logcat -g` would have returned 5 MiB and the sentence could not have been
+written. A reader applying this rule finds it already satisfied and moves on, which is how it
+survived every pass over these documents. *Measured 16 Aug 2026; see the caveat at `NOTES.md`'s
+segment-duration A/B/A.* Verify the instrument *before* the measurement, use a positive control from the
 real modality, and repeat the baseline.
 
 | Instrument | Looked like | Actually |
@@ -94,6 +100,7 @@ real modality, and repeat the baseline.
 | A primed observer across sessions | later sessions felt worse | sensitisation, not the setting |
 | `logcat -G 64M` | the app is dead | the log reader silently stopped returning data |
 | The `VISIBLE LURCH` log line | the lead-in is an ease-in | measured a tenth of the effect; the ramp carries ~90% |
+| A recorded buffer size, never checked | the capture was complete | the device refused that size; the check was written, not run |
 | A check scoped narrower than the claim | HANDOVER's basis cell was accurate on its own | the row title made it a claim about all three privacy properties, which the cell could not support |
 
 Verify the **claiming unit** — title plus basis, heading plus body — not the fragment you

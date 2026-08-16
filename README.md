@@ -153,7 +153,7 @@ good it looks in isolation. Stated in full, with the reasoning that produced eac
 6. **The app may not initiate, plan, or sequence anything.** The engine satisfies this by
    construction; the exposure is entirely in the control surface.
 
-## One method rule, learned six times over
+## One method rule, learned seven times over
 
 **Before believing a result, ask what a null instrument would have produced.** Six separate
 measurements returned clean-looking data from instruments that could not measure the thing in
@@ -166,6 +166,7 @@ question:
 | Plain A/B, one comparison | "250ms segments are smoother" | unreplicated; the A/B/A control showed the discrimination didn't hold |
 | A primed observer across sessions | "later sessions felt worse" | sensitisation — the observer got more critical, not the setting worse |
 | `logcat -G 64M` | "the app is dead" | the log reader silently stopped returning data |
+| A recorded buffer size, never checked | "the capture was complete" | the device refused that size; the check was written, not run |
 | The `VISIBLE LURCH` log line | "the lead-in is an ease-in" | it measured only the margin term; the ramp carries ~90% |
 
 Each returns something that looks like data. The check is cheap: run a positive control from

@@ -740,7 +740,24 @@ for artifacts they had not been hunting for in session 1.
 one concrete complaint in session 2 was *"the bump is more noticeable"* — the bump being the
 re-grip. But re-grip dead time cannot depend on `segmentMs`: decel, hold, kick and ramp all
 run on `PROFILE_SEGMENT_MS` / `HOLD_MS` / `LEAD_IN_MS`, and only cruise uses the configurable
-value. Measured directly, with a 64M logcat buffer so nothing rolled:
+value. Measured directly, with what was recorded at the time as a 64M logcat buffer:
+
+> **CAVEAT ADDED 2026-08-16 — the buffer was not 64M and the capture-completeness claim has no
+> basis as written.** This measurement is in the SM-P200 section, and **that device refuses any
+> buffer above 5 MiB**, replying *"MAX log buffer size is 5 MiB. So set it to 5 MiB"* — measured
+> 16 Aug 2026 on two invocation forms and at 8M as well. So `logcat -g` would have returned 5 MiB,
+> and the words "so nothing rolled" could not have been written by anyone who ran it.
+>
+> **This is not a retraction of the numbers.** 5 MiB may well have been ample for four `REGRIP`
+> lines, and the mechanism argument above — re-grip dead time cannot depend on `segmentMs`, since
+> decel, hold, kick and ramp run on other constants — stands independently of the capture. **What is
+> withdrawn is the stated reason for believing the capture was complete.** Whether anything rolled is
+> now unverified rather than disproved.
+>
+> Note the tension with the same passage below: it records that *every* A/B and sweep session lost
+> most of its telemetry to roll. **Re-derive the figure, or cite it with this caveat attached.**
+> Recorded as the eighth entry in standing rule 5's table in `DECISIONS.md`, where it is also the
+> reason that rule cannot catch this species — the check was written, not run.
 
 | Segment | REGRIP deadMs |
 |---|---|
