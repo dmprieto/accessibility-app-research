@@ -311,7 +311,10 @@ session. Re-check before relying on either.*
 **State of this repo:**
 
 - **The flag IS present**, in `app/src/main/res/xml/autoscroll_service.xml`, with the
-  reasoning inline. Added 2026-08-12 after closure — the one code change made to a closed
+  reasoning inline. Added 2026-08-13 after closure — *corrected from 2026-08-12 on 16 Aug 2026;
+  commit `c6681cd` is dated 2026-08-13 11:06:50 and the file mtime 11:04:58. The wrong date misled a
+  later run, which found a 12 Aug APK that looked as though it should carry the flag and did not,
+  because the edit came after it* — the one code change made to a closed
   spike, because these documents are shared across spikes and a decision recorded as a
   functional requirement should not be contradicted by the only implementation anyone can
   look at. API 30+; older platforms ignore it, so it is safe against `minSdk 26`.
@@ -335,7 +338,7 @@ fourth is a shipped default, admitted here deliberately — a guarantee that can
 line and whose only other enforcement is remembering belongs in a ratchet by the same
 argument, whether or not it lives in a manifest.
 
-**Read from the built artifact, never the source.** Demonstrated on this repo 2026-08-12:
+**Read from the built artifact, never the source.** Demonstrated on this repo 2026-08-13:
 the source contained `isAccessibilityTool="true"` while the APK did not, because the APK
 predated the edit — a source check would have passed on a build that shipped without it.
 Source grepping fails in both directions: it matches the attribute named in a comment, and
