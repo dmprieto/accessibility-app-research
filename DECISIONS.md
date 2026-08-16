@@ -254,11 +254,42 @@ cannot be the primary hands-free control. Measured — see the sensor availabili
 [DEVICES.md](DEVICES.md), and the consequences under *Proximity cannot be the primary
 hands-free control* below.
 
-**The nav-bar accessibility button.** Recorded as a candidate, **not as a working control.**
-Whether it presents a chooser when more than one accessibility service is registered is
-unverified, and a chooser is a window — the same root cause that excludes a quick-settings
-tile. This app's users run TalkBack or Switch Access already, so multiple services is the
-expected case, not the edge case. It must not be counted as available until that is answered.
+**The accessibility button.** Recorded as a candidate, **not as a working control.** Measured on both
+devices 14–16 Aug 2026; what was found is below, and it does not make the button available.
+
+**Three states, and they are not three orthogonal axes.** The vocabulary matters because the earlier
+version of this entry asked the question in terms of services being *registered*, which is the wrong
+term and would have tested a condition the effect does not require:
+
+- **enabled** — in `enabled_accessibility_services`, the service is bound and running
+- **assigned** — in `accessibility_button_targets`, the shortcut acts on it
+- **flag-declared** — `flagRequestAccessibilityButton` in `accessibilityFlags`, which is what receives
+  the button *callback*
+
+Enablement does not imply assignment; **an assignment does not survive its service being disabled**;
+and assignment does not require flag-declaration — this service is assigned and ticked in Settings
+while declaring no `accessibilityFlags` at all, and the platform then toggles it instead of delivering
+a callback. *`accessibilityFlags` is declared nowhere in this project, so nothing here establishes
+what flag-declaration is independent of.*
+
+**Whether the button presents a chooser has no single answer.** It depends on two things:
+
+- **The invoking surface.** A single control — a nav-bar button, a gesture — must disambiguate between
+  targets and raises a chooser. A floating menu (`accessibility_button_mode=1`) enumerates targets as
+  persistent icons and raises none. *Demonstrated within one device with everything else held: the
+  Moto's floating menu against its two-finger swipe, same day, same two targets.*
+- **Whether a selection has been persisted.** The chooser is a **configuration step, not a
+  per-invocation gate**: once a target is selected, later invocations go straight to it.
+
+**So the chooser is a first-run condition, not a standing one**, and the earlier reading — that a
+start through this button lands on the chooser rather than the content — is **withdrawn** as a general
+claim. It holds while no selection has been persisted.
+
+**None of this makes the button available.** It is touch-only; there is no nav-bar button at all under
+gesture navigation; and it currently toggles the service rather than starting a scroll, which a
+rebuild would change. *Measured on a Samsung SM-P200 (API 30, One UI, 3-button) and a Moto G54
+(API 35, gesture). No cross-device same-surface comparison exists, so OEM and API level are not
+excluded as factors — they are merely not needed to explain the divergence.*
 
 **An external switch, via a documented entry point — required, not optional.** v1 requires a
 documented external-switch entry point. **The contract is undefined**: which intent, what it
@@ -975,7 +1006,7 @@ which held up.
 | Host apps with vertical-gesture semantics | Untested: drag-to-dismiss, short-video feeds, video players mapping vertical drags to brightness/volume, nested-scroll and collapsing toolbars |
 | What to do about touchless app switches | Incoming call, alarm, full-screen intent, deep link — the only remaining case where the finger keeps dragging in a window the user did not choose |
 | **Ratchet not built** — four asserts, each a one-line change to lose and expensive to re-establish | Build it in the shipping repo, reading from the built artifact. Spec in the TODO section above, including the fourth assert whose mechanism is still undecided |
-| Does the nav-bar accessibility button show a chooser when more than one accessibility service is registered? | Register a second service and observe. **Unverified — the button must not be counted as a working control until it is.** A chooser is a window, and any control owning a window captures the synthetic finger; the panel-dismiss fix is gated on starts arriving from the notification and would not cover it. This app's users run TalkBack or Switch Access already, so multiple services is the expected case, not the edge case |
+| ~~Does the nav-bar accessibility button show a chooser when more than one accessibility service is registered?~~ **Premise corrected and question answered, 16 Aug 2026 — see *The v1 control set*.** The term was wrong: **assignment** governs, not registration. And the answer has two conditions — the invoking surface, and whether a selection has been persisted — so it cannot be stated as one fact. A chooser appeared with a *single* registered service, and did not appear with two registered and one assigned on a surface proven to raise one. **Still open:** the button remains unavailable for this app's purpose on other grounds — touch-only, absent under gesture nav, and it toggles the service rather than starting a scroll | Cross-device replication of the sufficiency arm on the SM-P200, which never had a second service enabled |
 | Can the light sensor serve as a windowless hands-free control? | Prototype occlusion detection on both devices — both have one. Needs no permission and does not touch the capabilities bitmask, so it costs nothing under standing rule 4. **Hypothesis only**, and possibly fatal on ambient variation, dim-room mounting, passing shadows, or on-change latency |
 | Does the spasm-tolerant hard stop's hold-cover gesture violate standing rule 1? | The control-path charter. Pre-existing, not caused by the sensor result: hold-cover is sustained input, which rule 1 forbids, and it is nowhere recorded as a deliberate exemption. **Open design question — not resolved here.** Note the asymmetry runs backwards for a stop: a false positive is cheap (the scroll stops, the user restarts) and a false negative is the dangerous one, because the person needing a hands-free stop is by definition the person who cannot reach the screen |
 | Does Reading mode (`com.google.android.accessibility.reader`) actually read window content, as the differentiation argument assumes? | `aapt2 dump badging` or `aapt2 dump xmltree` against its APK, or `dumpsys accessibility` against it running. **Currently a self-description read from its Play listing on 13 Aug 2026** — weaker than either check under standing rule 4, because a listing notice says what a service *may* do rather than what its declared attributes *grant*. **Must be settled before the comparison appears in the store listing or anywhere public** |
