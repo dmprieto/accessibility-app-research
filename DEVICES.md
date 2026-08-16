@@ -28,8 +28,9 @@ reference states, and it is user-configurable in accessibility settings.
 
 ## Sensor availability
 
-**Provenance: `dumpsys sensorservice`, read-only — not logcat.** This is the "except where
-noted" case. Measured 2026-08-13 on both devices.
+**Provenance: `dumpsys sensorservice`, read-only — not logcat.** One of the two "except where
+noted" cases; the other is *Accessibility shortcut surfaces* below. Measured 2026-08-13 on both
+devices.
 
 **This table does not feed the shipped-defaults model, and cannot.** Everything above is
 recorded because it looks like a property of the OS build, so it can become a starting value
@@ -52,6 +53,40 @@ for, and it is the reason this row can be trusted.
 **Inferred, not measured:** that `getDefaultSensor(TYPE_PROXIMITY)` returns null on device 2.
 It follows from the hardware inventory rather than from a call, and it confirms itself for
 free the first time app code runs there.
+
+## Accessibility shortcut surfaces
+
+**Provenance: `settings get secure`, `dumpsys accessibility` and `dumpsys input`, read-only — not
+logcat.** A second "except where noted" case. Measured 2026-08-14 (device 2) and 2026-08-16
+(device 1), through the Settings UI throughout; no `settings put secure` was used, because Settings
+was the modality under test and a written value would have created a state no user can reach.
+
+**Like sensor availability, this does not feed the shipped-defaults model.** It is per-model and
+per-OEM inventory: a matching manufacturer and API level tell you nothing about it. **The two devices
+disagree on almost every row**, which is the useful part.
+
+| # | nav mode | `accessibility_button_mode` | floating menu offered? | surfaces available | chooser class |
+|---|---|---|---|---|---|
+| 1 | gesture (`navigation_mode=2`) | **1** (floating menu) | **yes** — `accessibility_floating_menu_size` also present | floating button; two-finger swipe. **No nav-bar button exists** | `AccessibilityButtonChooserActivity` |
+| 2 | 3-button (`navigation_mode=0`) | **absent** | **no** — the Settings page offers no location option, no size or transparency settings | nav-bar button only | `AccessibilitySamsungShortcutChooserActivity` |
+
+**Whether a chooser appears is not a device property.** It depends on the invoking surface and on
+whether a selection has been persisted — see *The v1 control set* in [DECISIONS.md](DECISIONS.md),
+which is where that argument lives and is not repeated here. The classes above are what each device
+shows *when* one appears; Samsung ships its own variant.
+
+**Device 1's floating overlay cannot occupy the synthetic finger's column.** Released at three
+positions it snapped to a vertical edge every time — touchable region `x 0..222` or `x 858..1080` on
+a 1080px-wide screen, never including **x = 540**, where the engine puts the finger. 222px wide
+against 318px of clearance. Vertically it is free, spanning y 166–2277. *Read from `dumpsys input`'s
+touchable region rather than the window frame, which is full-screen and says nothing; each reading
+taken twice. The overlay is **faded when idle and still takes touches**, so fade is visual only.*
+
+**Device 2's absence of a floating menu is the developer's read of the Settings page**, corroborated
+by five unset `accessibility_floating_menu_*` keys — weaker than device 1's positive result, since
+unset is not the same as absent. **The consequence is scope, not tuning:** the overlay-in-drag-path
+question can only ever be answered on device 1, so the two-device agreement that would close it is
+unavailable by construction.
 
 ## Chain decay
 
