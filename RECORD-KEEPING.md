@@ -129,6 +129,34 @@ their own work converges on "it's fine" for the same reason the sensitised reade
 self-comparison against a memory of one's own intent is a null instrument for the defects that
 matter. It cannot see a claim it already believes.
 
+**A reader who has reviewed this document before still qualifies.** *This paragraph clarifies; the two
+below add a benefit and a preference that were not here before.*
+
+The bar above is authorship. **"Not a second pass by the same editor"** is the sentence that reads as
+barring a repeat reviewer, and it does not: the heading is *not self-review*, and the failure mode
+beneath it is *"an editor reviewing their own work"*. Both name the writer. A returning reader has not
+written the changes under review, and unfamiliarity is required nowhere in this rule.
+
+**One thing a returning reader can do better than a new one:** check whether its own earlier findings
+were applied **as the finding intended**. A fresh reader given the prior review can check that
+something changed; it cannot always tell whether the change answers what was meant, where the written
+finding under-specifies. *This is not the null instrument described above — that is an editor
+re-reading a memory of their own prose. Here the object is someone else's edit, and the memory being
+consulted is of the finding, not of the text.*
+
+**The cost is real and is not resolved here.** This rule borrows standing rule 3's reasoning by
+analogy — that is `:127`'s claim and this paragraph does not extend it — and rule 3's evidence is a
+returning observer degrading across four sessions, in `DECISIONS.md`. *During the pre-spike-2 device
+run, two reviewer defects survived passes over the exact text that had already read it. Those working
+records are **not in this repo** and a reader here cannot check them; recorded as reported, at that
+ceiling.* **No comparison of a returning against a fresh reader on the same document has ever been run
+here**, so which is better is unmeasured and neither is claimed. Prefer a reader who has not seen the
+document when the stakes justify it.
+
+**Open, and for the developer rather than a reviewer:** this narrows what rule 6 inherits from
+standing rule 3 — enough to name the cost, not enough to require freshness. **That call is not
+confirmed.**
+
 *Why:* on 2026-08-13 a paired review caught, in both directions, what neither reader found
 alone — one found the stale consent line and the drifted confidence-table row; the other found
 that the proposed `dumpsys` fix was itself wrong (the check is `aapt2 dump badging`, against
