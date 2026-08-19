@@ -124,6 +124,11 @@ question arrived after the answer could still have mattered.
 Changes to these documents get a reader who **did not work on the changes under review**. Not a
 second pass by the same editor.
 
+**Prompting a change does not count as working on it; supplying its content does.** A reviewer whose
+finding caused an edit still qualifies to check that the edit answers the finding — that is the
+benefit named below, and **without it no review round could ever close.** A reader who supplied the
+substance of a change has participated in it, however it reached the page.
+
 This is standing rule 3 applied to the process rather than to readers. An editor reviewing
 their own work converges on "it's fine" for the same reason the sensitised reader did: serial
 self-comparison against a memory of one's own intent is a null instrument for the defects that
@@ -146,7 +151,8 @@ re-reading a memory of their own prose. Here the object is someone else's edit, 
 consulted is of the finding, not of the text.*
 
 **The cost is real and is not resolved here.** This rule borrows standing rule 3's reasoning by
-analogy — that is `:127`'s claim and this paragraph does not extend it — and rule 3's evidence is a
+analogy — that is the claim of the *"standing rule 3 applied to the process"* paragraph above, and
+this paragraph does not extend it — and rule 3's evidence is a
 returning observer degrading across four sessions, in `DECISIONS.md`. *During the pre-spike-2 device
 run, two reviewer defects survived passes over the exact text that had already read it. Those working
 records are **not in this repo** and a reader here cannot check them; recorded as reported, at that
@@ -160,9 +166,18 @@ qualifies, including a reader who has reviewed this document many times and incl
 wrote earlier, unrelated parts of it. The cost recorded above is real and unmeasured; it stays a
 preference, not a bar.
 
-*This closes the item previously left open here, which read: "this narrows what rule 6 inherits from
-standing rule 3 — enough to name the cost, not enough to require freshness. That call is not
-confirmed."*
+*This closes the item previously left open here, which read: "**Open, and for the developer rather
+than a reviewer:** this narrows what rule 6 inherits from standing rule 3 — enough to name the cost,
+not enough to require freshness. That call is not confirmed."* **The opening clause is the in-file
+warrant for the label above** — it is why this was the developer's to settle and not a reviewer's,
+and an earlier version of this quotation dropped it.
+
+**Retracted in the same change, and preserved here because rule 1 requires it.** This section
+previously asserted **"The bar above is authorship"** — stated in the file and in commit `839e944`'s
+own subject line, *"Clarify rule 6: the bar is authorship, not unfamiliarity"*, three days earlier.
+**That is now wrong**: the bar is participation in the changes under review. *The first version of
+this settled paragraph preserved the open item, which was never wrong, and silently overwrote the
+sentence that was — applying rule 1's retention to the wrong one of the two.*
 
 *Why:* on 2026-08-13 a paired review caught, in both directions, what neither reader found
 alone — one found the stale consent line and the drifted confidence-table row; the other found
