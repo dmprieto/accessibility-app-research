@@ -162,10 +162,11 @@ consulted is of the finding, not of the text.*
 **The cost is real and is not resolved here.** This rule borrows standing rule 3's reasoning by
 analogy — that is the claim of the *"standing rule 3 applied to the process"* paragraph above, and
 this paragraph does not extend it — and rule 3's evidence is a
-returning observer degrading across four sessions, in `DECISIONS.md`. *During the pre-spike-2 device
-run, two reviewer defects survived passes over the exact text that had already read it. Those working
-records are **not in this repo** and a reader here cannot check them; recorded as reported, at that
-ceiling.* **No comparison of a returning against a fresh reader on the same document has ever been run
+returning observer degrading across four sessions, in `DECISIONS.md`. **One in-repo instance is
+checkable here:** rule 2's *Why* records `HANDOVER.md`'s confidence table *"missed twice, including
+once after being checked"* — a defect that survived a pass over text already read, which is the
+failure this rule guards against. *Two further instances, from the pre-spike-2 device run, are
+**not in this repo** and a reader here cannot check them; recorded as reported, at that ceiling.* **No comparison of a returning against a fresh reader on the same document has ever been run
 here**, so which is better is unmeasured and neither is claimed. Prefer a reader who has not seen the
 document when the stakes justify it.
 
