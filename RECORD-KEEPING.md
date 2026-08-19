@@ -121,8 +121,8 @@ question arrived after the answer could still have mattered.
 
 ## 6. Review is not optional, and not self-review
 
-Changes to these documents get a second reader who did not write them. **Not a second pass by
-the same editor.**
+Changes to these documents get a reader who **did not work on the changes under review**. Not a
+second pass by the same editor.
 
 This is standing rule 3 applied to the process rather than to readers. An editor reviewing
 their own work converges on "it's fine" for the same reason the sensitised reader did: serial
@@ -132,10 +132,11 @@ matter. It cannot see a claim it already believes.
 **A reader who has reviewed this document before still qualifies.** *This paragraph clarifies; the two
 below add a benefit and a preference that were not here before.*
 
-The bar above is authorship. **"Not a second pass by the same editor"** is the sentence that reads as
-barring a repeat reviewer, and it does not: the heading is *not self-review*, and the failure mode
-beneath it is *"an editor reviewing their own work"*. Both name the writer. A returning reader has not
-written the changes under review, and unfamiliarity is required nowhere in this rule.
+The bar above is **participation in the changes under review**. **"Not a second pass by the same
+editor"** is the sentence that reads as barring a repeat reviewer, and it does not: the heading is
+*not self-review*, and the failure mode beneath it is *"an editor reviewing their own work"*. Both
+name the writer. A returning reader has not worked on the changes under review, and unfamiliarity is
+required nowhere in this rule.
 
 **One thing a returning reader can do better than a new one:** check whether its own earlier findings
 were applied **as the finding intended**. A fresh reader given the prior review can check that
@@ -153,9 +154,15 @@ ceiling.* **No comparison of a returning against a fresh reader on the same docu
 here**, so which is better is unmeasured and neither is claimed. Prefer a reader who has not seen the
 document when the stakes justify it.
 
-**Open, and for the developer rather than a reviewer:** this narrows what rule 6 inherits from
-standing rule 3 — enough to name the cost, not enough to require freshness. **That call is not
-confirmed.**
+**Settled by the developer, 2026-08-19.** The bar is participation in the changes under review — not
+authorship of the file, and not unfamiliarity with it. Anyone who did not work on those changes
+qualifies, including a reader who has reviewed this document many times and including someone who
+wrote earlier, unrelated parts of it. The cost recorded above is real and unmeasured; it stays a
+preference, not a bar.
+
+*This closes the item previously left open here, which read: "this narrows what rule 6 inherits from
+standing rule 3 — enough to name the cost, not enough to require freshness. That call is not
+confirmed."*
 
 *Why:* on 2026-08-13 a paired review caught, in both directions, what neither reader found
 alone — one found the stale consent line and the drifted confidence-table row; the other found
