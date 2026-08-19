@@ -124,10 +124,19 @@ question arrived after the answer could still have mattered.
 Changes to these documents get a reader who **did not work on the changes under review**. Not a
 second pass by the same editor.
 
-**Prompting a change does not count as working on it; supplying its content does.** A reviewer whose
-finding caused an edit still qualifies to check that the edit answers the finding — that is the
-benefit named below, and **without it no review round could ever close.** A reader who supplied the
-substance of a change has participated in it, however it reached the page.
+**The test is the rationale, not a list of roles.** The bar exists because serial self-comparison
+against a memory of one's own intent is a null instrument — so ask, of a given change, whether the
+reader would be reading against such a memory.
+
+- **A reviewer whose finding caused an edit would not.** The memory is of the finding, not of the
+  prose. That is the benefit named below, and **without it no review round could ever close.**
+- **A reader who composed a change's substance would**, however it reached the page.
+- **Where a change was fully determined by the finding** — restoring a deleted clause, surfacing an
+  overwritten sentence — **nobody composed it, and there is no memory of one's own intent to be blind
+  to.**
+
+**Applied per change, not per round.** A reader may be barred from one change and qualified for the
+rest of the same round.
 
 This is standing rule 3 applied to the process rather than to readers. An editor reviewing
 their own work converges on "it's fine" for the same reason the sensitised reader did: serial
@@ -172,7 +181,7 @@ not enough to require freshness. That call is not confirmed."* **The opening cla
 warrant for the label above** — it is why this was the developer's to settle and not a reviewer's,
 and an earlier version of this quotation dropped it.
 
-**Retracted in the same change, and preserved here because rule 1 requires it.** This section
+**Retracted in `212eefa`, and preserved here because rule 1 requires it.** This section
 previously asserted **"The bar above is authorship"** — stated in the file and in commit `839e944`'s
 own subject line, *"Clarify rule 6: the bar is authorship, not unfamiliarity"*, three days earlier.
 **That is now wrong**: the bar is participation in the changes under review. *The first version of
