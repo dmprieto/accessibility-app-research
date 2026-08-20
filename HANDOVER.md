@@ -43,7 +43,9 @@ not inputs to a build.
 until a user can start and stop the app without adb. The Play-track decisions taken while it
 is paused — the applicationId, the developer account, the upload key, and the nearest
 comparable app — are recorded in DECISIONS.md and not restated here. Two of them carry the
-same trigger as the pause itself: a control surface plus the exported-receiver fix.
+same trigger as the pause itself: a control surface plus the **complete** exported-receiver fix
+— receiver closed *and* pairing built. The pairing mechanism is unbuilt, so the trigger is not
+met; see DECISIONS.md *Control surface … CLOSED*.
 
 **The production applicationId is `io.github.dmprieto.reading`**, settled 14 Aug 2026 and
 irreversible at first publication. **It has never been built or run.** The spike's

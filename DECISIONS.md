@@ -738,9 +738,10 @@ which has no announced date. An unanswered adjacency here reads like an unexamin
 is why the negative is written down rather than left implicit.
 
 **Trigger for creation:** spike 2 has delivered a control surface **and** the exported-receiver
-fix has landed. Both are already recorded here as prerequisites for any build reaching a device
-not under the developer's control, testers included — see *Control surface: the receiver must
-not ship exported*.
+fix has landed **in full — receiver closed *and* pairing built.** The receiver was closed
+2026-08-20; **the pairing mechanism is unbuilt, so this trigger is not yet met** — see
+*Control surface: the receiver must not ship exported — CLOSED*, which records the developer's
+decision that the complete fix, not the closure alone, is what these triggers require.
 
 **Worth doing now, ahead of the trigger:** make the identity document, address and payment card
 carry the same name in the same form. Mismatched or unsupported documents are the primary
@@ -1018,6 +1019,14 @@ routing control through key-event filtering raises the capabilities bitmask — 
 **The deadline that applied to the exported receiver now applies to the pairing mechanism**:
 before any build reaches a device we do not control, including the closed beta. Testers are not
 a safe interval, and a beta build is a shipped build for this purpose.
+
+**Developer decision, 2026-08-20 — the Play-track pause holds until the pairing mechanism is
+built, not merely until the receiver was closed.** Every trigger recorded as "control surface
+plus the exported-receiver fix" (the pause itself in `HANDOVER.md`, and the account and upload-key
+triggers above) reads "the exported-receiver fix" as the **complete** fix — receiver closed *and*
+pairing built — so all of them remain unmet while pairing is unbuilt. This is the reading this
+entry already implied; it is now settled rather than left to a reader. Reserved under rule 4 and
+made by the developer, not inferred.
 
 *Previously recorded here: "`RECEIVER_EXPORTED` means any installed app can start and stop the
 scroll… Planned fix: channel off by default plus a per-install pairing token", with the note
