@@ -402,7 +402,7 @@ it misses anything a dependency merges into the manifest.
 
 | Assert | Read from | How |
 |---|---|---|
-| `isAccessibilityTool="true"` present | `res/xml/autoscroll_service.xml` inside the APK | `aapt2 dump xmltree <apk> --file res/xml/autoscroll_service.xml` |
+| `isAccessibilityTool="true"` present | the accessibility-service XML inside the APK — **not at a fixed path**, see below | `aapt2 dump xmltree <apk> --file <path>`, where `<path>` is found by root element, not by name |
 | `canPerformGestures=true`, `canRetrieveWindowContent=false`, and the absence of `canRequestFilterKeyEvents`, touch exploration and magnification | same file, same command | these are the *inputs* that produce `capabilities=32` |
 | No `INTERNET` in the **merged** manifest | APK badging | `aapt2 dump badging <apk>` — merged, so a library's manifest can introduce one that `tools:node="remove"` in the app manifest does not catch |
 | `repressOnCancel` cannot be enabled in a release build | compiled code in the APK | **Mechanism undecided** — this is a code property, not a manifest read. See the note below |
@@ -415,6 +415,25 @@ broadcast extra from release builds entirely and asserting *that*. It is recorde
 because the alternative is remembering, and remembering is precisely what a ratchet exists
 to replace: a build shipped with this flag reachable is an app the user cannot stop by
 touching the screen, which is the failure mode the whole cancellation design prevents.
+
+**Correction, and the reason the first two rows changed.** This table used to name
+`res/xml/autoscroll_service.xml` as both the location and the command argument. **A release
+build renames the resource** — in the first release APK ever built from spike 1 it landed at
+`res/2n.xml` — so `aapt2 dump xmltree <apk> --file res/xml/autoscroll_service.xml` returns
+`error: failed to find file` against the exact artifact the assert exists to check. A debug
+APK does keep the original path, which is why the spec read correctly for as long as nobody
+ran it against a release build.
+
+The failure mode matters more than the path. **It fails by finding nothing**, which is
+indistinguishable from a clean pass unless the check treats absence as an error — standing
+rule 5, inside the tool built to enforce rule 4. Locate the file by its root element
+(`accessibility-service`) instead, which is stable against renaming and needs no resource-id
+arithmetic, and make an unreadable APK fail rather than pass.
+
+*Measured 2026-08-20 by running it — aapt2 37.0.0 against `app-release-unsigned.apk`, AGP
+9.0.0, `isMinifyEnabled = false`. Run in a session that had the Android SDK available, unlike
+the environment `CLAUDE.md` assumes; not sourced from this repo. A working implementation is
+in the spike repo at `tools/declaration-ratchet.sh`.*
 
 **Correction worth carrying:** earlier notes said "assert `capabilities == 32` from the built
 artifact". The bitmask is computed by the OS at runtime and is not in the APK. From the
