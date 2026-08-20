@@ -790,25 +790,22 @@ tablet-class devices there is nothing to contend for. And the allocation it assu
 unresolved: hold-cover is sustained input, which standing rule 1 forbids, and it is recorded
 nowhere as a deliberate exemption. Both are open items in [DECISIONS.md](DECISIONS.md).
 
-### Security: the control receiver is exported
+### Security: the control receiver was exported — CLOSED 2026-08-20
 
-`registerReceiver(..., RECEIVER_EXPORTED)` in `AutoScrollService` means **any installed app
-can start and stop the scroll**, with no permission and no user interaction. Fine for a
-spike driven from adb; not shippable.
+`registerReceiver(..., RECEIVER_EXPORTED)` in `AutoScrollService` meant **any installed app
+could start and stop the scroll**, with no permission and no user interaction. Fine for a
+spike driven from adb; not shippable. Two manifest-declared receivers replaced it — a
+non-exported one that reads no extras, and a debug channel absent from release builds
+entirely.
 
-Planned fix: remote channel off by default, plus a per-install pairing token. Two
-alternatives were considered and rejected — a signature-level permission breaks third-party
-switch-access and AAC apps, which are precisely the integrations this audience relies on;
-and routing control through `CAPABILITY_CAN_REQUEST_FILTER_KEY_EVENTS` moves the dumpsys
-capabilities bitmask from 32 to 40, spending the submission's strongest verifiable claim on
-a convenience.
+**The pairing mechanism is still unbuilt**, so v1 still has no third-party entry point. The
+deadline that applied to the exported receiver now applies to that: before any build reaches
+a device we do not control, including the closed beta.
 
-Note what the privacy architecture already bounds here: a hostile app could start and stop
-scrolling, and nothing more. It cannot read screen content or exfiltrate anything, because
-`capabilities=32`, `eventTypes=0` and the absent `INTERNET` permission apply to the whole
-process. Its ceiling is denial-of-function rather than data access. **It must be fixed
-before any build reaches a device we do not control, including the closed beta** — testers
-are not a safe interval, and a beta build is a shipped build for this purpose.
+**[DECISIONS.md](DECISIONS.md) → *Control surface: the receiver must not ship exported* is
+the definition** — what closed it, what remains, the two rejected alternatives, and the bound
+the privacy architecture already placed on the exposure. Not restated here, per rule 2 of
+[RECORD-KEEPING.md](RECORD-KEEPING.md).
 
 ### Interstitial ads end the session, and the user may not be able to clear them
 

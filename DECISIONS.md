@@ -987,22 +987,44 @@ wheelchair setups, so this lands on a real segment rather than a hypothetical on
 This is a scope decision, not a measurement. What is known about option 2 — and what would
 have to be true for it to work — is in the open items table.
 
-### Control surface: the receiver must not ship exported
+### Control surface: the receiver must not ship exported — CLOSED 2026-08-20
 
-`RECEIVER_EXPORTED` means any installed app can start and stop the scroll, with no
-permission and no user interaction.
+**This entry is the definition of the receiver's status. Every other mention points here**
+— rule 2 — because two entries in this file disagreed about it for the length of one commit,
+and a stated resolution is what stops that recurring.
 
-Planned fix: channel off by default plus a per-install pairing token. Rejected alternatives:
-a signature-level permission (breaks third-party switch-access and AAC apps, exactly the
-integrations this audience depends on) and routing control through key-event filtering
-(raises the capabilities bitmask — see standing rule 4).
+**What it was.** `RECEIVER_EXPORTED` meant any installed app could start and stop the scroll,
+with no permission and no user interaction. The extras were not merely configuration:
+`repress=true` defeats touch-to-stop, and `leadin=false` with a low speed makes the synthetic
+finger long-press the host app and navigate the reader out of it. Both measured on hardware.
 
-**It must be fixed before any build reaches a device we do not control, including the closed
-beta** — testers are not a safe interval, and a beta build is a shipped build for this
-purpose. Its ceiling is denial-of-function rather than data access: a hostile app could start
-and stop scrolling and nothing more, because `capabilities=32`, `eventTypes=0` and the absent
-INTERNET permission apply to the whole process. That bounds the damage; it does not move the
-deadline.
+**What closed it.** The runtime-registered receiver is gone. Two manifest-declared receivers
+replace it: a non-exported one that reads **no extras at all** — the command rides in the
+action — driven only by the app's own notification, and a debug channel carrying every tuning
+extra, in a `debug` source set and therefore absent from a release APK's merged manifest *and*
+its dex. *Verified from the built artifact 2026-08-20 and on two devices; the ratchet asserts
+both absences. Spike repo, committed and pushed.*
+
+**What is still open, and it is the reason this heading is not simply deleted.** The recorded
+plan was *"channel off by default plus a per-install pairing token"*. Off-by-default and the
+pairing mechanism are **unbuilt** — what shipped closes the hole rather than opening a
+controlled door through it. The door is specified in *The v1 control set* above; a v1 with no
+third-party entry point is not a v1.
+
+The two rejected alternatives stand unchanged: a signature-level permission breaks
+third-party switch-access and AAC apps, exactly the integrations this audience depends on, and
+routing control through key-event filtering raises the capabilities bitmask — standing rule 4.
+
+**The deadline that applied to the exported receiver now applies to the pairing mechanism**:
+before any build reaches a device we do not control, including the closed beta. Testers are not
+a safe interval, and a beta build is a shipped build for this purpose.
+
+*Previously recorded here: "`RECEIVER_EXPORTED` means any installed app can start and stop the
+scroll… Planned fix: channel off by default plus a per-install pairing token", with the note
+that the exposure's "ceiling is denial-of-function rather than data access: a hostile app could
+start and stop scrolling and nothing more, because `capabilities=32`, `eventTypes=0` and the
+absent INTERNET permission apply to the whole process." That bound was correct and still holds
+for the pairing gap.*
 
 ---
 
