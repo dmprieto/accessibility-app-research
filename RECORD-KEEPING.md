@@ -119,10 +119,40 @@ what becomes public.**
 covered publication. It resolved well — they were asked and agreed on those terms — but the
 question arrived after the answer could still have mattered.
 
+### A publication gate must live where copying happens, not only in the prose it guards
+
+When a passage is held back from publication for a reason of its own — an unfixed vulnerability
+written up in full, a quote not yet cleared, anything whose *reason* to stay private differs from
+the file's — **the hold is marked in the text with the literal token `[[DO-NOT-PUBLISH]]`, on its
+own line at the top of the passage, naming the condition that releases it.** The prose reasoning
+stays too; the token is what a machine can find.
+
+**Two obligations follow, and they bind the copy, not the reader:**
+
+- **A file carrying `[[DO-NOT-PUBLISH]]` is not copied into, or pushed to, any repo more public
+  than the one it sits in** until the developer clears the token. Not the passage — the *file*.
+- **Every sanitisation or copy-to-publish task greps for the token as an explicit criterion,
+  alongside personal and device data.** A task told to remove personal data will remove personal
+  data; a publication hold recorded only as an argument is invisible to it.
+
+*Why:* on 2026-08-19 a worked escalation chain, carrying its own in-prose deferral —
+*"not routed to the public repo yet, by decision"* — was published to a remote anyway, by a
+sanitisation task correctly scoped to personal and device data. **A correct application of the
+criteria it was given published the thing the document said not to publish**, because the gate
+lived where a reader of the document would see it and a file-copying task would not. This is the
+run's own recurring defect — a check pointed at the wrong thing — at the level of the process. A
+gate that only humans reading in context can see is not a gate.
+
 ## 6. Review is not optional, and not self-review
 
 Changes to these documents get a reader who **did not work on the changes under review**. Not a
 second pass by the same editor.
+
+**When every available instance worked on the change, the developer is the reader** — not a relaxed
+bar, an escalation. Rule 5 already puts the developer at the point where things become public; this
+routes a conflicted review to the same place rather than tempting a widening of "worked on" to
+manufacture an eligible agent. The bar is what catches the defects; it is the thing to protect, so
+the escape hatch is escalation, never dilution.
 
 **The test is the rationale, not a list of roles.** The bar exists because serial self-comparison
 against a memory of one's own intent is a null instrument — so ask, of a given change, whether the
