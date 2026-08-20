@@ -317,12 +317,24 @@ anything other than toggling the service — and which the control-path charter 
 its own reasons, since the three facts above are unaffected by it.
 
 **An external switch, via a documented entry point — required, not optional.** v1 requires a
-documented external-switch entry point. **The contract is undefined**: which intent, what it
-carries, and who documents it are all control-path charter output. Blocked on that charter and
-on the receiver-security fix, since the only entry point that exists today is the exported
-`CONTROL` broadcast whose pairing-token fix is unbuilt. This is required because of the
-proximity result: on a tablet, a user who cannot reliably touch the screen has no other
-hands-free path.
+documented external-switch entry point. **A specification now exists and is unbuilt** —
+`SWITCH-CONTRACT.md` in the spike repo, written 2026-08-20 in the same pass as the receiver
+fix, deliberately: closing every path a third party can use and *then* discovering the switch
+needs a hole in it is the failure it exists to avoid. It proposes an exported, pairing-gated
+receiver whose caller is authenticated by `PendingIntent` creator identity rather than by a
+bearer token, because a `BroadcastReceiver` is never told who sent the broadcast.
+
+**Adopting it is the control-path charter's call, and nothing here is settled by its
+existence.** The consent surface is deferred inside the document itself, and its command
+vocabulary deliberately adds nothing to the two intents recorded above.
+
+*This previously read "**The contract is undefined**: which intent, what it carries, and who
+documents it are all control-path charter output." The first two now have a proposed answer;
+who documents it is still open.* The receiver-security half of the blocker is cleared — the
+exported `CONTROL` broadcast was closed 2026-08-20 and replaced by a non-exported receiver
+that reads no extras — while the pairing mechanism itself remains unbuilt. All of this is
+required because of the proximity result: on a tablet, a user who cannot reliably touch the
+screen has no other hands-free path.
 
 **Rewind-on-resume.** On restart, the scroll resumes **~120dp above where it stopped**, so the
 reader re-reads a few lines rather than resuming mid-sentence at a point they may already have
@@ -405,16 +417,33 @@ it misses anything a dependency merges into the manifest.
 | `isAccessibilityTool="true"` present | the accessibility-service XML inside the APK — **not at a fixed path**, see below | `aapt2 dump xmltree <apk> --file <path>`, where `<path>` is found by root element, not by name |
 | `canPerformGestures=true`, `canRetrieveWindowContent=false`, and the absence of `canRequestFilterKeyEvents`, touch exploration and magnification | same file, same command | these are the *inputs* that produce `capabilities=32` |
 | No `INTERNET` in the **merged** manifest | APK badging | `aapt2 dump badging <apk>` — merged, so a library's manifest can introduce one that `tools:node="remove"` in the app manifest does not catch |
-| `repressOnCancel` cannot be enabled in a release build | compiled code in the APK | **Mechanism undecided** — this is a code property, not a manifest read. See the note below |
+| **No configuration extra is reachable in a release build** — not "`repressOnCancel` cannot be enabled", see below | the merged manifest **and** the dex | two reads: nothing but the accessibility service is `exported="true"`, and no debug-channel class or `Intent` extra accessor appears in `classes*.dex`. **Mechanism decided and implemented** |
 
-**The fourth assert is a different shape from the first three, and that is not yet solved.**
-The declarations are manifest and resource reads: cheap, exact, and available from `aapt2`.
-`repressOnCancel` is a code property, so asserting it against the built artifact means
-inspecting compiled code rather than reading a manifest — or, more cheaply, removing the
-broadcast extra from release builds entirely and asserting *that*. It is recorded here
-because the alternative is remembering, and remembering is precisely what a ratchet exists
-to replace: a build shipped with this flag reachable is an app the user cannot stop by
-touching the screen, which is the failure mode the whole cancellation design prevents.
+**The fourth assert used to be a different shape from the first three. It no longer is, and
+it is no longer about a flag.** It previously read *"`repressOnCancel` cannot be enabled in a
+release build"*, with the note that this is a code property, so asserting it means inspecting
+compiled code — *"or, more cheaply, removing the broadcast extra from release builds entirely
+and asserting **that**."* The cheaper option is what was built.
+
+**Naming the flag was the bigger error, and it is why the assert is now stated as a
+property.** The spec named `repressOnCancel` because it defeats touch-to-stop. Nobody named
+`leadin`, which at low speed drops cruise under the long-press threshold and makes the
+synthetic finger long-press the host app, navigating the reader out of it — equally a safety
+property, and **not known to be one until 19 Aug 2026**. Enumerating flags keeps losing that
+race. A release build that accepts no configuration at all cannot be weakened by an extra of
+any name, remembered or not. The original reasoning survives unchanged: a build shipped with
+these reachable is an app the user cannot stop by touching the screen, and the alternative to
+a ratchet is remembering.
+
+**Mechanism.** The debug control channel lives in a `debug` source set, so it is absent from
+a release APK's merged manifest *and* its dex, and both absences are artifact reads. The
+allowlists in the script are the ratchet: landing the switch contract means editing them,
+which appears in review as a deliberate act rather than a diff nobody noticed.
+
+*Implemented and verified 2026-08-20 — six assertions hold on the release APK and three of
+them fail on the debug APK, which is the control that shows they discriminate.
+`tools/declaration-ratchet.sh` in the spike repo, with its own "what this does not catch"
+note. Recorded from running it, not sourced from this repo.*
 
 **Correction, and the reason the first two rows changed.** This table used to name
 `res/xml/autoscroll_service.xml` as both the location and the command argument. **A release
