@@ -92,6 +92,18 @@ survived every pass over these documents. *Measured 16 Aug 2026; see the caveat 
 segment-duration A/B/A.* Verify the instrument *before* the measurement, use a positive control from the
 real modality, and repeat the baseline.
 
+**A ninth belongs beside these eight without matching the sentence above it.** The other eight
+were run inside this project; this one was not. **Recorded from design/research — not
+measured**: read from the control-path identity-primitive charter (2026-08-21) rather than
+reproduced here, and this environment has no Android device to re-run it on. It earns its
+place anyway because it is the same failure shape as the rest, on the primitive most people
+reach for first: a `Messenger` posts to a `Handler` that runs *after* the binder transaction
+returns, so `Binder.getCallingUid()` inside `handleMessage` is outside any incoming transaction
+and returns self-uid — a clean-looking value that reads as "no identity available" rather than
+"you read it in the wrong place." The charter used a raw `Binder` (`onTransact`, inside the
+transaction) specifically to avoid this: the raw-Binder `onTransact` returned the caller's real
+uid on both test devices, where a Messenger handler would have returned self.
+
 | Instrument | Looked like | Actually |
 |---|---|---|
 | `adb shell input tap` | touches don't cancel | synthesised via InputManager; never reaches the digitiser |
@@ -102,6 +114,7 @@ real modality, and repeat the baseline.
 | The `VISIBLE LURCH` log line | the lead-in is an ease-in | measured a tenth of the effect; the ramp carries ~90% |
 | A recorded buffer size, never checked | the capture was complete | the device refused that size; the check was written, not run |
 | A check scoped narrower than the claim | HANDOVER's basis cell was accurate on its own | the row title made it a claim about all three privacy properties, which the cell could not support |
+| A `Messenger` for caller identity | no identity available | `getCallingUid()` runs in the `Handler`, after the transaction returns — reads self, not the caller |
 
 Verify the **claiming unit** — title plus basis, heading plus body — not the fragment you
 were pointed at. In that case the narrow scope came from the instruction, not from the check.
@@ -335,6 +348,17 @@ exported `CONTROL` broadcast was closed 2026-08-20 and replaced by a non-exporte
 that reads no extras — while the pairing mechanism itself remains unbuilt. All of this is
 required because of the proximity result: on a tablet, a user who cannot reliably touch the
 screen has no other hands-free path.
+
+**Identity is not authorisation, and the mechanism above already reflects that.** *Inferred.*
+An attested package (or uid) is identity, not authorisation. A provider- or uid-based
+control-path design must add a signature check as a second step — resolve the caller's signing
+certificate (`PackageManager.GET_SIGNING_CERTIFICATES` / `hasSigningCertificate`) and compare
+against the paired signer — because a package name is not a security boundary on its own.
+`SWITCH-CONTRACT.md` (spike repo) already keys pairing on uid **and** signer — `getCreatorUid()`,
+then the paired-set check, then `hasSigningCertificate` before granting, revoking the pairing if
+the signer ever changes — so this finding reinforces the existing design rather than changing
+it. *Checked by reading `SWITCH-CONTRACT.md` directly, not by running it; there is no Android
+device in this environment to test a real signer-mismatch case against.*
 
 **Rewind-on-resume.** On restart, the scroll resumes **~120dp above where it stopped**, so the
 reader re-reads a few lines rather than resuming mid-sentence at a point they may already have
