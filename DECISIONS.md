@@ -93,16 +93,18 @@ segment-duration A/B/A.* Verify the instrument *before* the measurement, use a p
 real modality, and repeat the baseline.
 
 **A ninth belongs beside these eight without matching the sentence above it.** The other eight
-were run inside this project; this one was not. **Recorded from design/research — not
-measured**: read from the control-path identity-primitive charter (2026-08-21) rather than
-reproduced here, and this environment has no Android device to re-run it on. It earns its
-place anyway because it is the same failure shape as the rest, on the primitive most people
-reach for first: a `Messenger` posts to a `Handler` that runs *after* the binder transaction
-returns, so `Binder.getCallingUid()` inside `handleMessage` is outside any incoming transaction
-and returns self-uid — a clean-looking value that reads as "no identity available" rather than
-"you read it in the wrong place." The charter used a raw `Binder` (`onTransact`, inside the
-transaction) specifically to avoid this: the raw-Binder `onTransact` returned the caller's real
-uid on both test devices, where a Messenger handler would have returned self.
+were run inside this project; this one was not. It earns its place anyway because it is the
+same failure shape as the rest, on the primitive most people reach for first: a `Messenger`
+posts to a `Handler` that runs *after* the binder transaction returns, so
+`Binder.getCallingUid()` inside `handleMessage` is outside any incoming transaction and returns
+self-uid — a clean-looking value that reads as "no identity available" rather than "you read it
+in the wrong place." **Recorded from design discussion — not measured**: reasoned from
+documented Handler/IPC semantics, read from the control-path identity-primitive charter
+(2026-08-21) rather than reproduced here. The charter used a raw `Binder` (`onTransact`, inside
+the transaction) specifically to avoid this: the raw-Binder `onTransact` returned the caller's
+real uid on both test devices, where a Messenger handler would have returned self. **Reported as
+a measurement by the charter, not independently reproduced or verified here**: two test devices,
+per the charter (2026-08-21); this environment has no Android device to re-run it on.
 
 | Instrument | Looked like | Actually |
 |---|---|---|
@@ -356,9 +358,13 @@ certificate (`PackageManager.GET_SIGNING_CERTIFICATES` / `hasSigningCertificate`
 against the paired signer — because a package name is not a security boundary on its own.
 `SWITCH-CONTRACT.md` (spike repo) already keys pairing on uid **and** signer — `getCreatorUid()`,
 then the paired-set check, then `hasSigningCertificate` before granting, revoking the pairing if
-the signer ever changes — so this finding reinforces the existing design rather than changing
-it. *Checked by reading `SWITCH-CONTRACT.md` directly, not by running it; there is no Android
-device in this environment to test a real signer-mismatch case against.*
+the signer ever changes — so this finding aligns with the shape of the existing design. It does
+not close the gap, though: the identity step that shape depends on, `getCreatorUid()` /
+`getCreatorPackage()`, is exactly what `SWITCH-CONTRACT.md` §12 already flags as unexercised —
+their "behaviour was not exercised", called "the weakest link in the argument for the fix" — so
+this finding sharpens why that verification gap matters rather than closing it. *Checked by
+reading `SWITCH-CONTRACT.md` directly, not by running it; there is no Android device in this
+environment to test a real signer-mismatch case against.*
 
 **Rewind-on-resume.** On restart, the scroll resumes **~120dp above where it stopped**, so the
 reader re-reads a few lines rather than resuming mid-sentence at a point they may already have
