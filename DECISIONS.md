@@ -339,6 +339,14 @@ needs a hole in it is the failure it exists to avoid. It proposes an exported, p
 receiver whose caller is authenticated by `PendingIntent` creator identity rather than by a
 bearer token, because a `BroadcastReceiver` is never told who sent the broadcast.
 
+**Correction, 2026-08-21: this does not authenticate any caller on API 35.**
+`getCreatorUid()`/`getCreatorPackage()` were measured, not merely checked for compile-SDK
+presence — API 30 (SM-P200) returns the true creator, **API 35 (Moto G54) returns no identity
+at all**, `creatorUid=-1`/`creatorPackage=null`, on cross-process delivery. That fails closed
+rather than open — nothing above is compromised — but it fails closed for the legitimate switch
+too, on the project's own phone. See `SWITCH-CONTRACT.md` §12 for the measurement and §11 for
+the replacement decision, which is open and not resolved here.
+
 **Adopting it is the control-path charter's call, and nothing here is settled by its
 existence.** The consent surface is deferred inside the document itself, and its command
 vocabulary deliberately adds nothing to the two intents recorded above.
@@ -358,13 +366,13 @@ certificate (`PackageManager.GET_SIGNING_CERTIFICATES` / `hasSigningCertificate`
 against the paired signer — because a package name is not a security boundary on its own.
 `SWITCH-CONTRACT.md` (spike repo) already keys pairing on uid **and** signer — `getCreatorUid()`,
 then the paired-set check, then `hasSigningCertificate` before granting, revoking the pairing if
-the signer ever changes — so this finding aligns with the shape of the existing design. It does
-not close the gap, though: the identity step that shape depends on, `getCreatorUid()` /
-`getCreatorPackage()`, is exactly what `SWITCH-CONTRACT.md` §12 already flags as unexercised —
-their "behaviour was not exercised", called "the weakest link in the argument for the fix" — so
-this finding sharpens why that verification gap matters rather than closing it. *Checked by
-reading `SWITCH-CONTRACT.md` directly, not by running it; there is no Android device in this
-environment to test a real signer-mismatch case against.*
+the signer ever changes — so this finding's principle (identity ≠ authorisation, pair it with a
+signer check) holds regardless of what follows. **What follows has since changed, and is not
+restated here**: `SWITCH-CONTRACT.md` §12 no longer records `getCreatorUid()`/`getCreatorPackage()`
+as merely unexercised — see the correction under *An external switch* above — so the identity
+step this uid-then-signer design depends on is now known not to run at all on the project's
+phone. *Checked by reading `SWITCH-CONTRACT.md` directly, not by running it; there is no Android
+device in this environment to test a real signer-mismatch case against.*
 
 **Rewind-on-resume.** On restart, the scroll resumes **~120dp above where it stopped**, so the
 reader re-reads a few lines rather than resuming mid-sentence at a point they may already have
