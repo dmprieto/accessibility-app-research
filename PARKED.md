@@ -27,6 +27,13 @@ differs between binary and ranged — a graduated gesture, for instance, rather 
 cover/uncover. Binary is sufficient for cover/uncover, so a charter that only needs that
 leaves this parked permanently.
 
+**UN-PARKED 2026-08-28 (design discussion; developer-relayed).** The proximity control-path charter
+— reprioritised to run next after the Option D reachability finding — includes **wave recognition**,
+not only cover/uncover, so it needs a design whose behaviour differs between binary and ranged: the
+un-parking condition above. Answer it **first**, the way the 2026-08-13 sensor-availability check
+preceded everything — via `getMaximumRange()` from app code (dumpsys no longer prints `maxRange`).
+If the charter's design settles to cover/uncover only, this re-parks (binary suffices).
+
 ## Carry the sensor inventory in the `DEVICE` log line
 
 **What.** Have the service log its sensor inventory at connect, alongside manufacturer, model,
