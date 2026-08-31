@@ -34,6 +34,20 @@ un-parking condition above. Answer it **first**, the way the 2026-08-13 sensor-a
 preceded everything — via `getMaximumRange()` from app code (dumpsys no longer prints `maxRange`).
 If the charter's design settles to cover/uncover only, this re-parks (binary suffices).
 
+**ANSWERED 2026-08-31 — BINARY near/far (measured, Moto G54 API 35).** A `ProximityProbeActivity`
+in `probe-sender` streamed the value set under a controlled slow hand approach: only `{0.0, 5.0}`
+across four slow passes, screen and logcat agreeing. `maximumRange=5.0`, advertised `resolution=1.0`,
+but no intermediate value ever reported. Detail: control-path-charter/`FINDINGS-proximity.md` (F1),
+`OBSERVATIONS-proximity-moto-g54.md`, `log_proximity_binary_moto.txt`.
+- **Method correction worth carrying:** `getMaximumRange()` alone (the method this entry named)
+  *cannot* distinguish binary from ranged — a ranged sensor also has a max, and this one advertises a
+  resolution it does not honour. The decisive instrument is the **quantisation of the value stream**
+  under a slow approach.
+- **Design consequence:** a graduated hover-distance gesture is ruled out on this hardware;
+  cover/uncover and wave both remain viable on binary (a wave is a temporal near/far pattern). So the
+  charter's gesture set costs nothing here. This item is now **closed, not re-parked** (measured
+  rather than assumed).
+
 ## Carry the sensor inventory in the `DEVICE` log line
 
 **What.** Have the service log its sensor inventory at connect, alongside manufacturer, model,
