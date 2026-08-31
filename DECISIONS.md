@@ -926,6 +926,29 @@ in the store listing or anywhere else public.** Until then it is a listing quote
 listing is the one place it must not be used unverified. In the open items table below, with
 the checks that would settle it.
 
+### The proximity capability clause has an optimistic ceiling — F6 (2026-08-31)
+
+Recorded here because the store copy — where the audience is defined by capability clauses — is in
+the Play declaration package, outside this repo. This is the in-repo working note for one of those
+clauses; carry it into the store copy when that is next touched.
+
+The audience is defined by capability, not diagnosis (see the applicationId gates above). One clause
+is the phone no-touch proximity path — in effect *"if you can hold a hand over the top of the phone."*
+**Its optimistic ceiling is 85%.**
+
+The control-path charter measured cover-recognition against the proximity entry trigger (F6,
+control-path-charter/FINDINGS-proximity.md): **17 of 20 deliberate covers registered — and that is an
+able-bodied operator with steady hands.** The misses were under-reaching a **~2 cm zone that is
+hardware and cannot be widened** (F1/F3); a target user with tremor or weakness would miss more (H1,
+the first ability-linked signal, unmeasured). Misses are retryable — a missed cover does nothing — so
+the clause is real, not false.
+
+**Two consequences, neither a change to the claim (the claim is capability-based and correct):**
+- **The beta must test this clause specifically** — cover-recognition with target users is the only
+  instrument that improves on 85%; measuring it again with steady hands cannot.
+- **The recruitment line for phone no-touch users must not oversell it.** "Hold a hand near the
+  screen" works, but not on the first attempt every time, and by less for the users it is for.
+
 ### Engine: never catch up for dead time
 
 A re-grip costs ~460ms of no motion. Repaying that debt with a burst afterwards is rejected.
