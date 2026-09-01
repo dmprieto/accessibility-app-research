@@ -949,6 +949,14 @@ the clause is real, not false.
 - **The recruitment line for phone no-touch users must not oversell it.** "Hold a hand near the
   screen" works, but not on the first attempt every time, and by less for the users it is for.
 
+**Sharpened by the on-device test (2026-09-01): frame it as a *reach* question, not a *gesture* one.**
+The build refuted the under-sampling hypothesis (a fast full cover registered 12/12); the sole failure
+mode is **under-reaching the 2 cm zone, speed-independent** — one failure mode with one fix (reach
+further), not two. So the beta question for a target user is not "can you wave correctly" but **"can
+you get your hand within ~2 cm of the screen, reliably."** That is a physical-reach question, and for
+a *mounted* device it is partly about **mount geometry** — how close the screen sits to where the hand
+can travel — rather than about the person. Carry it in that form.
+
 ### Engine: never catch up for dead time
 
 A re-grip costs ~460ms of no motion. Repaying that debt with a burst afterwards is rejected.
