@@ -168,11 +168,25 @@ question:
 | `logcat -G 64M` | "the app is dead" | the log reader silently stopped returning data |
 | A recorded buffer size, never checked | "the capture was complete" | the device refused that size; the check was written, not run |
 | The `VISIBLE LURCH` log line | "the lead-in is an ease-in" | it measured only the margin term; the ramp carries ~90% |
+| `deviceId` for finger-vs-injected, carried from the Moto | "the SM-P200 point-scan tap is an injected pass" | a finger returns **−1 there too** — blind, and blind *as* the injected value, so every finger tap reads as a pass; `flags` (`0x800000` / `0x0`) separates on this device |
 
 Each returns something that looks like data. The check is cheap: run a positive control from
 the real modality *first*, repeat the baseline, and ask whether the instrument reproduces the
 user action or only its side effect. Verify the instrument **before** the measurement, not
 after.
+
+**The `deviceId` row is a different shape from the rest.** The others are one shape — a check
+that could not *see* the thing (a null: looks like data, measured nothing or only a side
+effect). The `deviceId` row is the other — a check that sees a **different** thing and looks
+identical. An instrument validated on one device (`deviceId`, Moto G54: finger=5, injected=−1)
+transferred to the SM-P200 and **inverted**: same field, opposite behaviour, and the failed
+reading pointed *toward* the hoped-for answer — a finger reads there as the injected value, so a
+`deviceId` rule would have called every finger tap a pass, silently. The rule it adds: an
+instrument that worked elsewhere can transfer *and invert*, so establish the discriminating
+field **per device, from a baseline**, before trusting a result. Condition 2 — the finger
+baseline read before any injected pass — is what caught it. *(Switch arm, SM-P200 vs Moto,
+3 Sep 2026; measured, 3 injected / 4 finger; the "sees a different thing" shape named by the
+coordinator, the closest this project came to shipping a wrong result on a load-bearing claim.)*
 
 ---
 ---
