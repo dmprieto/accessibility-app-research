@@ -50,9 +50,35 @@ sensor is absent or the dump failed, so the full inventory was printed to tell t
 not hidden behind a vendor alias. That check is standing rule 5 applied without being asked
 for, and it is the reason this row can be trusted.
 
-**Inferred, not measured:** that `getDefaultSensor(TYPE_PROXIMITY)` returns null on device 2.
-It follows from the hardware inventory rather than from a call, and it confirms itself for
-free the first time app code runs there.
+**Why the spec sheets disagree (documentation read 2026-09-02, not independently verified).** Web
+aggregators list a proximity sensor for this device and appear to contradict the row above; they do
+not. GSMArena covers `SM-P200` (Wi-Fi) and `SM-P205` (LTE) on one page — "Versions: SM-P200 (Wi-Fi);
+SM-P205 (LTE)" — and lists "Sensors: Accelerometer, proximity" for the pair, i.e. the union across
+variants. A proximity sensor's primary job is blanking the screen during a call, which exists only on
+the cellular `SM-P205`; the `SM-P200` is Wi-Fi-only with no call path (already established for the
+host-hazard incoming-call arm). PhoneDB lists the `SM-P200` on its own and gives "L sensor, Hall" —
+light and hall, no proximity. So the sensor that differs across the listings is exactly the one whose
+purpose exists only on the LTE model. Spec aggregators are not a source this project treats as
+authoritative — rule 1 ranks a device reporting its own hardware above them — and this is recorded only
+so the next person who spots the discrepancy finds it already explained, not to re-open the measurement.
+
+**Confirmed via the app's own call (2026-09-02).** `getDefaultSensor(TYPE_PROXIMITY)` returns null on
+device 2. It was inferred from the hardware inventory; now measured against the API the app actually
+uses. `PairingActivity` (spike1-autoscroll, lines 91–92) calls
+`getSystemService(SensorManager)?.getDefaultSensor(TYPE_PROXIMITY) != null` and, on null, disables the
+proximity toggle and shows the "unavailable" note. On device 2 the toggle is greyed with that note
+(developer-observed on the tablet, app code now present there) — so the call returned null. Optical
+evidence, the developer's, matching the hardware inventory rather than a spec aggregator.
+
+**The feature-detect-and-degrade path works — first evidence (2026-09-02, measured).** The same
+observation carries a second finding, previously untested: the greyed toggle with its "unavailable"
+note is `ProximityControl`'s designed **degradation running correctly on hardware with no proximity
+sensor**. That was the requirement set on 13 August, when the sensor check first established proximity
+could not be universal — anything built on it must feature-detect and degrade. This is the first
+evidence the requirement holds. It exists only because the **shipped path** (`PairingActivity`'s own
+`getDefaultSensor` check) was used to settle the null, rather than a `run-as` instrument: a `run-as`
+write would have confirmed the null and shown nothing about the app's behaviour. So the disabled toggle
+on device 2 is two results at once — the null return, and the degradation working.
 
 ## Accessibility shortcut surfaces
 
