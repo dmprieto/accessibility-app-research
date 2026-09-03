@@ -153,7 +153,7 @@ good it looks in isolation. Stated in full, with the reasoning that produced eac
 6. **The app may not initiate, plan, or sequence anything.** The engine satisfies this by
    construction; the exposure is entirely in the control surface.
 
-## One method rule, learned seven times over
+## One method rule, learned eight times over
 
 **Before believing a result, ask what a null instrument would have produced.** Six separate
 measurements returned clean-looking data from instruments that could not measure the thing in
@@ -277,7 +277,7 @@ concerns the *control surface*, which was an explicit non-goal — see
 **Known wrong turns, documented so they are not repeated:** chain-age decay (was sub-pixel
 segments), the band widening (wrong in both directions), and the app-switch cancellation
 claim (was the touch, not the window change). The instrument failures behind several of them
-are in [the null-instrument table](#one-method-rule-learned-six-times-over) above.
+are in [the null-instrument table](#one-method-rule-learned-eight-times-over) above.
 
 ---
 

@@ -136,7 +136,7 @@ Each has a `REJECTED DESIGN` block in `ScrollEngine.kt` with the evidence attach
 
 ## The most transferable output
 
-A method rule, learned six times over: **before believing a result, ask what a null
+A method rule, learned eight times over: **before believing a result, ask what a null
 instrument would have produced.**
 
 | Instrument | Looked like | Actually |
@@ -147,6 +147,8 @@ instrument would have produced.**
 | A primed observer across sessions | later sessions felt worse | sensitisation — the observer got more critical, not the setting worse |
 | `logcat -G 64M` | the app is dead | the log reader silently stopped returning data |
 | A recorded buffer size, never checked | the capture was complete | the device refused that size; the check was written, not run |
+| The `VISIBLE LURCH` log line | the lead-in is an ease-in | it measured only the margin term; the ramp carries ~90% |
+| `deviceId` for finger-vs-injected, carried from the Moto | the SM-P200 point-scan tap is an injected pass | a finger returns −1 there too — blind, and blind *as* the injected value, so every finger reads as a pass; `flags` (`0x800000`/`0x0`) separates on this device |
 
 Verify the instrument **before** the measurement, not after. Use a positive control from
 the real modality, and repeat the baseline.
