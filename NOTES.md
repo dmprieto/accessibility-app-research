@@ -403,6 +403,17 @@ wandering means noise is being fed into on-screen velocity and the filter is too
 > again. It said "the two quotes currently in this file are the developer's own" well after
 > the file had acquired three of Observer A's — the one line carrying the consent record was
 > the one line that had gone stale.
+>
+> **Where the participant material is — known, NOT exhaustive (recorded 2026-09-04 — the coordinator's
+> decision, not the agent's).** Observer A's verbatim quotes live at **eight sites across two repos**,
+> including **two structured-column sites** a prose scan passes over (a value in a table column, not a
+> sentence). **The set is known, not exhaustive: any task touching files must _check_ for participant
+> passages, never rely on this list.** *Why the list must not be trusted as complete:* the count went
+> from **four to eight** the first time anyone looked systematically — the same pattern as every entry in
+> `RECORD-KEEPING.md`, where a rule stated without its incident gets read as mere caution and quietly
+> relaxed. **Consent is unchanged** — Observer A's is authoritative in this public repo and was
+> re-confirmed after publication (above). This entry is about *where the material is*, not whether it may
+> exist.
 
 Does the eased re-grip read as a blink or a glitch on hardware it was not tuned on?
 

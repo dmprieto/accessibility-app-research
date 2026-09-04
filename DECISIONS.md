@@ -780,6 +780,11 @@ fix has landed **in full — receiver closed *and* pairing built.** The receiver
 2026-08-20; **the pairing mechanism is unbuilt, so this trigger is not yet met** — see
 *Control surface: the receiver must not ship exported — CLOSED*, which records the developer's
 decision that the complete fix, not the closure alone, is what these triggers require.
+> *Superseded 2026-09-04 (wrong version kept per rule 1): the complete fix has landed — receiver closed
+> **and pairing built** (verified on-device, Exit A, 2026-09-03), so this trigger (gate one) is now met.
+> The account/upload-key triggers are held instead by gate two (the unbuilt prominent-disclosure screen +
+> verification page). See "CORRECTION (2026-09-04) — Gate one fired; the Play track remains paused on
+> gate two alone" below in this file.*
 
 **Worth doing now, ahead of the trigger:** make the identity document, address and payment card
 carry the same name in the same form. Mismatched or unsupported documents are the primary
@@ -1096,6 +1101,29 @@ triggers above) reads "the exported-receiver fix" as the **complete** fix — re
 pairing built — so all of them remain unmet while pairing is unbuilt. This is the reading this
 entry already implied; it is now settled rather than left to a reader. Reserved under rule 4 and
 made by the developer, not inferred.
+
+**CORRECTION (2026-09-04 — recording the developer + coordinator's decision; the superseded present-tense
+statements are kept visible at their sites per rule 1). Gate one fired; the Play track remains paused on
+gate two alone.** This is the canonical entry the seven "pairing unbuilt / paused" statements across
+`README.md`, `HANDOVER.md` and this file now point to.
+- **Gate one — pairing built — is MET.** The condition settled 2026-08-20 was *pairing built* (not merely
+  the receiver closed — the distinction this entry drew, and the one a reader must not reconstruct
+  backwards from "the receiver was closed"). Pairing was built and **verified on-device** — Exit A,
+  start+stop round-trip on both devices, 2026-09-03 (control-path-charter). The receiver already ships
+  `enabled=false`. Gate one has fired.
+- **Gate two — the prominent-disclosure screen and the in-app verification page — is NEARLY met, NOT
+  met.** Two artifacts, both **specified, neither built**: the prominent-disclosure screen (video script,
+  step 2) and the in-app verification page. The gate moved from **unmet** (no working control surface
+  existed) to **nearly met** (three measured control surfaces now exist — notification, proximity,
+  switch) **because the surfaces got built, not because the requirement changed.** "Nearly met" is not
+  "met" — the two artifacts and their unbuilt state are named so the gate stays *checkable* rather than
+  reading as effectively satisfied in six weeks.
+- **The Play track REMAINS PAUSED — on gate two alone.** A correction that says only "pairing is built"
+  leaves a reader concluding the track is open; that is the two-independent-reasons failure that once
+  published the escalation section, in this same file family. The downstream account and upload-key
+  triggers stay unmet with gate two.
+- So `:1092`–`:1096` above ("remain unmet while pairing is unbuilt") is superseded on the *pairing* half:
+  pairing is built; what holds the pause now is gate two.
 
 *Previously recorded here: "`RECEIVER_EXPORTED` means any installed app can start and stop the
 scroll… Planned fix: channel off by default plus a per-install pairing token", with the note

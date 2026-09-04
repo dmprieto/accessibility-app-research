@@ -143,6 +143,26 @@ lived where a reader of the document would see it and a file-copying task would 
 run's own recurring defect — a check pointed at the wrong thing — at the level of the process. A
 gate that only humans reading in context can see is not a gate.
 
+### Raw device dumps are personal data, and the distilled line is the half a sweep misses
+
+*(Added 2026-09-04. This guardrail is the **agent's**, surfaced by the doc-cleanup pass — not a recorded
+developer/coordinator decision; marked so per rule 1's provenance discipline.)*
+
+Raw device captures — `adb shell settings get secure` / dumpsys output, e.g. `secure_*.txt` — are
+**personal data**: they carry `android_id`, `serial`, `bluetooth_address`, `ssid` (a home network name),
+`account` and `owner`. They are never published raw; if a derived result must go public it is the
+**finding**, after an identifier check — never the dump. A **filename sweep** (`secure_*`) catches the
+dump files.
+
+**The half a filename sweep misses is a value distilled out of a dump into a prose line.** When an
+identifier is lifted from a capture into a markdown sentence — a device id quoted in a finding, an SSID
+named in a run note — the file it lands in has no telltale name, and a sweep for `secure_*` passes over
+it. That distilled line is the half that matters, and it is the **same shape as the escalation-section
+gate above**: a task scoped to one form (files named like dumps) acting on content it wasn't asked to
+read (identifiers living inside other files). So a copy-to-publish or sanitisation task greps for the
+**identifier patterns themselves**, not only the dump filenames — alongside `[[DO-NOT-PUBLISH]]` and
+personal/participant data.
+
 ## 6. Review is not optional, and not self-review
 
 Changes to these documents get a reader who **did not work on the changes under review**. Not a

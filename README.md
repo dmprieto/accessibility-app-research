@@ -56,6 +56,11 @@ get recorded and handed forward instead of chased.
 
 **The Play track is paused** until spike 2 delivers a control surface. There is nothing to
 submit until a user can start and stop the app without a terminal.
+> *Superseded 2026-09-04 (wrong version kept per rule 1): the control surface now exists — three,
+> measured (notification, proximity, switch) — and pairing is built (gate one fired). **The track is
+> still paused, on gate two:** the prominent-disclosure screen and the in-app verification page, both
+> specified, neither built. See `DECISIONS.md` → "CORRECTION (2026-09-04) — Gate one fired; the Play
+> track remains paused on gate two alone."*
 
 ### The documents
 
@@ -815,6 +820,9 @@ entirely.
 **The pairing mechanism is still unbuilt**, so v1 still has no third-party entry point. The
 deadline that applied to the exported receiver now applies to that: before any build reaches
 a device we do not control, including the closed beta.
+> *Superseded 2026-09-04 (wrong version kept per rule 1): pairing is **built** and verified on-device
+> (Exit A, 2026-09-03), so gate one has fired. The Play track remains paused on gate two (unbuilt
+> prominent-disclosure screen + verification page). See `DECISIONS.md` → "CORRECTION (2026-09-04)."*
 
 **[DECISIONS.md](DECISIONS.md) → *Control surface: the receiver must not ship exported* is
 the definition** — what closed it, what remains, the two rejected alternatives, and the bound
