@@ -142,7 +142,14 @@ phase and is meant to be deleted when that closes, apart from the part it marks 
   intended user without a terminal.
   > *Superseded 2026-09-04 (wrong version kept per rule 1): **three** control surfaces now exist and are
   > measured — the notification (20/20, md5-verified), proximity (shipped), and the switch path
-  > (round-tripping on both devices). The app can be started and stopped without a terminal. **This
+  > (round-tripping on both devices). **The switch capability carries a limit that must travel with it
+  > (rule 1):** its stop is slow (>10 s/activation) and imprecise — a **missed point-scan tap lands a
+  > real touch on the reading content and can navigate the user away**, and the §8 guard covers only the
+  > pairing surface. The hazard is **inseparable from the property that makes the path work** — point-scan
+  > taps a coordinate on the topmost window, which is both why it reaches the overlay and why a miss
+  > reaches content. (This is the research record stating a verification limit; the store-copy split —
+  > implicit in the listing, explicit in-app — is a different document under a different rule and stays
+  > intact.) The app can be started and stopped without a terminal. **This
   > sentence was the original premise for gate two** — the prominent-disclosure video could not be filmed
   > because the only start path was adb — so it and the canonical correction (gate two now *nearly* met)
   > cannot both be live. See `DECISIONS.md` → "CORRECTION (2026-09-04) — Gate one fired; the Play track

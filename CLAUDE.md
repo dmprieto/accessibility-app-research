@@ -195,3 +195,12 @@ that stop an editing instance breaking the record's rules and re-proposing parke
 The developer coordinates this work across more than one Claude instance and routes follow-up
 herself. Do the change asked for, keep it coherent across the other documents, and **flag what
 you discover without picking it up**. Once an item is parked, stop raising it.
+
+**Standing gap — coordinator-drafted files land in the developer's `Downloads` and stay there unless
+someone moves them** (recorded 2026-09-04, coordinator). Two have now landed outside the
+version-controlled record: the as-approved `host-hazard-charter.md` (superseded by its repo copy) and
+`identity-primitive-charter.md` (the **sole** copy of the closed part-one plan — unversioned, unbacked,
+pointed at by `control-path-charter/README.md:3`). When a coordinator charter is pasted in, its canonical
+home is a repo, not `Downloads`; check there for stragglers. *(The proposed move of
+`identity-primitive-charter.md` into `control-path-charter/` is on hold — that directory is not itself a
+git repo, so the move would relocate the sole copy without giving it version control; flagged 2026-09-04.)*

@@ -149,8 +149,9 @@ gate that only humans reading in context can see is not a gate.
 developer/coordinator decision; marked so per rule 1's provenance discipline.)*
 
 Raw device captures — `adb shell settings get secure` / dumpsys output, e.g. `secure_*.txt` — are
-**personal data**: they carry `android_id`, `serial`, `bluetooth_address`, `ssid` (a home network name),
-`account` and `owner`. They are never published raw; if a derived result must go public it is the
+**personal data**: they carry `android_id`, `serial`, `bluetooth_address`, `ssid` (a hotspot SSID, per
+`SANITIZATION.md`), `account` and `owner`. They are never published raw; if a derived result must go
+public it is the
 **finding**, after an identifier check — never the dump. A **filename sweep** (`secure_*`) catches the
 dump files.
 

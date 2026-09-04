@@ -1104,13 +1104,13 @@ made by the developer, not inferred.
 
 **CORRECTION (2026-09-04 — recording the developer + coordinator's decision; the superseded present-tense
 statements are kept visible at their sites per rule 1). Gate one fired; the Play track remains paused on
-gate two alone.** This is the canonical entry the seven "pairing unbuilt / paused" statements across
-`README.md`, `HANDOVER.md` and this file now point to.
+gate two alone.** This is the canonical entry the **eight** "pairing unbuilt / paused / no control
+surface" statements across `README.md`, `HANDOVER.md` and this file now point to.
 - **Gate one — pairing built — is MET.** The condition settled 2026-08-20 was *pairing built* (not merely
   the receiver closed — the distinction this entry drew, and the one a reader must not reconstruct
   backwards from "the receiver was closed"). Pairing was built and **verified on-device** — Exit A,
-  start+stop round-trip on both devices, 2026-09-03 (control-path-charter). The receiver already ships
-  `enabled=false`. Gate one has fired.
+  start+stop round-trip, **Moto G54 2026-08-27 and SM-P200 2026-09-03** (control-path-charter; dated per
+  hardware, rule 1). The receiver already ships `enabled=false`. Gate one has fired.
 - **Gate two — the prominent-disclosure screen and the in-app verification page — is NEARLY met, NOT
   met.** Two artifacts, both **specified, neither built**: the prominent-disclosure screen (video script,
   step 2) and the in-app verification page. The gate moved from **unmet** (no working control surface
@@ -1122,8 +1122,11 @@ gate two alone.** This is the canonical entry the seven "pairing unbuilt / pause
   leaves a reader concluding the track is open; that is the two-independent-reasons failure that once
   published the escalation section, in this same file family. The downstream account and upload-key
   triggers stay unmet with gate two.
-- So `:1092`–`:1096` above ("remain unmet while pairing is unbuilt") is superseded on the *pairing* half:
-  pairing is built; what holds the pause now is gate two.
+- So the entry above — **"Developer decision, 2026-08-20 — the Play-track pause holds until the pairing
+  mechanism is built"** ("remain unmet while pairing is unbuilt") — is superseded on the *pairing* half:
+  pairing is built; what holds the pause now is gate two. *(Pointers reference that heading, not a line
+  number — F2: a line anchor breaks on the next commit, per `CLAUDE.md`'s own rule; the earlier
+  `:1092`–`:1096` had already gone stale.)*
 - **The site list is KNOWN, NOT exhaustive — search the claim, not the wording.** The sweep that found
   the statements to correct targeted *pairing/pause* phrasing and returned **seven**; an **eighth**
   existed on a different phrasing of the same fact (`README.md` "No control surface exists" — the gate-two
