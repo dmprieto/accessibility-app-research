@@ -405,12 +405,22 @@ wandering means noise is being fed into on-screen velocity and the filter is too
 > the one line that had gone stale.
 >
 > **Where the participant material is — known, NOT exhaustive (recorded 2026-09-04 — the coordinator's
-> decision, not the agent's).** Observer A's verbatim quotes live at **eight sites across two repos**,
-> including **two structured-column sites** a prose scan passes over (a value in a table column, not a
-> sentence). **The set is known, not exhaustive: any task touching files must _check_ for participant
-> passages, never rely on this list.** *Why the list must not be trusted as complete:* the count went
-> from **four to eight** the first time anyone looked systematically — the same pattern as every entry in
-> `RECORD-KEEPING.md`, where a rule stated without its incident gets read as mere caution and quietly
+> decision, not the agent's; counting unit settled 2026-09-04 after the rule-6 read).** Observer A's
+> verbatim quotes sit in **9 files** — the *unit of action*, what a task copying, sanitising or publishing
+> has to handle — holding **17 passages** between them — the *unit of protection*, what a reader has to
+> check for. Both numbers are needed: stating one loses what the other carries. **4 of those 9 files hold
+> more than one passage**, and those are exactly where a task that checks a file once and moves on misses
+> the second: this file, **`NOTES.md` (6 passages — the highest-risk entry in the register by some
+> distance)**, this repo's `README.md` (2), and `spike1-autoscroll`'s `NOTES.md` (2) and `README.md` (2).
+> Some of the passages are **structured-column sites** a prose scan passes over — a value in a table
+> column, not a sentence — which is the class the rule-6 read kept finding. **The set is known, not
+> exhaustive: any task touching files must _check_ for participant passages, never rely on this list —
+> and where this line and the register disagree on a number, use the rows, not the number.** *Why the
+> list must not be trusted as complete:* the **known-sites count moved twice under scrutiny — 4→8→14 as
+> each look went deeper** (4→8 the first systematic pass; 8→14 when a reader audited a register that had
+> been built to be complete and found six more). It is the *movement*, not the ceiling, that is
+> load-bearing: a register cannot warrant completeness on this material — the same pattern as every entry
+> in `RECORD-KEEPING.md`, where a rule stated without its incident gets read as mere caution and quietly
 > relaxed. **Consent is unchanged** — Observer A's is authoritative in this public repo and was
 > re-confirmed after publication (above). This entry is about *where the material is*, not whether it may
 > exist.
