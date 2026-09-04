@@ -197,12 +197,11 @@ herself. Do the change asked for, keep it coherent across the other documents, a
 you discover without picking it up**. Once an item is parked, stop raising it.
 
 **Standing gap — coordinator-drafted files land in the developer's `Downloads` and stay there unless
-someone moves them** (recorded 2026-09-04, coordinator). Two have now landed outside the
-version-controlled record: the as-approved `host-hazard-charter.md` (superseded by its repo copy) and
-`identity-primitive-charter.md` (the **sole** copy of the closed part-one plan — unversioned, unbacked,
-pointed at by `control-path-charter/README.md:3`). When a coordinator charter is pasted in, its canonical
-home is a repo, not `Downloads`; check there for stragglers. *(The move of
-`identity-primitive-charter.md` into `control-path-charter/` was **made** 2026-09-04. The reason first
-raised for a hold — that directory is not a git repo, so the move gives no version control — **held true;
-the hold did not.** The move resolves the `README.md:3` pointer and consolidates the sole copy next to
-its thread; it does **not** add version control or backup. See `control-path-charter/README.md`.)*
+someone moves them** (recorded 2026-09-04, coordinator). When a coordinator charter is pasted in, its
+canonical home is a **version-controlled repo**, not `Downloads` — **check `Downloads` for stragglers.**
+Both instances raised under this gap are now resolved: the as-approved `host-hazard-charter.md` is
+superseded by its repo copy, and `identity-primitive-charter.md` (the closed part-one plan) was
+**consolidated into `spike1-autoscroll` (git, private) on 2026-09-04** — versioned beside its outputs after
+a clean FLAG-5/FLAG-6 read, its sole-unversioned-copy risk closed and the local `control-path-charter`
+duplicate removed. The gap itself stays open as a habit to watch; the two known stragglers are cleared.
+See `control-path-charter/README.md` for the authority statement and the (closed) not-a-git-repo decision.
