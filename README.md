@@ -140,6 +140,13 @@ phase and is meant to be deleted when that closes, apart from the part it marks 
   differences.
 - **No control surface exists.** The app cannot currently be started or stopped by its
   intended user without a terminal.
+  > *Superseded 2026-09-04 (wrong version kept per rule 1): **three** control surfaces now exist and are
+  > measured — the notification (20/20, md5-verified), proximity (shipped), and the switch path
+  > (round-tripping on both devices). The app can be started and stopped without a terminal. **This
+  > sentence was the original premise for gate two** — the prominent-disclosure video could not be filmed
+  > because the only start path was adb — so it and the canonical correction (gate two now *nearly* met)
+  > cannot both be live. See `DECISIONS.md` → "CORRECTION (2026-09-04) — Gate one fired; the Play track
+  > remains paused on gate two alone."*
 
 ## Standing rules
 

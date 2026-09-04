@@ -1124,6 +1124,14 @@ gate two alone.** This is the canonical entry the seven "pairing unbuilt / pause
   triggers stay unmet with gate two.
 - So `:1092`–`:1096` above ("remain unmet while pairing is unbuilt") is superseded on the *pairing* half:
   pairing is built; what holds the pause now is gate two.
+- **The site list is KNOWN, NOT exhaustive — search the claim, not the wording.** The sweep that found
+  the statements to correct targeted *pairing/pause* phrasing and returned **seven**; an **eighth**
+  existed on a different phrasing of the same fact (`README.md` "No control surface exists" — the gate-two
+  premise), corrected 2026-09-04. So seven was the count of a *phrasing*, not of a *claim*. Same shape as
+  the "one dumpsys command" correction (scoped to four places, actually in seven) and the reason
+  `NOTES.md` now records participant passages as known-not-exhaustive: a future sweep must search the
+  **claim** — "the Play track is open / pairing unbuilt / no control surface" — not any one wording of
+  it. (Recorded with its incident because a rule stated without one gets read as caution and relaxed.)
 
 *Previously recorded here: "`RECEIVER_EXPORTED` means any installed app can start and stop the
 scroll… Planned fix: channel off by default plus a per-install pairing token", with the note

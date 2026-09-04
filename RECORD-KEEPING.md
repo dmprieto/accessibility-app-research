@@ -163,6 +163,12 @@ read (identifiers living inside other files). So a copy-to-publish or sanitisati
 **identifier patterns themselves**, not only the dump filenames — alongside `[[DO-NOT-PUBLISH]]` and
 personal/participant data.
 
+**A found instance, not a hypothetical:** `control-path-charter/NEXT-SESSION-switch-arm.md:44` carries
+the **SM-P200 serial in plain prose** (plus settings-derived values like `accessibility_enabled=1`) —
+a value distilled out of a device capture into a markdown line, exactly the half a `secure_*` sweep
+misses. Local-only, so nothing is exposed today; recorded here so the class acts on a real case rather
+than a described risk.
+
 ## 6. Review is not optional, and not self-review
 
 Changes to these documents get a reader who **did not work on the changes under review**. Not a
