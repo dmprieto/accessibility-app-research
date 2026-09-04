@@ -781,7 +781,7 @@ fix has landed **in full — receiver closed *and* pairing built.** The receiver
 *Control surface: the receiver must not ship exported — CLOSED*, which records the developer's
 decision that the complete fix, not the closure alone, is what these triggers require.
 > *Superseded 2026-09-04 (wrong version kept per rule 1): the complete fix has landed — receiver closed
-> **and pairing built** (verified on-device, Exit A, 2026-09-03), so this trigger (gate one) is now met.
+> **and pairing built** (verified on-device — Exit A, Moto G54 2026-08-27 and SM-P200 2026-09-03), so this trigger (gate one) is now met.
 > The account/upload-key triggers are held instead by gate two (the unbuilt prominent-disclosure screen +
 > verification page). See "CORRECTION (2026-09-04) — Gate one fired; the Play track remains paused on
 > gate two alone" below in this file.*

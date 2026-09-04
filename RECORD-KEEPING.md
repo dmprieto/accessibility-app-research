@@ -73,6 +73,20 @@ that is complete.
 each correction pass found another. The last one — `HANDOVER.md`'s confidence table — was
 missed twice, including once after being checked.
 
+### A status or decision change carries its public-record check — in the same pass, not as a follow-up
+
+The recurring failure is **directional**: private records update immediately (the session that did the
+work writes them); **public records update when someone remembers**. So the public record keeps asserting
+a completeness the private record has already withdrawn. This is the pairing/pause defect (eight public
+statements corrected 2026-09-04) — and it **reproduced twice on the day it was fixed** (a notification-arm
+status and a move-status), because those corrections landed at the *site* named and not at the *class*
+they belong to.
+
+The fix is not another sweep. **Any change to an arm's status or a decision's state carries a
+public-record check as part of that change:** before it is called done, ask where the old state is
+asserted *publicly* and correct it in the same pass. The follow-up is the thing that does not happen.
+(Recorded at the definition rule because it is read before the next status change.)
+
 ## 3. Verify the claiming unit, not the fragment
 
 A documentation defect usually lives in a *relationship*, not a sentence: a row title against
@@ -164,11 +178,14 @@ read (identifiers living inside other files). So a copy-to-publish or sanitisati
 **identifier patterns themselves**, not only the dump filenames — alongside `[[DO-NOT-PUBLISH]]` and
 personal/participant data.
 
-**A found instance, not a hypothetical:** `control-path-charter/NEXT-SESSION-switch-arm.md:44` carries
-the **SM-P200 serial in plain prose** (plus settings-derived values like `accessibility_enabled=1`) —
-a value distilled out of a device capture into a markdown line, exactly the half a `secure_*` sweep
-misses. Local-only, so nothing is exposed today; recorded here so the class acts on a real case rather
-than a described risk.
+**A found instance, not a hypothetical:** `control-path-charter/NEXT-SESSION-switch-arm.md` carries
+the **SM-P200 serial in plain prose** — in its switch-arm recon-capture section (a "connected devices"
+line, with settings-derived values like `accessibility_enabled=1`) — a value distilled out of a device
+capture into a markdown line, exactly the half a `secure_*` sweep misses. Local-only, so nothing is
+exposed today; recorded here so the class acts on a real case rather than a described risk. *(Located by
+description, not a line number: this points from a versioned public repo into a **live unversioned
+working file** — a line anchor here is more fragile than the case that prompted F2, and the serial has
+already moved once.)*
 
 ## 6. Review is not optional, and not self-review
 

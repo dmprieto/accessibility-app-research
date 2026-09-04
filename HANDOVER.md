@@ -47,8 +47,8 @@ same trigger as the pause itself: a control surface plus the **complete** export
 — receiver closed *and* pairing built. The pairing mechanism is unbuilt, so the trigger is not
 met; see DECISIONS.md *Control surface … CLOSED*.
 > *Superseded 2026-09-04 (wrong version kept per rule 1): both halves of that trigger are now met —
-> the receiver ships `enabled=false` and **pairing is built** and verified on-device (Exit A,
-> 2026-09-03). Gate one has fired. **The Play track is still paused, on gate two:** the
+> the receiver ships `enabled=false` and **pairing is built** and verified on-device (Exit A —
+> Moto G54 2026-08-27, SM-P200 2026-09-03). Gate one has fired. **The Play track is still paused, on gate two:** the
 > prominent-disclosure screen and the in-app verification page — both specified, neither built. Do not
 > read "pairing built" as "the track is open." See `DECISIONS.md` → "CORRECTION (2026-09-04) — Gate one
 > fired; the Play track remains paused on gate two alone."*

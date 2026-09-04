@@ -201,6 +201,8 @@ someone moves them** (recorded 2026-09-04, coordinator). Two have now landed out
 version-controlled record: the as-approved `host-hazard-charter.md` (superseded by its repo copy) and
 `identity-primitive-charter.md` (the **sole** copy of the closed part-one plan — unversioned, unbacked,
 pointed at by `control-path-charter/README.md:3`). When a coordinator charter is pasted in, its canonical
-home is a repo, not `Downloads`; check there for stragglers. *(The proposed move of
-`identity-primitive-charter.md` into `control-path-charter/` is on hold — that directory is not itself a
-git repo, so the move would relocate the sole copy without giving it version control; flagged 2026-09-04.)*
+home is a repo, not `Downloads`; check there for stragglers. *(The move of
+`identity-primitive-charter.md` into `control-path-charter/` was **made** 2026-09-04. The reason first
+raised for a hold — that directory is not a git repo, so the move gives no version control — **held true;
+the hold did not.** The move resolves the `README.md:3` pointer and consolidates the sole copy next to
+its thread; it does **not** add version control or backup. See `control-path-charter/README.md`.)*

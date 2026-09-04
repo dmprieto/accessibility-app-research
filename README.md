@@ -141,13 +141,18 @@ phase and is meant to be deleted when that closes, apart from the part it marks 
 - **No control surface exists.** The app cannot currently be started or stopped by its
   intended user without a terminal.
   > *Superseded 2026-09-04 (wrong version kept per rule 1): **three** control surfaces now exist and are
-  > measured — the notification (20/20, md5-verified), proximity (shipped), and the switch path
+  > measured — the notification (20/20 md5-verified **on the Moto only; the SM-P200 leg is outstanding,
+  > arm partially met** — the tablet's `GLOBAL_ACTION_BACK` collapse is a different question), proximity
+  > (shipped), and the switch path
   > (round-tripping on both devices). **The switch capability carries a limit that must travel with it
   > (rule 1):** its stop is slow (>10 s/activation) and imprecise — a **missed point-scan tap lands a
   > real touch on the reading content and can navigate the user away**, and the §8 guard covers only the
-  > pairing surface. The hazard is **inseparable from the property that makes the path work** — point-scan
-  > taps a coordinate on the topmost window, which is both why it reaches the overlay and why a miss
-  > reaches content. (This is the research record stating a verification limit; the store-copy split —
+  > pairing surface. A miss has two failure modes, not one: it **cancels the scroll by touch (a false
+  > stop)** if it lands on inert content, or **navigates the user away** if it lands on a link. The hazard
+  > is **inseparable from the property that makes the path work** — point-scan taps a coordinate on the
+  > topmost window, which is both why it reaches the overlay and why a miss reaches content. (Mechanism
+  > verified on the SM-P200, 2026-09-03; developer-optical + the miss observed on-device. This is the
+  > research record stating a verification limit; the store-copy split —
   > implicit in the listing, explicit in-app — is a different document under a different rule and stays
   > intact.) The app can be started and stopped without a terminal. **This
   > sentence was the original premise for gate two** — the prominent-disclosure video could not be filmed
@@ -835,7 +840,7 @@ entirely.
 deadline that applied to the exported receiver now applies to that: before any build reaches
 a device we do not control, including the closed beta.
 > *Superseded 2026-09-04 (wrong version kept per rule 1): pairing is **built** and verified on-device
-> (Exit A, 2026-09-03), so gate one has fired. The Play track remains paused on gate two (unbuilt
+> (Exit A — Moto G54 2026-08-27, SM-P200 2026-09-03), so gate one has fired. The Play track remains paused on gate two (unbuilt
 > prominent-disclosure screen + verification page). See `DECISIONS.md` → "CORRECTION (2026-09-04)."*
 
 **[DECISIONS.md](DECISIONS.md) → *Control surface: the receiver must not ship exported* is
