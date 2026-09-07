@@ -772,7 +772,13 @@ documentation reads, **not legal clearance** — same ceiling as `keepreading` a
 - The **dedicated Google account's address can now be chosen** — it was waiting on this (see the Play
   developer account decision below, *Account address*).
 
-### Play developer account: individual type, dedicated address, creation deferred
+**The companion still has NO production applicationId and NO display name — a permanent-at-publication gap,
+same class as the reading app's above (D9 F6, 2026-09-07).** The reading app's took two rounds and a gate-4
+check to settle (`io.github.dmprieto.reading` + `steadyread`); the companion carries only its **spike** id
+`dev.spike.companion` and no display name at all. A privacy policy that names **both** apps cannot name an
+app with no production identity, so this is a **blocker for the D9 draft** (added to its gate table), not a
+loose end. Deciding them is the same permanent-at-publication work as the reading app's — gate-4 the id, run
+the naming criterion on the display name — deferred until needed, but recorded as a gate, not accepted.
 
 **Two axes, named explicitly — "personal" was carrying both, and they are independent** (consolidated here
 2026-09-07; the *account-address* half had been recorded in `spike1-autoscroll/DECISIONS.md` by an earlier
