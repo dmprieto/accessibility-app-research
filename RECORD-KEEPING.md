@@ -163,6 +163,23 @@ dwell threshold, three rejected names) that cannot be trimmed and competes for a
    ceilings (rule 5's null-instrument table, and the "code-reviewed, not measured" caveat): **state what the
    instance could see.**
 
+**Why a delegated coordinator is a chat instance and not Claude Code — the reason is the role, not the
+tooling (clarified 2026-09-07).** A delegated coordinator **decides and directs; it does not build.** That is
+the same split that has worked since 13 August — the building instance builds and measures, coordination
+pushes on the reasoning. **Making a delegated coordinator a Code instance collapses it:** the instance would
+**review work it also does**, which is the **rule 6 problem reintroduced at a new layer**. And the chat form
+**inherits a discipline by construction** — working from uploaded files rather than the repos means anything
+turning on file contents needs an **explicit upload**, which is exactly where the coordinator's errors have
+clustered and the constraint that fixed them. Two consequences follow (stated in each delegated brief): it
+**requests checks rather than running them** (it says what needs establishing; the building instance
+establishes it), and it **states its ceilings** — no repo access, no commands, no device, so a claim about
+file contents is **not verified unless a file was uploaded**, said plainly rather than reasoned around.
+
+**What this deliberately preserves — the reason, not just the rule.** The doc-cleanup pass was valuable
+because the **cold instance proposed and the building instance verified, and each caught what the other did
+not.** A delegated coordinator that could verify its own claims would lose that — the same
+propose-then-verify separation rule 6 protects, applied to coordination.
+
 ### A publication gate must live where copying happens, not only in the prose it guards
 
 When a passage is held back from publication for a reason of its own — an unfixed vulnerability
