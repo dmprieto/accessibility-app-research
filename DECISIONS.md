@@ -729,6 +729,41 @@ bundle upload. **The identifier is irreversible at first publication, not first 
 *support.google.com/googleplay/android-developer/answer/16483176, checked 13 Aug 2026, not
 independently verified.*
 
+### Display name: `steadyread` — DECIDED 2026-09-07
+
+**Recording the coordinator's decision, not the agent's.** The applicationId `io.github.dmprieto.reading`
+(above) is fixed and unchanged; the **store display name is a separate field**, and it is **`steadyread`**.
+
+**Why:**
+- **Cleanest on occupancy** — no existing Play app, no exact mark; only an **out-of-field** `STEADY`
+  software mark (Steady Platform, Inc., employment).
+- **Cleanest where the display name actually surfaces** — the `dumpsys` app label and the
+  verification-page prose. (It is **absent from the listing URL**, which carries the applicationId, not
+  the display name — so this is looser than the `keepreading` failure, where the identifier was public
+  where the product points people.)
+- **It makes the weakest descriptive claim**, which **suits a listing built on limitations rather than
+  promises.**
+
+**Gate 4 — the three candidates kept, the way `longform` is kept, because it demonstrates the gate fires
+rather than rubber-stamps.** Three distinct failure modes (checked 2026-09-07, Google Play + Justia/USPTO,
+documentation reads, **not legal clearance** — same ceiling as `keepreading` and `longform`):
+- **`HandsFree Reading` — failed twice.** Gate 4: `HandsFree` (`com.handsfree.app`) is a **live app in this
+  exact category** (AccessibilityService, scrolling) **and** `HANDSFREE` is a **registered software mark**
+  (Hello Systems; also HANDSFREE HEALTH, HANDSFREE RADIO). The `keepreading` shape. *Its second strike is
+  positioning, not gate 4, and is recorded with the differentiation reasoning below.*
+- **`NoSwipeReading` — dropped despite scoring best on the naming criterion.** The cross-category `NoSwipe`
+  collision (a live photo-privacy app; a shorts-blocker) is survivable and it is clear in reading — but it
+  **reads awkwardly unspaced, and unspaced is exactly how it appears in the `dumpsys` label and the
+  verification page.** A name that reads badly where the product points people works against the argument
+  it is meant to support.
+- **`steadyread` — clean pass**, as above.
+
+**What follows from the name being settled — consequences, not tasks:**
+- The display name goes in the **store listing** and the **Play declaration package**.
+- It is **separate from `io.github.dmprieto.reading`**, which is unchanged.
+- The **dedicated Google account's address can now be chosen** — it was waiting on this (see the Play
+  developer account decision below, and its dedicated-account/2SV record in `spike1-autoscroll/DECISIONS.md`).
+
 ### Play developer account: personal, and creation deferred
 
 **Personal account, not organisation.** The organisation route needs a registered business and
@@ -930,6 +965,37 @@ its declared attributes *grant*.
 in the store listing or anywhere else public.** Until then it is a listing quote, and the
 listing is the one place it must not be used unverified. In the open items table below, with
 the checks that would settle it.
+
+### The vision-based hands-free-control category, and the no-camera wedge (2026-09-07)
+
+Recorded with the differentiation reasoning, not with the name, because it **outlives the name** and is
+input to the **store copy, the Play declaration's Q3, and the audience claim**. Found by asking whether this
+project **rebuilds something that already exists** — it does not, and the answer sharpens the position.
+
+**There is an established category of hands-free control apps, and it is vision-based.** `HandsFree`
+(`com.handsfree.app`) drives scrolling and taps from **front-camera finger/gesture recognition**;
+`BlinkScroll` scrolls on blink detection; `AirTouch` is camera gesture control; Google's own **Camera
+Switches** and eye-scroll gestures are the platform version. They read the **front camera continuously** to
+work. *(Checked 2026-09-07, Google Play + project pages; documentation reads, not independently verified —
+same ceiling as the Reading-mode comparison above.)*
+
+**This project occupies the same need with the opposite sensor choice and a narrower scope.** Same need —
+people who cannot easily touch the screen. But the input is **proximity, a hardware switch, or the
+notification**, never a camera; the scope is **paced auto-scroll for reading**, not general device control;
+and the privacy claim is **structural and checkable**, not promised.
+
+**The contrast is what makes the claim legible, and it is sharper against the category than alone.** *"No
+camera permission, verifiable in one command"* means something specific standing next to a category that
+**requires the front camera continuously** — and it pairs with the Reading-mode differentiator above: that
+one reads the *screen*, the camera category watches the *user*, this one does neither. Carry it into the
+store copy / Q3 at that strength (subject to the same verify-before-public discipline as the Reading-mode
+claim).
+
+**The `HandsFree Reading` name would have worked against exactly this — its second strike, positioning not
+gate 4.** The name would have **filed the product into the camera-gesture category it deliberately rejects**,
+so a reviewer or user would expect the very sensor the design refuses. Recorded because it is the kind of
+defect a gate does not catch: it surfaced only from asking whether this rebuilds something that exists,
+which was the more valuable half of that pass.
 
 ### The proximity capability clause has an optimistic ceiling — F6 (2026-08-31)
 
