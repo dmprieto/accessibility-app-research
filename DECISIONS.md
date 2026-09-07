@@ -520,6 +520,12 @@ its application.
 notice the engine reaching the node tree by some other route, or a control path letting a
 third party start the scroll. Those need review and tests, not a ratchet.
 
+**And it does not run against the companion at all (D8, 2026-09-07).** This ratchet targets the reading app
+only; there is no ratchet in `switch-companion`, so the companion's release build — the app that carries
+`SYSTEM_ALERT_WINDOW` and is hand-delivered — has **no artifact-level assertion** behind it. Recorded with
+the decision in `spike1-autoscroll/DECISIONS.md` (SYSTEM_ALERT_WINDOW posture, *Build integrity and
+distribution*); reported, not fixed.
+
 ### Distribution: Play as the primary channel — PAUSED
 
 Started as reasoning, became observation. Three distinct blocks were hit sideloading onto
