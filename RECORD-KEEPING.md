@@ -268,6 +268,29 @@ alone — one found the stale consent line and the drifted confidence-table row;
 that the proposed `dumpsys` fix was itself wrong (the check is `aapt2 dump badging`, against
 the artifact) and that the phrase needing correction was in seven places, not four.
 
+### A revision needs its own read when it changes a claim, not when it corrects an address
+
+*Settled by the coordinator 2026-09-07. A clarification of how the bar applies across iterated revisions,
+not a change to the bar.* When a review's own corrections are themselves a revision, *"this revision has no
+reader"* arrives as an owed item every round — and keeps arriving if nothing settles it (it was carried
+three times: the §E adjudication, the 2026-09-06 tool-ceiling revision, the 2026-09-07 Play-package
+revision). The stopping rule: **a revision needs a formal rule-6 read when it changes a claim — not when it
+corrects an address.**
+
+**Where the line sits, so it is applied rather than re-judged each time: if a reader's belief about *what is
+true* would change, it needs a read. If only their ability to *find* something changes, it does not.**
+
+- **Needs a read** — new evidence under a claim. The doc-cleanup `§E` adjudication moved seven public
+  statements from *contradicted by a local-only file* to *measured stale, corroborated by an artifact*: that
+  changes what a reader believes is true.
+- **Does not** — a status header, a placement note, a corrected pointer, a filled-in address. These change
+  where something is or how it reads, not what is true.
+
+**The residual, recorded as stated practice rather than improvisation:** where a revision is not formally
+read, **whoever verified its load-bearing claim says so and names what they checked.** That is what happened
+for both the 2026-09-06 tool-ceiling revision and the 2026-09-07 Play-package revision — the practice, not a
+one-off.
+
 ---
 
 ## What graduates
