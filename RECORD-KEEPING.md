@@ -133,6 +133,36 @@ what becomes public.**
 covered publication. It resolved well — they were asked and agreed on those terms — but the
 question arrived after the answer could still have mattered.
 
+### The coordinator, and delegated coordinators — DECIDED 2026-09-07 (coordinator)
+
+**A structural change to how coordination works, recorded here because it governs instances.** Coordination
+ran through **one long-lived instance** from 13 August. Two costs accumulated: it is now **conflicted on most
+of the architecture** (the charters, the escalation section, the identity primitive, the doc-cleanup tier
+structure, several standing rules), so it cannot review the things it is most invested in; and it carries a
+large body of **settled or refuted material** (the accessibility-button chooser, the media-button channel, the
+dwell threshold, three rejected names) that cannot be trimmed and competes for attention with what is live.
+
+- **Coordinator (unqualified)** — the long-lived one. Carries the **reasoning history**: why decisions were
+  reversed, what was tried and failed, the shapes of the recurring failure modes. That is the part **no
+  document holds**. Consulted where history matters.
+- **Delegated coordinator** — **scoped to a phase**, briefed from the record, runs the current work's
+  decisions and direction. **Named by scope, never numbered** — *the M1 coordinator*, not *delegated
+  coordinator 2*. A number tells a future reader nothing; a scope tells them **what the instance was clean
+  on**. In the documents, unqualified **"coordinator" means the main one**; a delegated one is **always named
+  as such, with its scope** — same shape as the cross-repo naming convention.
+
+**Two clauses carry the weight — recorded explicitly because both will otherwise be softened:**
+
+1. **A delegated coordinator's conclusions are NOT subordinate to the coordinator's.** "Main" and "delegated"
+   read as seniority, and an instance resolving a disagreement will drift toward the main one — which is
+   **backwards on everything the coordinator is invested in**: the delegated instance is *clean* there, and
+   that is worth more than the coordinator's context on it. **Disagreement is the arrangement working, not a
+   problem to escalate.**
+2. **Each delegated coordinator records what it was briefed with.** So when it is wrong about something
+   **outside its scope**, the reason is **legible rather than mysterious**. Same discipline as the state
+   ceilings (rule 5's null-instrument table, and the "code-reviewed, not measured" caveat): **state what the
+   instance could see.**
+
 ### A publication gate must live where copying happens, not only in the prose it guards
 
 When a passage is held back from publication for a reason of its own — an unfixed vulnerability
