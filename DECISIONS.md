@@ -524,7 +524,9 @@ third party start the scroll. Those need review and tests, not a ratchet.
 only; there is no ratchet in `switch-companion`, so the companion's release build — the app that carries
 `SYSTEM_ALERT_WINDOW` and is hand-delivered — has **no artifact-level assertion** behind it. Recorded with
 the decision in `spike1-autoscroll/DECISIONS.md` (SYSTEM_ALERT_WINDOW posture, *Build integrity and
-distribution*); reported, not fixed.
+distribution*) as a **gap with a known fix** — a companion ratchet asserting only `SYSTEM_ALERT_WINDOW`, no
+debug classes, no unintended exported components — **not an accepted state**; whether to build it now is the
+coordinator's scope call.
 
 ### Distribution: Play as the primary channel — PAUSED
 
