@@ -874,6 +874,14 @@ not even "X is in Y" — belongs in it. Where the locator lives is a separate pl
 recorded in any repo** pending it: there is no existing keystore backup-*location* note to sit beside
 (generation is deferred, so only the backup *approach* exists, not a locator).
 
+**Recovery material and the keystore password: a password manager (approach; no locator recorded, 2026-09-07).**
+The developer holds the account-recovery material and the keystore password in a password manager. **Consequence,
+recorded:** the manager is now the **single point of failure** for the Play account, the upload key, and the 2SV
+backup codes — so its **own recovery kit / emergency access must be set up and stored *outside* the manager**,
+the one thing that cannot live inside the thing it recovers. **Owed, not answered:** whether the Google 2SV
+backup codes being in the manager creates a **circular dependency** (the manager recovers Google, Google recovers
+the manager) — usually not, but the failure only surfaces once already locked out, so confirm rather than assume.
+
 ### Upload key: decided, generation deferred
 
 **This is a decision with a trigger, and it does not belong in [PARKED.md](PARKED.md).** Parked
@@ -969,6 +977,21 @@ commands and what output proves success; a "last verified" date with a tickbox p
 and the reset path if lost. **The password never appears in the note.** Re-verify periodically —
 cloud accounts close and drives die, and a backup verified once and never again is one that
 fails when it matters.
+
+**The two homes, planned now so they are not improvised at generation (2026-09-07). The concrete locations
+are content of the written note above, which does not enter any repo — recorded here is the requirement, not
+the locator.**
+- **Two failure domains, not two folders.** One **local and not cloud-synced**, one **off-machine**. A
+  second copy on the same machine dies with the machine — that is why the phrase is *failure domains*, not
+  *folders*.
+- **The off-machine copy is encrypted before upload — a requirement, not an option.** A password-protected
+  archive whose password is in the manager, a *different* domain from the file, so a compromise of the cloud
+  account holding it yields an **encrypted blob, not a signing key.** *Record the reasoning, because it is the
+  step skipped at generation: the password is in a different domain from the file, and the encryption is what
+  keeps that separation intact once the file sits in a cloud account someone else operates.*
+- **What this does not cover:** the password manager holds the keystore **password**, not the **file** — the
+  keystore is a binary and does not belong in the manager. The two-domain requirement is about the **file**
+  and is unaffected by the manager.
 
 **Why this surfaces late.** The upload key must exist **before the first bundle upload**,
 because Play binds the upload certificate at that moment. The keystore must never be committed:
