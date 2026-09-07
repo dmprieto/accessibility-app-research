@@ -858,9 +858,21 @@ identity consequence known in advance, accepted, not a signup surprise**: it is 
 no-revenue app — the trade is worse). The **public developer email independently strengthens the
 dedicated-address decision** — that address goes on the listing, so it must not be a personal inbox.
 
-**Address choosable now (2026-09-07):** the account address was waiting on the display name; with
-`steadyread` decided (see *Display name* above), the dedicated account's address can be chosen. Creation
-itself stays deferred to the trigger recorded above.
+**Address chosen — `contact.steadyread@gmail.com`, created 2026-09-07.** It was waiting on the display name;
+with `steadyread` decided (see *Display name* above), it was created. It becomes the **public developer
+contact on the listing** and, per the 6-September read, must **remain operational for the duration of the
+developer account**, so it is permanent-ish. The address is the *public contact* — not a secret — which is
+why it is recorded here. Creation of the developer **account** itself stays deferred to the trigger above;
+this is the Google account that will own it.
+
+**Recovery — the approach only, never the details and never a locator.** 2SV enabled from the start; a
+recovery phone and a secondary recovery email set; backup codes generated and stored separately. **Only the
+approach is recorded — not the recovery phone, address, codes or answers, and not where any of them live.**
+Same distinction the keystore backup note draws (below): the note is the artifact, not the key. **`aar` is
+public and git history is permanent** (the escalation-incident lesson), so no credential and no *locator* —
+not even "X is in Y" — belongs in it. Where the locator lives is a separate placement question, **not
+recorded in any repo** pending it: there is no existing keystore backup-*location* note to sit beside
+(generation is deferred, so only the backup *approach* exists, not a locator).
 
 ### Upload key: decided, generation deferred
 
