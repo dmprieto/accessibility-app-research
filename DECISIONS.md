@@ -762,11 +762,23 @@ documentation reads, **not legal clearance** — same ceiling as `keepreading` a
 - The display name goes in the **store listing** and the **Play declaration package**.
 - It is **separate from `io.github.dmprieto.reading`**, which is unchanged.
 - The **dedicated Google account's address can now be chosen** — it was waiting on this (see the Play
-  developer account decision below, and its dedicated-account/2SV record in `spike1-autoscroll/DECISIONS.md`).
+  developer account decision below, *Account address*).
 
-### Play developer account: personal, and creation deferred
+### Play developer account: individual type, dedicated address, creation deferred
 
-**Personal account, not organisation.** The organisation route needs a registered business and
+**Two axes, named explicitly — "personal" was carrying both, and they are independent** (consolidated here
+2026-09-07; the *account-address* half had been recorded in `spike1-autoscroll/DECISIONS.md` by an earlier
+misplacement and is brought to where the account decision lives — that entry is now a pointer). *Same fix as
+the participant count: name the unit beside every value, because the collision comes from two things sharing
+a word.*
+- **Account type — individual, not organisation.** Bears on the D-U-N-S question and the 12-tester gate.
+- **Account address — dedicated, not a personal inbox.** Bears on release control, the recovery surface and
+  the handoff boundary.
+An **individual account on a dedicated address** and an **organisation account on an everyday Gmail** are
+both coherent — the axes do not imply each other, so name both wherever the account is described. A reader
+who conflated them could conclude the *type* was settled when only the *address* was.
+
+**Account type — individual, not organisation.** The organisation route needs a registered business and
 a D-U-N-S number. Google's own pages disagree on timing — the verification FAQ says up to 28
 days, Play Console help says up to 30; **the disagreement is recorded rather than resolved**,
 since picking one would be inventing a number. Either way it is weeks plus an entity that does
@@ -824,6 +836,31 @@ decision that the complete fix, not the closure alone, is what these triggers re
 **Worth doing now, ahead of the trigger:** make the identity document, address and payment card
 carry the same name in the same form. Mismatched or unsupported documents are the primary
 documented cause of verification failure.
+
+**Account address — a new, dedicated Google account, not a personal inbox. 2SV from the start, recovery
+details recorded deliberately (coordinator, DECIDED 2026-09-06; consolidated here 2026-09-07 from
+`spike1-autoscroll`).** This is the *address* axis, independent of the *type* axis above. Three reasons:
+1. **Account control is release control.** The upload-key reset path runs *through the account*, so whoever
+   holds the account can move releases — the reason for 2SV. Entangling it with a personal inbox **widens
+   what an account compromise costs.**
+2. **It is the recovery surface.** If the account is lost or locked, the listing and the key-reset path go
+   with it. A dedicated account is a **smaller target** than a personal address that has been in a decade of
+   breaches.
+3. **It is a handoff boundary.** An account that is not a personal identity is the difference between a
+   **transfer and a mess** if maintenance ever passes to anyone else.
+
+**Public fields — the 6 September finding (Play policy documentation read; not verified against a real
+account).** For an **individual** account, Google shows *"Legal name, your country (as per your legal
+address), and developer email address"* on the listing. A chosen developer *display* name is a separate
+field and does **not** keep the legal name off the listing — both appear. Recorded as a **permanent-ish
+identity consequence known in advance, accepted, not a signup surprise**: it is an argument for an
+**organisation** account, which **stays rejected** (a registered entity + D-U-N-S + weeks, for a free
+no-revenue app — the trade is worse). The **public developer email independently strengthens the
+dedicated-address decision** — that address goes on the listing, so it must not be a personal inbox.
+
+**Address choosable now (2026-09-07):** the account address was waiting on the display name; with
+`steadyread` decided (see *Display name* above), the dedicated account's address can be chosen. Creation
+itself stays deferred to the trigger recorded above.
 
 ### Upload key: decided, generation deferred
 
