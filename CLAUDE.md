@@ -205,3 +205,11 @@ superseded by its repo copy, and `identity-primitive-charter.md` (the closed par
 a clean FLAG-5/FLAG-6 read, its sole-unversioned-copy risk closed and the local `control-path-charter`
 duplicate removed. The gap itself stays open as a habit to watch; the two known stragglers are cleared.
 See `control-path-charter/README.md` for the authority statement and the (closed) not-a-git-repo decision.
+
+**Second drift source, now CLOSED (2026-09-06).** `Downloads` was not the only place documents lived
+unseen by the record: two Play documents (`play-accessibility-declaration-package.md`, the closed-track
+read) lived as **attachments in a Claude project** — a home no filesystem taxonomy could see, which is why
+they appeared without provenance and the pointer inventory recorded one as *not located*. Both are now
+placed in `control-path-charter/`, and **the developer will store no further files in the Claude project**,
+so this class is shut. Recorded here so a future reader knows why two documents surfaced without provenance
+and that the source is closed.
