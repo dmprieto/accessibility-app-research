@@ -896,6 +896,40 @@ the one thing that cannot live inside the thing it recovers. **Owed, not answere
 backup codes being in the manager creates a **circular dependency** (the manager recovers Google, Google recovers
 the manager) — usually not, but the failure only surfaces once already locked out, so confirm rather than assume.
 
+### Naming beyond the applicationId — user-facing and reviewer-facing strings — DECIDED 2026-09-07 (coordinator)
+
+**Recording the coordinator's decision. Two layers; only one is mandatory.**
+
+**Layer 1 — settled and permanent:** `dev.spike.autoscroll` → `io.github.dmprieto.reading` (the applicationId
+decision above), carried through the **package declaration, manifest, imports, the ratchet's own references,
+and any surviving `adb` commands.** Not reopened here — named so the rename lands everywhere it must.
+
+**Layer 2 — the criterion does not stop at the identifier.** `autoscroll` was rejected for the applicationId
+because it **names the mechanism** and pattern-matches to the automation category Play treats as
+disqualifying (the naming criterion, above). That reasoning **applies wherever a user or a reviewer reads
+it** — most sharply the accessibility service's **description string**, which Android shows someone in
+**Settings at the exact moment they decide whether to grant an alarming-sounding permission.**
+
+**What the reading app ships today (`spike1-autoscroll/app/src/main/res/values/strings.xml`, read
+2026-09-07) — the offenders:**
+- `service_description` = *"Throwaway spike. Holds a single synthetic touch down…"* — **the pre-enable
+  disclosure, opening with the literal words "Throwaway spike."** The confidence problem the port exists to
+  fix, in the highest-stakes string in the app.
+- `service_label` and `app_name` = *"Autoscroll Spike"* — the mechanism name **and** "spike", in the label a
+  person reads before enabling.
+- `channel_name` / `notif_title_running` / `notif_title_stopped` = "Auto-scroll control" / "Auto-scrolling" /
+  "Auto-scroll ready" — user-visible, same `auto-scroll` pattern.
+
+**The split, so this does not become a rename sweep:** **user-facing and reviewer-facing strings must
+change** (the six above); **internal identifiers are optional** — `AutoScrollService` as a class name is not
+the same problem as *"Autoscroll Spike"* in Settings. **The log tag is borderline and worth a call:** tags
+like `Trace.i("PROX", …)` land in the `dumpsys` / `logcat` output the verification argument *invites people
+to run*, so a reviewer reads them — flagged, not decided.
+
+**Reserved (rule 4):** the actual replacement wording is Play-facing and audience-shaped — it goes to the
+developer + coordinator, not decided here. This records *which strings* must change and *why*, not their new
+values.
+
 ### Upload key: decided, generation deferred
 
 **This is a decision with a trigger, and it does not belong in [PARKED.md](PARKED.md).** Parked
@@ -1011,7 +1045,19 @@ the locator.**
 because Play binds the upload certificate at that moment. The keystore must never be committed:
 `.gitignore` it, and keep the password out of any `gradle.properties` inside a repository.
 
-**Trigger: the same as the account** — spike 2's control surface and the exported-receiver fix.
+**Trigger — restated as a checkable state, 2026-09-07 (coordinator). Superseded form kept visible (rule 1):**
+~~the same as the account — spike 2's control surface and the exported-receiver fix~~ was the trigger carried
+since 13 August; it was a *project-state* trigger, not a checkable one. **The trigger is now: the ratchet
+passes on the release artifact, the README is written, and the `LICENSE` is in place** — the M1 port's own
+done-state (see `spike1-autoscroll/DECISIONS.md`, *M1, and the port that serves it*). Generation requirements
+are unchanged and already recorded above (two failure domains, off-machine copy encrypted, password in the
+manager).
+
+**Signing precedes the M1 *sideload*, not publication (coordinator, 2026-09-07).** M1's build is the first
+artifact reaching a real person, so it must carry the key that will be kept. Otherwise M1's build and v1's
+have **different signers**, which matters for update continuity and for the pairing signature check when the
+switch path returns. This pulls key generation **forward** of where the superseded trigger placed it (tied to
+publication / the account): the key now exists **before M1's sideload**.
 
 ### The nearest comparable app, and what it does that this one cannot
 
