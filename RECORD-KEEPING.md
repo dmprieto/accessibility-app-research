@@ -180,6 +180,22 @@ dwell threshold, three rejected names) that cannot be trimmed and competes for a
    it was briefed with. Without it, the material added late — the most load-bearing — is exactly what has no
    record of why the instance had it, defeating the clause for the case it most matters. (Generalised from the
    M1 brief 2026-09-07: stating it here makes it a practice, not a thing that happened once.)*
+   *How a growing brief reaches the delegated coordinator (protocol set by the M1 coordinator, 2026-09-08,
+   after its copy went stale — recruitment framing and a device inventory had been edited into the file and
+   reached it as paraphrase in a relay note, which it correctly declined to treat as record). **Every
+   revision is re-uploaded as the full file — no threshold of "was this a decision or just wording."** That
+   threshold sounds clean but isn't reliable from the delegated coordinator's seat: it can't tell a cosmetic
+   edit from a load-bearing one until it reads it, and "recruitment is a parallel first-order gate" is the
+   counterexample — it read like a framing note and changed the critical-path statement. A "did this change a
+   decision" filter puts a **judging step in front of the verification ceiling**, which is the thing the
+   ceiling exists to remove. Each re-upload carries a **one-line "what changed" pointer** (sections, dated) so
+   the reader verifies the delta without re-reading the whole file — the pointer never replaces the file. The
+   **provenance header is the running changelog** (each revision dated and named there, so staleness is
+   visible from inside the file). And a re-upload is **explicitly re-confirmed, not silently folded**: the
+   delegated coordinator replies with a one-line confirmation or a flagged disagreement before treating it as
+   record — the only point a disagreement surfaces before other work assumes the new version, and the moment
+   that makes each briefed-with entry a thing actually looked at rather than a thing that merely landed. Kept
+   to a line unless the delta is actually wrong, so the checkpoint does not become its own bottleneck.*
 
 **Why a delegated coordinator is a chat instance and not Claude Code — the reason is the role, not the
 tooling (clarified 2026-09-07).** A delegated coordinator **decides and directs; it does not build.** That is
