@@ -54,6 +54,14 @@ in one `dumpsys` command". Two of the three are runtime properties; the third is
 the built APK and no `dumpsys` command can answer it. The claim was confident, plausible, and
 wrong, and it took three passes to clear.
 
+*Positive instance (2026-09-08).* The fresh reviewer of the M1 coordinator brief opened its findings
+by disclosing it was **not fully cold** — three unrelated project docs were already in its context —
+and stated the **direction of the risk correctly**: silent gap-filling produces *omissions, not false
+findings*, so its list was trustworthy as far as it went and could only under-cover. This is the
+behaviour the rule wants — a reviewer stating the limit of what it could see, in a form that tells the
+reader which way to discount — recorded here as the positive case, not as a caveat on that one review
+(`control-path-charter/M1-BRIEF-REVIEW-FINDINGS.md`, §0).
+
 ## 2. One definition. Everything else points at it
 
 A load-bearing claim has exactly one authoritative home. Every other mention **points** rather
@@ -157,11 +165,21 @@ dwell threshold, three rejected names) that cannot be trimmed and competes for a
    read as seniority, and an instance resolving a disagreement will drift toward the main one — which is
    **backwards on everything the coordinator is invested in**: the delegated instance is *clean* there, and
    that is worth more than the coordinator's context on it. **Disagreement is the arrangement working, not a
-   problem to escalate.**
+   problem to escalate.** *Operationally (clarified 2026-09-07 via the M1 brief's F1): a decision inside the
+   delegated scope that the delegated coordinator was briefed with is **revisable by it** — recorded under
+   rule 1 and **reported to the developer, who may override the revision as the developer, not as the main
+   coordinator's proxy** (the delegated coordinator is not waiting on a sign-off). The exception is
+   **permanent-at-publication** items — a signing key, an applicationId, a licence — which attach at
+   distribution and are revisable by no one afterwards; those are reserved under rule 4 regardless of scope.*
 2. **Each delegated coordinator records what it was briefed with.** So when it is wrong about something
    **outside its scope**, the reason is **legible rather than mysterious**. Same discipline as the state
    ceilings (rule 5's null-instrument table, and the "code-reviewed, not measured" caveat): **state what the
-   instance could see.**
+   instance could see.** *Because a delegated brief is designed to grow — the reader may pull in a specific
+   fact beyond it, with a stated reason — the record must grow with it: the delegated coordinator keeps a
+   **running list of everything pulled in beyond its brief, with the reason and the date**, as part of what
+   it was briefed with. Without it, the material added late — the most load-bearing — is exactly what has no
+   record of why the instance had it, defeating the clause for the case it most matters. (Generalised from the
+   M1 brief 2026-09-07: stating it here makes it a practice, not a thing that happened once.)*
 
 **Why a delegated coordinator is a chat instance and not Claude Code — the reason is the role, not the
 tooling (clarified 2026-09-07).** A delegated coordinator **decides and directs; it does not build.** That is
