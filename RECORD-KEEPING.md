@@ -268,6 +268,45 @@ description, not a line number: this points from a versioned public repo into a 
 working file** — a line anchor here is more fragile than the case that prompted F2, and the serial has
 already moved once.)*
 
+### The charter is backed up, not versioned — reopened and resolved 2026-09-09 (coordinator)
+
+`control-path-charter/` is deliberately **not a git repository** — recorded 6 September, with two named
+reopening conditions: the archive ceasing to be throwaway, or another file in it becoming load-bearing.
+**Both have fired.** The D8, D9, M1-coordinator, session-template and port-delta **briefs are the instruments
+the next passes run on**, and the D8 brief is gated to the pre-cohort window — so it has to survive weeks, not
+a session. That is not a throwaway archive any more. *(This entry is that 6-September decision's first home on
+disk — it had been recorded only in the coordinator's context, so this records it rather than editing an
+earlier version; provenance per rule 1.)*
+
+**The remedy is backup, not version control — and the distinction is the whole point.** The condition that
+fired is *these exist in exactly one place and a disk loss takes them*. A local git repo with no remote does
+**not** survive a disk loss; it gives history, bad-edit recovery, and a diff — real, modest, and not the thing
+that fired the reopening. So the answer is a copy in a second failure domain, not `git init`. (If a local repo
+is ever added for the diff/history, it must not be recorded as the durability answer — it isn't one.) The
+reopening test is structural — both conditions fired; the **coordinator** directed backup over version control,
+the **developer** caught that a local repo is not the durability answer, and the **building instance** ran the
+backup and the correspondence split. Marked per rule 1.
+
+**Done 2026-09-09**, separating value from volume the way the briefs themselves are the irreplaceable part:
+
+- **The briefs are backed up two-domain, keystore-discipline** — one local durable copy, one encrypted
+  off-machine copy in a second failure domain (password in a different domain). A brief's reasoning cannot be
+  re-derived; that is why it is the part that gets backed up.
+- **The bulk is not** — raw device logs, frame captures, and the findings/run-logs. A lost measurement costs a
+  re-run, not a reconstruction, so it does not earn the backup cost.
+- **Legibility (Phase 1 reorg):** the dead relay traffic — coordinator responses/updates, summaries, review
+  packages, upload excerpts — moved to `control-path-charter/correspondence/`. It is most of the volume and the
+  part that is genuinely scratch once its conclusion graduated; distinguishing it is what makes the load-bearing
+  briefs and findings at the root legible. Bucketing the rest (briefs/findings/artifacts) is deferred, because
+  moving them rots the flat `control-path-charter/<file>` pointers the tracked repos and memory still cite.
+
+**What does not change:** durable *facts* still graduate into the tracked `DECISIONS.md` repos — this is about
+the working artifacts, not a reason to stop promoting conclusions.
+
+**A remote stays gated.** The directory holds raw device dumps and correspondence, and one run-log carries a
+device serial in prose — so it cannot simply be pushed. Any remote goes through the sanitised-copy path, the
+way `host-hazard-tests-shareable` was done, never a push of the working directory.
+
 ## 6. Review is not optional, and not self-review
 
 Changes to these documents get a reader who **did not work on the changes under review**. Not a
