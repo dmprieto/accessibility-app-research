@@ -1053,6 +1053,15 @@ done-state (see `spike1-autoscroll/DECISIONS.md`, *M1, and the port that serves 
 are unchanged and already recorded above (two failure domains, off-machine copy encrypted, password in the
 manager).
 
+**STATUS — key GENERATED and backed up, confirmed by the developer 2026-09-09 (supersedes the "generation
+deferred" notes above, kept visible per rule 1).** Signing was pulled forward from the checkable-state trigger
+by a real dependency — on-device M1 verification needed an installable build — so the permanent signing key now
+exists and the release APK is V2-signed and smoke-tested. **The two-domain generation requirement was met, not
+skipped:** an encrypted off-machine copy in a second failure domain exists (confirmed by the developer). This is
+exactly the moment the requirement was written to protect. **Approach only — no keystore location, backup
+location, or password is recorded here or in any repo,** per the locator discipline above; the off-repo written
+note remains the artifact.
+
 **Signing precedes the M1 *sideload*, not publication (coordinator, 2026-09-07).** M1's build is the first
 artifact reaching a real person, so it must carry the key that will be kept. Otherwise M1's build and v1's
 have **different signers**, which matters for update continuity and for the pairing signature check when the
