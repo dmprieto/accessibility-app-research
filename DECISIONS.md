@@ -1107,30 +1107,24 @@ in the store listing or anywhere else public.** Until then it is a listing quote
 listing is the one place it must not be used unverified. In the open items table below, with
 the checks that would settle it.
 
-### The vision-based hands-free-control category, and the no-camera wedge (2026-09-07)
+### The differentiation landscape, and the no-access position (2026-09-07; reframed 2026-09-18)
 
 Recorded with the differentiation reasoning, not with the name, because it **outlives the name** and is
 input to the **store copy, the Play declaration's Q3, and the audience claim**. Found by asking whether this
 project **rebuilds something that already exists** — it does not, and the answer sharpens the position.
 
-**There is an established category of hands-free control apps, and it is vision-based.** `HandsFree`
-(`com.handsfree.app`) drives scrolling and taps from **front-camera finger/gesture recognition**;
-`BlinkScroll` scrolls on blink detection; `AirTouch` is camera gesture control; Google's own **Camera
-Switches** and eye-scroll gestures are the platform version. They read the **front camera continuously** to
-work. *(Checked 2026-09-07, Google Play + project pages; documentation reads, not independently verified —
-same ceiling as the Reading-mode comparison above.)*
+*Reframed 2026-09-18 after the first external community evidence showed the landscape has more than one
+shape (it was first written against a single vision-based category). The checkable claim below is kept, not
+withdrawn; the single-category framing is superseded; and no superlative — not first, not only — because the
+category is now established as hard to enumerate.*
 
-**This project occupies the same need with the opposite sensor choice and a narrower scope.** Same need —
-people who cannot easily touch the screen. But the input is **proximity, a hardware switch, or the
-notification**, never a camera; the scope is **paced auto-scroll for reading**, not general device control;
-and the privacy claim is **structural and checkable**, not promised.
+**Three alternatives, not one.** People who find reading on a phone hard already solve it three ways: a
+hardware page-turner (works anywhere, needs no permissions, doesn't scroll a browser); OS voice control or
+camera-gesture tools (need microphone or camera, and read the screen); and auto-scroller apps (the same
+mechanism as this, typically via an overlay, some needing to know which apps you use).
 
-**The contrast is what makes the claim legible, and it is sharper against the category than alone.** *"No
-camera permission, verifiable in one command"* means something specific standing next to a category that
-**requires the front camera continuously** — and it pairs with the Reading-mode differentiator above: that
-one reads the *screen*, the camera category watches the *user*, this one does neither. Carry it into the
-store copy / Q3 at that strength (subject to the same verify-before-public discipline as the Reading-mode
-claim).
+What none of them does is say what it cannot access. That is the position, and it is the durable part — the
+scroll engine is copyable in a week; the posture means giving up the features those products are built on.
 
 **The `HandsFree Reading` name would have worked against exactly this — its second strike, positioning not
 gate 4.** The name would have **filed the product into the camera-gesture category it deliberately rejects**,
